@@ -1,0 +1,4 @@
+name: HomeSpawn
+version: ${project.version}
+main: net.lapismc.homespawn.HomeSpawn
+authors: [Dart2112]
