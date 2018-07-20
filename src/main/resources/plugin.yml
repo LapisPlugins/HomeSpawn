@@ -1,4 +1,7 @@
 name: HomeSpawn
-version: ${project.version}
-main: net.lapismc.homespawn.HomeSpawn
 authors: [Dart2112]
+loadbefore: [Essentials]
+version: ${project.version}
+softdepend: [Multiverse-Core]
+main: net.lapismc.homespawn.HomeSpawn
+description: The Basic Home And Spawn Plugin

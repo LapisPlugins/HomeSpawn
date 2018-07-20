@@ -1,0 +1,22 @@
+ConfigVersion: 1
+
+PrimaryColor:
+SecondaryColor:
+
+Home:
+  Teleport: "&pWelcome home"
+
+SetHome:
+  Moved: "&pYour home has been moved"
+  Created: "&pHome has been created"
+  LimitReached: "&sYou have reached you limit for custom homes, please use /delhome to remove some"
+
+DelHome:
+  Deleted: "&pYour home was deleted"
+
+Error:
+  MustBePlayer: "&4You must be a player to do this!"
+  NotPermitted: "&4You are not permitted to do this!"
+  HomeDoesNotExist: "&4The home provided doesn't exist"
+  NumberFormatError: "&4A player had impossible values for their home location, that home has been removed!"
+  WorldDoesNotExist: "&4The world %WORLD% was found in a players homes, since it doesn't exist the home was removed!"
