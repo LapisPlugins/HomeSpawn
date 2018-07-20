@@ -1,0 +1,19 @@
+Teleport delay (possibly in the home object)
+Home and player objects to access player data
+Possibly SQL?
+Auto updating
+Custom permissions
+Clickable list and paged UI for homes list
+Metrics
+New implementation of old API
+converter from old data format, Maybe use data store idea from lapis bans
+Commands:
+    Delete Home
+    Delete Spawn
+    Home
+    Home list
+    Player stats
+    Rename home
+    Set home
+    Set spawn
+    spawn
