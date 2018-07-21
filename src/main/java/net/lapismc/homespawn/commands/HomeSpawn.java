@@ -16,6 +16,7 @@
 
 package net.lapismc.homespawn.commands;
 
+import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
 import org.bukkit.Bukkit;
@@ -40,7 +41,11 @@ public class HomeSpawn extends LapisCommand {
         if (args.length == 0) {
             displayPluginInfo(sender);
         } else if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("help")) {
+            if (args[0].equalsIgnoreCase("update")) {
+                update(sender);
+            } else if (args[0].equalsIgnoreCase("reload")) {
+                reload(sender);
+            } else if (args[0].equalsIgnoreCase("help")) {
                 displayHelp(sender);
             } else if (args[0].equalsIgnoreCase("player")) {
                 HSPlayer.onCommand(sender, args);
@@ -48,6 +53,33 @@ public class HomeSpawn extends LapisCommand {
                 sendMessage(sender, "Help.HomeSpawn");
             }
         }
+    }
+
+    private void update(CommandSender sender) {
+        if (sender instanceof Player) {
+            if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanUpdate)) {
+                sendMessage(sender, "Error.NotPermitted");
+            }
+        }
+        if (plugin.lapisUpdater.checkUpdate()) {
+            plugin.lapisUpdater.downloadUpdate();
+            sendMessage(sender, "Update.Downloading");
+        } else {
+            sendMessage(sender, "Update.NotAvailable");
+        }
+    }
+
+    private void reload(CommandSender sender) {
+        if (sender instanceof Player) {
+            if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanReload)) {
+                sendMessage(sender, "Error.NotPermitted");
+            }
+        }
+        plugin.getLogger().info("Reloading...");
+        plugin.HSConfig.reloadMessages(null);
+        plugin.reloadConfig();
+        plugin.HSPerms.loadPermissions();
+        sendMessage(sender, "Reload");
     }
 
     private void displayHelp(CommandSender sender) {
@@ -75,6 +107,11 @@ public class HomeSpawn extends LapisCommand {
     private class HomeSpawnPlayerCommand {
 
         private void onCommand(CommandSender sender, String[] args) {
+            if (sender instanceof Player) {
+                if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanViewPlayerStats)) {
+                    sendMessage(sender, "Error.NotPermitted");
+                }
+            }
             if (args.length == 1 || args.length > 3) {
                 sendMessage(sender, "Help.HomeSpawnPlayer");
             } else if (args.length == 2) {

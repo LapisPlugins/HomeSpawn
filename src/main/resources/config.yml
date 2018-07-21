@@ -1,1 +1,17 @@
 ConfigVersion: 1
+
+# If true an inventory based UI will display the players current homes and allow them to teleport
+# If false a list of home names will be shown that can be clicked to teleport
+HomeListGUI: true
+
+# 0 = cancel teleport, 1 = ignore(this means they will have to keep waiting), 2 = teleport instantly
+TeleportCancel:
+  # PvP means attacked by a player, this could be a direct attack, arrow attack or wolf attack
+  PvP: 0
+  # Attacked means damaged by a mob
+  Attacked: 2
+  # Move means they move in the x y or z directions
+  Move: 0
+
+
+Permissions:

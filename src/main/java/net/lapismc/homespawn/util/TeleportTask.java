@@ -14,21 +14,30 @@
  * limitations under the License.
  */
 
-package net.lapismc.homespawn;
+package net.lapismc.homespawn.util;
 
-import net.lapismc.homespawn.commands.*;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
-class HomeSpawnCommands {
+public class TeleportTask {
 
-    HomeSpawnCommands(HomeSpawn plugin) {
-        new HomeSpawnDelHome(plugin);
-        new HomeSpawnDelSpawn(plugin);
-        new HomeSpawnHome(plugin);
-        new HomeSpawnHomeList(plugin);
-        new HomeSpawnRenameHome(plugin);
-        new HomeSpawnSetHome(plugin);
-        new HomeSpawnSetSpawn(plugin);
-        new HomeSpawnSpawn(plugin);
+    private BukkitTask task;
+    private Player player;
+
+    public TeleportTask(BukkitTask task, Player player) {
+        this.task = task;
+        this.player = player;
     }
 
+    public boolean isCancelled() {
+        return task.isCancelled();
+    }
+
+    public void cancelTask() {
+        task.cancel();
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

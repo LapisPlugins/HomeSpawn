@@ -18,29 +18,36 @@ package net.lapismc.homespawn.playerdata;
 
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
+import net.lapismc.homespawn.util.TeleportTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.UUID;
 
 public class Home {
 
     private final UUID owner;
+    private final HomeSpawn plugin;
     private String name;
     private Location loc;
-    private final HomeSpawn plugin;
-    private BukkitTask teleportTask;
+    private TeleportTask teleportTask;
 
     public Home(HomeSpawn plugin, UUID owner, String name, Location loc) {
         this.plugin = plugin;
         this.owner = owner;
         this.name = name;
         this.loc = loc;
+    }
+
+    Home(HomeSpawn plugin, UUID owner, String name, String loc) {
+        this.plugin = plugin;
+        this.owner = owner;
+        this.name = name;
+        this.loc = parseStringToLocation(loc);
     }
 
     public void rename(String newName) {
@@ -51,9 +58,20 @@ public class Home {
         player.addHome(this);
     }
 
-    public void cancelTeleport() {
+    boolean isWaiting() {
+        return teleportTask != null;
+    }
+
+    void cancelTeleport() {
         if (teleportTask != null && !teleportTask.isCancelled()) {
-            teleportTask.cancel();
+            teleportTask.cancelTask();
+        }
+    }
+
+    void skipTeleportTimer() {
+        if (teleportTask != null && !teleportTask.isCancelled()) {
+
+            teleportTask.cancelTask();
         }
     }
 
@@ -63,6 +81,13 @@ public class Home {
         yaml.set("Homes." + name, parseLocationToString(loc));
         player.saveConfig(yaml);
         this.loc = loc;
+    }
+
+    public Location getLocation() {
+        if (loc == null) {
+            loadLocation();
+        }
+        return loc;
     }
 
     private void loadLocation() {
@@ -80,7 +105,8 @@ public class Home {
         if (delay) {
             Integer delayTime = plugin.HSPerms.getPermissionValue(p.getUniqueId(),
                     HomeSpawnPermissions.Perm.TeleportDelay);
-            teleportTask = Bukkit.getScheduler().runTaskLater(plugin, () -> teleport(p), delayTime * 20);
+            teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
+                    () -> teleport(p), delayTime * 20), p);
         } else {
             this.teleport(p);
         }
@@ -88,6 +114,7 @@ public class Home {
 
     private void teleport(Player p) {
         if (teleportTask != null) {
+            teleportTask.cancelTask();
             teleportTask = null;
         }
         teleportNow(p);
@@ -112,6 +139,10 @@ public class Home {
         } else {
             p.teleport(loc);
         }
+    }
+
+    public String getLocationString() {
+        return parseLocationToString(loc);
     }
 
     private String parseLocationToString(Location loc) {

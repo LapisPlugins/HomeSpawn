@@ -17,20 +17,18 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.api.events.HomeRenameEvent;
-import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class HomeSpawnRenameHome extends LapisCommand {
+public class HomeSpawnHomeList extends LapisCommand {
 
-    public HomeSpawnRenameHome(HomeSpawn plugin) {
-        super(plugin, "renamehome", "Rename a home", new ArrayList<>());
+    public HomeSpawnHomeList(HomeSpawn plugin) {
+        super(plugin, "homelist", "Shows the players current homes", new ArrayList<>(Arrays.asList("homeslist", "listhomes", "listhome")));
     }
 
     @Override
@@ -40,23 +38,14 @@ public class HomeSpawnRenameHome extends LapisCommand {
         }
         Player p = (Player) sender;
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
-        if (args.length == 2) {
-            String oldName = args[0];
-            String newName = args[1];
-            if (!player.hasHome(oldName)) {
-                sendMessage(sender, "Error.HomeDoesNotExist");
-                return;
-            }
-            Home home = player.getHome(oldName);
-            //run home rename event
-            HomeRenameEvent event = new HomeRenameEvent(p, oldName, newName);
-            Bukkit.getPluginManager().callEvent(event);
-            if (event.isCancelled()) {
-                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
-                return;
-            }
-            home.rename(newName);
-            sendMessage(sender, "Home.Renamed");
+        if (player.getHomes().isEmpty()) {
+            sendMessage(sender, "Home.NoHomes");
+            return;
+        }
+        if (plugin.getConfig().getBoolean("HomeListGUI")) {
+            player.showHomesGUI(p);
+        } else {
+            player.sendClickableHomesList(p);
         }
     }
 }

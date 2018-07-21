@@ -16,9 +16,13 @@
 
 package net.lapismc.homespawn;
 
+import net.lapismc.homespawn.api.HomeSpawnPlayerData;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import net.lapismc.homespawn.util.HomeSpawnDataConverter;
 import net.lapismc.homespawn.util.LapisUpdater;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
@@ -33,8 +37,10 @@ public final class HomeSpawn extends JavaPlugin {
     public HomeSpawnConfiguration HSConfig;
     public HomeSpawnPermissions HSPerms;
     public PrettyTime prettyTime;
-    private LapisUpdater lapisUpdater;
+    public LapisUpdater lapisUpdater;
     private HashMap<UUID, HomeSpawnPlayer> players = new HashMap<>();
+
+    //TODO check API with extensions
 
     @Override
     public void onEnable() {
@@ -46,7 +52,10 @@ public final class HomeSpawn extends JavaPlugin {
         prettyTime.removeUnit(JustNow.class);
         prettyTime.removeUnit(Millisecond.class);
         new HomeSpawnFileWatcher(this);
+        new HomeSpawnListeners(this);
         new HomeSpawnCommands(this);
+        new HomeSpawnDataConverter(this);
+        new HomeSpawnPlayerData().init(this);
     }
 
     @Override
@@ -55,7 +64,7 @@ public final class HomeSpawn extends JavaPlugin {
     }
 
     private void checkUpdates() {
-        //TODO update these values when we make out new config
+        //TODO update these values when we make our new config
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
             lapisUpdater = new LapisUpdater(this);
             //check for an update
@@ -85,5 +94,35 @@ public final class HomeSpawn extends JavaPlugin {
             players.put(uuid, new HomeSpawnPlayer(this, uuid));
         }
         return players.get(uuid);
+    }
+
+    public String parseLocationToString(Location loc) {
+        return loc.getWorld() + "," + loc.getX() + "," + loc.getY() + ","
+                + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
+    }
+
+    public Location parseStringToLocation(String s) {
+        if (s == null) {
+            return null;
+        }
+        Location loc;
+        String[] args = s.split(",");
+        String worldName = args[0];
+        if (Bukkit.getServer().getWorld(worldName) == null) {
+            return null;
+        }
+        World world = getServer().getWorld(worldName);
+        try {
+            Float pitch = Float.valueOf(args[4]);
+            Float yaw = Float.valueOf(args[5]);
+            Double x = Double.valueOf(args[1]);
+            Double y = Double.valueOf(args[2]);
+            Double z = Double.valueOf(args[3]);
+            loc = new Location(world, x, y, z, yaw, pitch);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return loc;
     }
 }

@@ -18,9 +18,12 @@ package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
+import net.lapismc.homespawn.api.events.HomeMoveEvent;
+import net.lapismc.homespawn.api.events.HomeSetEvent;
 import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -38,15 +41,18 @@ public class HomeSpawnSetHome extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
+        if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.Homes)) {
+            sendMessage(sender, "Error.NotPermitted");
+        }
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
         String homeName = "Home";
         //if the player is setting a custom home, check that they can and then set the name
         if (args.length == 1) {
-            if (plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.CustomHomes)) {
+            if (plugin.HSPerms.getPermissionValue(p.getUniqueId(), HomeSpawnPermissions.Perm.Homes) > 1) {
                 //check that the player doesn't have to many custom homes to set another
                 //also check if they are moving a preexisting home as they can do that even if they are at the limit
                 if (player.getHomes().size() >= plugin.HSPerms.getPermissionValue(p.getUniqueId(),
-                        HomeSpawnPermissions.Perm.CustomHomes) && player.getHome(args[0]) == null) {
+                        HomeSpawnPermissions.Perm.Homes) && !player.hasHome(args[0])) {
                     sendMessage(sender, "Home.LimitReached");
                     return;
                 }
@@ -58,11 +64,25 @@ public class HomeSpawnSetHome extends LapisCommand {
         }
         if (player.hasHome(homeName)) {
             //if we are just moving a preexisting home then this is significantly better
+            //run home move event
+            HomeMoveEvent event = new HomeMoveEvent(p, player.getHome(homeName).getLocation(), p.getLocation());
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+                return;
+            }
             player.getHome(homeName).setLoc(p.getLocation());
             sendMessage(sender, "Home.Moved");
         } else {
             //otherwise make a new home and add it to the player
             Home home = new Home(plugin, p.getUniqueId(), homeName, p.getLocation());
+            //run home set event
+            HomeSetEvent event = new HomeSetEvent(p, home);
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) {
+                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+                return;
+            }
             home.setLoc(p.getLocation());
             player.addHome(home);
             sendMessage(sender, "Home.Created");

@@ -16,22 +16,27 @@
 
 package net.lapismc.homespawn.playerdata;
 
+import me.kangarko.ui.UIDesignerAPI;
+import me.kangarko.ui.menu.menues.MenuPagged;
+import me.kangarko.ui.model.ItemCreator;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.EasyComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 import org.ocpsoft.prettytime.Duration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class HomeSpawnPlayer {
 
@@ -42,6 +47,34 @@ public class HomeSpawnPlayer {
     public HomeSpawnPlayer(HomeSpawn plugin, UUID uuid) {
         this.plugin = plugin;
         this.uuid = uuid;
+        loadHomes();
+    }
+
+    private void loadHomes() {
+        YamlConfiguration yaml = getConfig();
+        if (!yaml.contains("Homes")) {
+            return;
+        }
+        ConfigurationSection permsSection = yaml.getConfigurationSection("Homes");
+        Set<String> homes = permsSection.getKeys(false);
+        for (String home : homes) {
+            String location = yaml.getString("Homes." + home);
+            addHome(new Home(plugin, uuid, home, location));
+        }
+    }
+
+    public void cancelTeleport() {
+        for (Home home : homes) {
+            if (home.isWaiting())
+                home.cancelTeleport();
+        }
+    }
+
+    public void skipTeleportTimer() {
+        for (Home home : homes) {
+            if (home.isWaiting())
+                home.skipTeleportTimer();
+        }
     }
 
     public boolean hasHome(String name) {
@@ -85,6 +118,12 @@ public class HomeSpawnPlayer {
                     .onHover(plugin.HSConfig.primaryColor + "Click to teleport");
             component.append(" ");
         }
+        component.send(p);
+    }
+
+    public void showHomesGUI(Player p) {
+        UIDesignerAPI.setPlugin(plugin);
+        new HomeListGUI().displayTo(p);
     }
 
     public void deleteHome(Home home) {
@@ -110,7 +149,7 @@ public class HomeSpawnPlayer {
         info = info.replace("%TIME%", timeString);
         info = info.replace("%USED%", String.valueOf(homes.size()));
         info = info.replace("%TOTAL%",
-                (plugin.HSPerms.getPermissionValue(uuid, HomeSpawnPermissions.Perm.CustomHomes) + 1) + "");
+                (plugin.HSPerms.getPermissionValue(uuid, HomeSpawnPermissions.Perm.Homes) + 1) + "");
         return info;
     }
 
@@ -149,5 +188,47 @@ public class HomeSpawnPlayer {
             durationList.remove(smallest);
         }
         return durationList;
+    }
+
+    private class HomeListGUI extends MenuPagged<Home> {
+
+        final Random r = new Random(System.currentTimeMillis());
+        OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
+
+        HomeListGUI() {
+            super(9 * 2, null, homes);
+            setTitle(getMenuTitle());
+        }
+
+        @Override
+        protected String getMenuTitle() {
+            return op == null ? "Player" : op.getName() + "'s homes";
+        }
+
+        @Override
+        protected ItemStack convertToItemStack(Home home) {
+            return ItemCreator.of(Material.WOOL).color(DyeColor.values()[(r.nextInt(DyeColor.values().length))])
+                    .name(plugin.HSConfig.primaryColor + home.getName()).build().make();
+        }
+
+        @Override
+        protected void onMenuClickPaged(Player player, Home home, ClickType clickType) {
+            if (clickType.isLeftClick() || clickType.isRightClick()) {
+                player.closeInventory();
+                home.teleportPlayer(player);
+            }
+        }
+
+        @Override
+        protected boolean updateButtonOnClick() {
+            return false;
+        }
+
+        @Override
+        protected String[] getInfo() {
+            return new String[]{
+                    "This is a list of your current homes", "", "Click to teleport!"
+            };
+        }
     }
 }

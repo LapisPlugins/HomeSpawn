@@ -10,6 +10,7 @@ Home:
   Created: "&pHome has been created"
   LimitReached: "&sYou have reached you limit for custom homes, please use /delhome to remove some"
   Deleted: "&pYour home was deleted"
+  NoHomes: "&pYou have no homes set"
 
 Spawn:
   Teleport: "&pTeleported to spawn"
@@ -18,6 +19,12 @@ Spawn:
   Moved: "&pSpawn location moved"
   Deleted: "&pSpawn location deleted"
 
+Update:
+  NotAvailable: "&pNo Update Available"
+  Available: "&pAn update for HomeSpawn is available and can be downloaded and installed by running /homespawn update"
+  Downloading: "&pUpdate found, Downloading it now\n it will be installed on next server restart"
+
+# This message is sent when the /homespawn player (name) command is run
 # %NAME% is username, %STATE% is offline or online, %TIME% is how long that have been online/offline,
 # %USED% is the number of homes the player has used, %TOTAL% is the number of homes they are permitted
 # a clickable list of the players set homes is sent directly after this, hence the : at the end
@@ -26,6 +33,8 @@ PlayerData: "&pPlayer data for &s%NAME%\n
  &pPlayer has been &s%STATE%&p for &s%TIME%&p\n
  &pPlayer has &s%USED%&p of &s%TOTAL%&p homes in use:"
 
+Reload: "&pAll configs and permissions have been reloaded!"
+
 Help:
   #This message is sent before all of the command help messages are sent if a user types /homespawn help
   Help: "The following is a list of commands and their uses:\n"
@@ -33,6 +42,7 @@ Help:
 Error:
   MustBePlayer: "&4You must be a player to do this!"
   PlayerNotFound: "&4The given player could not be found!"
+  ActionCancelled: "&4This action has been cancelled because "
   PermissionNotFound: "&4Permission not found!"
   NotPermitted: "&4You are not permitted to do this!"
   HomeDoesNotExist: "&4The home provided doesn't exist!"

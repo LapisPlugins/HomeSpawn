@@ -20,7 +20,6 @@ import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
@@ -112,30 +111,11 @@ public abstract class LapisCommand extends BukkitCommand {
     }
 
     private String parseLocationToString(Location loc) {
-        return loc.getWorld() + "," + loc.getX() + "," + loc.getY() + ","
-                + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
+        return plugin.parseLocationToString(loc);
     }
 
     private Location parseStringToLocation(String s) {
-        Location loc;
-        String[] args = s.split(",");
-        String worldName = args[0];
-        if (Bukkit.getServer().getWorld(worldName) == null) {
-            return null;
-        }
-        World world = plugin.getServer().getWorld(worldName);
-        try {
-            Float pitch = Float.valueOf(args[4]);
-            Float yaw = Float.valueOf(args[5]);
-            Double x = Double.valueOf(args[1]);
-            Double y = Double.valueOf(args[2]);
-            Double z = Double.valueOf(args[3]);
-            loc = new Location(world, x, y, z, yaw, pitch);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return loc;
+        return plugin.parseStringToLocation(s);
     }
 
     private void registerCommand(String name) {

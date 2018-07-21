@@ -38,13 +38,14 @@ public class HomeSpawnPermissions {
 
     HomeSpawnPermissions(HomeSpawn p) {
         plugin = p;
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> playerPerms = new HashMap<>(),
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> playerPerms.clear(),
                 20 * 60 * 5, 20 * 60 * 5);
         loadPermissions();
     }
 
-    void loadPermissions() {
+    public void loadPermissions() {
         pluginPerms.clear();
+        playerPerms.clear();
         ConfigurationSection permsSection = plugin.getConfig().getConfigurationSection("Permissions");
         Set<String> perms = permsSection.getKeys(false);
         for (String perm : perms) {
@@ -150,7 +151,8 @@ public class HomeSpawnPermissions {
     }
 
     public enum Perm {
-        Default, Priority, CustomHomes, TeleportDelay, SetSpawn, Spawn, DeleteSpawn;
+        //TODO add these to config
+        Default, Priority, CanUpdate, CanReload, CanViewPlayerStats, Homes, TeleportDelay, SetSpawn, Spawn, DeleteSpawn;
 
         @Override
         public String toString() {

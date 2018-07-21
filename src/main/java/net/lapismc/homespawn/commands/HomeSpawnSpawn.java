@@ -18,7 +18,9 @@ package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
+import net.lapismc.homespawn.api.events.SpawnTeleportEvent;
 import net.lapismc.homespawn.util.LapisCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,6 +46,13 @@ public class HomeSpawnSpawn extends LapisCommand {
         Location spawn = getSpawnLocation(false);
         if (spawn == null) {
             sendMessage(sender, "Spawn.NotSet");
+            return;
+        }
+        //run spawn teleport event
+        SpawnTeleportEvent event = new SpawnTeleportEvent(p, spawn);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
         p.teleport(spawn);

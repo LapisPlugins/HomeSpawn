@@ -17,8 +17,10 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
+import net.lapismc.homespawn.api.events.HomeTeleportEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -44,6 +46,13 @@ public class HomeSpawnHome extends LapisCommand {
         //check if home exists
         if (!player.hasHome(homeName)) {
             sendMessage(sender, "Error.HomeDoesNotExist");
+            return;
+        }
+        //run home teleport event
+        HomeTeleportEvent event = new HomeTeleportEvent(p, player.getHome(homeName));
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
         player.getHome(homeName).teleportPlayer(p);

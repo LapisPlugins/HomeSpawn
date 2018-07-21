@@ -36,7 +36,7 @@ public class HomeSpawnSetSpawn extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
-        if (!plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.SetSpawn)) {
+        if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.SetSpawn)) {
             sendMessage(sender, "Error.NotPermitted");
             return;
         }
