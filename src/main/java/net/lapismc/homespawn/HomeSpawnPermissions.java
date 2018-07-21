@@ -116,6 +116,15 @@ public class HomeSpawnPermissions {
         return null;
     }
 
+    public String getPlayersPermission(UUID uuid) {
+        Permission p = getPlayerPermission(uuid);
+        if (p == null) {
+            return plugin.HSConfig.getColoredMessage("Error.PermissionNotFound");
+        } else {
+            return p.getName();
+        }
+    }
+
     public Boolean isPermitted(UUID uuid, Perm perm) {
         HashMap<Perm, Integer> permMap;
         Permission p = getPlayerPermission(uuid);
@@ -141,7 +150,7 @@ public class HomeSpawnPermissions {
     }
 
     public enum Perm {
-        Default, Priority, CustomHomes, TeleportDelay;
+        Default, Priority, CustomHomes, TeleportDelay, SetSpawn, Spawn, DeleteSpawn;
 
         @Override
         public String toString() {

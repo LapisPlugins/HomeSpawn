@@ -24,11 +24,11 @@ import java.io.*;
 @SuppressWarnings("FieldCanBeLocal")
 public class HomeSpawnConfiguration {
 
+    public String primaryColor = ChatColor.WHITE.toString();
+    public String secondaryColor = ChatColor.BLUE.toString();
     private final int configVersion = 1;
     private final int messagesVersion = 1;
     private final HomeSpawn plugin;
-    private String primaryColor = ChatColor.WHITE.toString();
-    private String secondaryColor = ChatColor.BLUE.toString();
     private File messagesFile;
     private YamlConfiguration messages;
 
@@ -64,6 +64,10 @@ public class HomeSpawnConfiguration {
         messages = YamlConfiguration.loadConfiguration(messagesFile);
         primaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("primaryColor", ChatColor.GOLD.toString()));
         secondaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("secondaryColor", ChatColor.RED.toString()));
+    }
+
+    public YamlConfiguration getMessages() {
+        return messages;
     }
 
     private void checkConfigVersions() {

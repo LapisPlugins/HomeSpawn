@@ -16,16 +16,18 @@
 
 package net.lapismc.homespawn;
 
-import net.lapismc.homespawn.commands.HomeSpawnDelHome;
-import net.lapismc.homespawn.commands.HomeSpawnHome;
-import net.lapismc.homespawn.commands.HomeSpawnSetHome;
+import net.lapismc.homespawn.commands.*;
 
 class HomeSpawnCommands {
 
     HomeSpawnCommands(HomeSpawn plugin) {
-        new HomeSpawnHome(plugin);
         new HomeSpawnDelHome(plugin);
+        new HomeSpawnDelSpawn(plugin);
+        new HomeSpawnHome(plugin);
+        new HomeSpawnRenameHome(plugin);
         new HomeSpawnSetHome(plugin);
+        new HomeSpawnSetSpawn(plugin);
+        new HomeSpawnSpawn(plugin);
     }
 
 }

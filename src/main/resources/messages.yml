@@ -5,18 +5,36 @@ SecondaryColor:
 
 Home:
   Teleport: "&pWelcome home"
-
-SetHome:
   Moved: "&pYour home has been moved"
+  Renamed: "&pYour home has been renamed"
   Created: "&pHome has been created"
   LimitReached: "&sYou have reached you limit for custom homes, please use /delhome to remove some"
-
-DelHome:
   Deleted: "&pYour home was deleted"
+
+Spawn:
+  Teleport: "&pTeleported to spawn"
+  NotSet: "&pUnfortunately the spawn location has not been set, please contact an admin if you believe this to be wrong"
+  Created: "&pSpawn location set"
+  Moved: "&pSpawn location moved"
+  Deleted: "&pSpawn location deleted"
+
+# %NAME% is username, %STATE% is offline or online, %TIME% is how long that have been online/offline,
+# %USED% is the number of homes the player has used, %TOTAL% is the number of homes they are permitted
+# a clickable list of the players set homes is sent directly after this, hence the : at the end
+PlayerData: "&pPlayer data for &s%NAME%\n
+ &pPlayers permission: &s%PERMISSION%\n
+ &pPlayer has been &s%STATE%&p for &s%TIME%&p\n
+ &pPlayer has &s%USED%&p of &s%TOTAL%&p homes in use:"
+
+Help:
+  #This message is sent before all of the command help messages are sent if a user types /homespawn help
+  Help: "The following is a list of commands and their uses:\n"
 
 Error:
   MustBePlayer: "&4You must be a player to do this!"
+  PlayerNotFound: "&4The given player could not be found!"
+  PermissionNotFound: "&4Permission not found!"
   NotPermitted: "&4You are not permitted to do this!"
-  HomeDoesNotExist: "&4The home provided doesn't exist"
+  HomeDoesNotExist: "&4The home provided doesn't exist!"
   NumberFormatError: "&4A player had impossible values for their home location, that home has been removed!"
   WorldDoesNotExist: "&4The world %WORLD% was found in a players homes, since it doesn't exist the home was removed!"

@@ -17,6 +17,7 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
+import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
 import org.bukkit.command.CommandSender;
@@ -24,10 +25,10 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnDelHome extends LapisCommand {
+public class HomeSpawnRenameHome extends LapisCommand {
 
-    public HomeSpawnDelHome(HomeSpawn plugin) {
-        super(plugin, "delhome", "Delete a home", new ArrayList<>());
+    public HomeSpawnRenameHome(HomeSpawn plugin) {
+        super(plugin, "renamehome", "Rename a home", new ArrayList<>());
     }
 
     @Override
@@ -37,17 +38,16 @@ public class HomeSpawnDelHome extends LapisCommand {
         }
         Player p = (Player) sender;
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
-        String homeName = "Home";
-        if (args.length == 1) {
-            homeName = args[0];
+        if (args.length == 2) {
+            String oldName = args[0];
+            String newName = args[1];
+            if (!player.hasHome(oldName)) {
+                sendMessage(sender, "Error.HomeDoesNotExist");
+                return;
+            }
+            Home home = player.getHome(oldName);
+            home.rename(newName);
+            sendMessage(sender, "Home.Renamed");
         }
-        //check that the home exists
-        if (!player.hasHome(homeName)) {
-            sendMessage(sender, "Error.HomeDoesNotExist");
-            return;
-        }
-        //delete the home
-        player.deleteHome(player.getHome(homeName));
-        sendMessage(sender, "Home.Deleted");
     }
 }

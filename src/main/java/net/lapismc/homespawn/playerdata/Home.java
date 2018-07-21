@@ -30,10 +30,10 @@ import java.util.UUID;
 
 public class Home {
 
-    private UUID owner;
+    private final UUID owner;
     private String name;
     private Location loc;
-    private HomeSpawn plugin;
+    private final HomeSpawn plugin;
     private BukkitTask teleportTask;
 
     public Home(HomeSpawn plugin, UUID owner, String name, Location loc) {

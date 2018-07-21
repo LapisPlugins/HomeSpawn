@@ -17,17 +17,17 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.LapisCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnDelHome extends LapisCommand {
+public class HomeSpawnSetSpawn extends LapisCommand {
 
-    public HomeSpawnDelHome(HomeSpawn plugin) {
-        super(plugin, "delhome", "Delete a home", new ArrayList<>());
+    public HomeSpawnSetSpawn(HomeSpawn plugin) {
+        super(plugin, "setspawn", "Set the location for /spawn", new ArrayList<>());
     }
 
     @Override
@@ -36,18 +36,12 @@ public class HomeSpawnDelHome extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
-        HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
-        String homeName = "Home";
-        if (args.length == 1) {
-            homeName = args[0];
-        }
-        //check that the home exists
-        if (!player.hasHome(homeName)) {
-            sendMessage(sender, "Error.HomeDoesNotExist");
+        if (!plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.SetSpawn)) {
+            sendMessage(sender, "Error.NotPermitted");
             return;
         }
-        //delete the home
-        player.deleteHome(player.getHome(homeName));
-        sendMessage(sender, "Home.Deleted");
+        //check if the command has an argument of new
+        setSpawnLocation(p.getLocation(), args.length == 1 && args[0].equalsIgnoreCase("new"));
+        sendMessage(sender, "Spawn.Created");
     }
 }

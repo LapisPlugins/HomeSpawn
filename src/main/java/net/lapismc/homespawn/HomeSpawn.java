@@ -20,14 +20,19 @@ import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
+import org.ocpsoft.prettytime.units.Millisecond;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.UUID;
 
 public final class HomeSpawn extends JavaPlugin {
 
     public HomeSpawnConfiguration HSConfig;
     public HomeSpawnPermissions HSPerms;
+    public PrettyTime prettyTime;
     private LapisUpdater lapisUpdater;
     private HashMap<UUID, HomeSpawnPlayer> players = new HashMap<>();
 
@@ -36,6 +41,10 @@ public final class HomeSpawn extends JavaPlugin {
         //checkUpdates();
         HSConfig = new HomeSpawnConfiguration(this);
         HSPerms = new HomeSpawnPermissions(this);
+        prettyTime = new PrettyTime();
+        prettyTime.setLocale(Locale.ENGLISH);
+        prettyTime.removeUnit(JustNow.class);
+        prettyTime.removeUnit(Millisecond.class);
         new HomeSpawnFileWatcher(this);
         new HomeSpawnCommands(this);
     }

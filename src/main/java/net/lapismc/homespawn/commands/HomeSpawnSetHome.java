@@ -47,7 +47,7 @@ public class HomeSpawnSetHome extends LapisCommand {
                 //also check if they are moving a preexisting home as they can do that even if they are at the limit
                 if (player.getHomes().size() >= plugin.HSPerms.getPermissionValue(p.getUniqueId(),
                         HomeSpawnPermissions.Perm.CustomHomes) && player.getHome(args[0]) == null) {
-                    sendMessage(sender, "SetHome.LimitReached");
+                    sendMessage(sender, "Home.LimitReached");
                     return;
                 }
                 //set the home name to the custom name provided
@@ -59,13 +59,13 @@ public class HomeSpawnSetHome extends LapisCommand {
         if (player.hasHome(homeName)) {
             //if we are just moving a preexisting home then this is significantly better
             player.getHome(homeName).setLoc(p.getLocation());
-            sendMessage(sender, "SetHome.Moved");
+            sendMessage(sender, "Home.Moved");
         } else {
             //otherwise make a new home and add it to the player
             Home home = new Home(plugin, p.getUniqueId(), homeName, p.getLocation());
             home.setLoc(p.getLocation());
             player.addHome(home);
-            sendMessage(sender, "SetHome.Created");
+            sendMessage(sender, "Home.Created");
         }
     }
 
