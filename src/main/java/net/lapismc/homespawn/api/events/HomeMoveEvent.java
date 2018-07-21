@@ -26,13 +26,15 @@ import org.bukkit.event.HandlerList;
 public class HomeMoveEvent extends Event implements Cancellable {
 
     public static HandlerList handlers = new HandlerList();
+    private final String name;
     private final Location oldHome;
     private final Location newHome;
     private final Player p;
     private String reason;
     private boolean cancelled;
 
-    public HomeMoveEvent(Player p, Location oldHome, Location newHome) {
+    public HomeMoveEvent(Player p, String name, Location oldHome, Location newHome) {
+        this.name = name;
         this.oldHome = oldHome;
         this.newHome = newHome;
         this.p = p;
@@ -41,6 +43,10 @@ public class HomeMoveEvent extends Event implements Cancellable {
 
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Location getOldHome() {

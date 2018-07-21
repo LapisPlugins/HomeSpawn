@@ -65,13 +65,14 @@ public class HomeSpawnSetHome extends LapisCommand {
         if (player.hasHome(homeName)) {
             //if we are just moving a preexisting home then this is significantly better
             //run home move event
-            HomeMoveEvent event = new HomeMoveEvent(p, player.getHome(homeName).getLocation(), p.getLocation());
+            Home home = player.getHome(homeName);
+            HomeMoveEvent event = new HomeMoveEvent(p, home.getName(), home.getLocation(), p.getLocation());
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled()) {
                 p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
                 return;
             }
-            player.getHome(homeName).setLoc(p.getLocation());
+            home.setLoc(p.getLocation());
             sendMessage(sender, "Home.Moved");
         } else {
             //otherwise make a new home and add it to the player
