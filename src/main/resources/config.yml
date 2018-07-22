@@ -7,6 +7,9 @@ Update:
   # Should console be notified if an update is available, this wont happen if download is true
   NotifyConsole: true
 
+# If true the /setspawn command will also set the world spawn, meaning you will respawn there
+SetWorldSpawn: false
+
 # If true an inventory based UI will display the players current homes and allow them to teleport
 # If false a list of home names will be shown that can be clicked to teleport
 HomeListGUI: true

@@ -38,34 +38,36 @@ import java.util.*;
 
 public class HomeSpawnPlayer {
 
+    private final HomeSpawn plugin;
+    private final UUID uuid;
     private ArrayList<Home> homes = new ArrayList<>();
     private TeleportTask teleportTask;
-    private HomeSpawn plugin;
-    private UUID uuid;
 
     public HomeSpawnPlayer(HomeSpawn plugin, UUID uuid) {
         this.plugin = plugin;
         this.uuid = uuid;
-        loadHomes();
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::loadHomes);
     }
 
     private void loadHomes() {
-        homes.clear();
+        homes = new ArrayList<>();
         YamlConfiguration yaml = getConfig();
         if (!yaml.contains("Homes")) {
             return;
         }
         ConfigurationSection permsSection = yaml.getConfigurationSection("Homes");
         Set<String> homes = permsSection.getKeys(false);
-        for (String home : homes) {
-            String location = yaml.getString("Homes." + home);
-            addHome(new Home(plugin, uuid, home, location));
+        for (String homeString : homes) {
+            String location = yaml.getString("Homes." + homeString);
+            Home home = new Home(plugin, uuid, homeString, location);
+            if (home.isValid())
+                addHome(home);
         }
     }
 
     public boolean isNotWaitingForTeleport() {
-        if (teleportTask != null && !teleportTask.isCancelled()) {
-            return true;
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
+            return false;
         }
         for (Home home : homes) {
             if (home.isWaiting())
@@ -75,8 +77,9 @@ public class HomeSpawnPlayer {
     }
 
     public void cancelTeleport() {
-        if (teleportTask != null && !teleportTask.isCancelled()) {
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.cancelTask();
+            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Home.Cancelled"));
             teleportTask = null;
         }
         for (Home home : homes) {
@@ -86,8 +89,9 @@ public class HomeSpawnPlayer {
     }
 
     public void skipTeleportTimer() {
-        if (teleportTask != null && !teleportTask.isCancelled()) {
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.getPlayer().teleport(teleportTask.getLocation());
+            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
             teleportTask.cancelTask();
             teleportTask = null;
         }
@@ -172,6 +176,9 @@ public class HomeSpawnPlayer {
     public void deleteHome(Home home) {
         YamlConfiguration yaml = getConfig();
         yaml.set("Homes." + home.getName(), null);
+        if (yaml.getConfigurationSection("Homes").getKeys(false).isEmpty()) {
+            yaml.set("Homes", null);
+        }
         saveConfig(yaml);
         homes.remove(home);
     }
@@ -240,7 +247,7 @@ public class HomeSpawnPlayer {
     private class HomeListGUI extends MenuPagged<Home> {
 
         final Random r = new Random(System.currentTimeMillis());
-        OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
+        final OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         HomeListGUI() {
             super(9 * 2, null, homes);

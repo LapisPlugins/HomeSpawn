@@ -32,7 +32,7 @@ public class HomeSpawnDataConverter {
 
     //TODO remove after the next few updates
 
-    private HomeSpawn plugin;
+    private final HomeSpawn plugin;
 
     public HomeSpawnDataConverter(HomeSpawn plugin) {
         this.plugin = plugin;

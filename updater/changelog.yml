@@ -17,7 +17,7 @@ ChangeLog:
     Beta 0.1.9:
         - "Update to Push Changes Above!"
     Beta 0.2.0:
-        - "New API Events to Listen for HomeSpawnHome Setting and HomeSpawnHome Teleporting"
+        - "New API Events to Listen for HomeSpawnHome Setting and HomeSpawnHome teleporting"
         - "Added Console Printout of Changes After Downloading Updates(Read From This Changelog File)"
         - "Moved Permissions to Their Own Class Ready For Permission Syncing With WarpPoint"
         - "Fixed Permission Defaults"
@@ -117,7 +117,7 @@ ChangeLog:
       - "Updated GUI to use UI Designer paged UI"
       - "Fixed some teleporting issues"
     2.3.2:
-      - "Fixed some teleportaion bugs"
+      - "Fixed some teleporting bugs"
       - "Fixed a problem with homes not deleting"
       - "Major code cleanup"
     2.3.3:

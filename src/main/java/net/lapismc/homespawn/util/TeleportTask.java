@@ -22,8 +22,8 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class TeleportTask {
 
-    private BukkitTask task;
-    private Player player;
+    private final BukkitTask task;
+    private final Player player;
     private Location loc;
 
     public TeleportTask(BukkitTask task, Player player) {
@@ -37,8 +37,8 @@ public class TeleportTask {
         this.loc = loc;
     }
 
-    public boolean isCancelled() {
-        return task.isCancelled();
+    public boolean isNotCancelled() {
+        return !task.isCancelled();
     }
 
     public void cancelTask() {

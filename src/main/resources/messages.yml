@@ -6,7 +6,7 @@ SecondaryColor: &9
 
 Home:
   Wait: "&pYou must wait &s%TIME%&p seconds before being teleported"
-  # Change the end of this message to suit your settings
+  # Change the end of this message to suit your settings, NOTE: this is also used for cancelled spawn teleport
   Cancelled: "&pYour teleport has been cancelled, you must not move or partake in PvP!"
   Teleport: "&pWelcome home"
   Moved: "&pYour home has been moved"

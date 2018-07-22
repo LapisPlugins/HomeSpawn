@@ -38,10 +38,10 @@ import java.io.File;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class HomeSpawnListeners implements Listener {
+class HomeSpawnListeners implements Listener {
 
-    private HomeSpawn plugin;
-    private Cache<UUID, String> attackedPlayers = CacheBuilder.newBuilder()
+    private final HomeSpawn plugin;
+    private final Cache<UUID, String> attackedPlayers = CacheBuilder.newBuilder()
             .expireAfterWrite(1, TimeUnit.SECONDS).build();
 
     HomeSpawnListeners(HomeSpawn plugin) {

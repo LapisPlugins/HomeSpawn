@@ -90,6 +90,9 @@ public abstract class LapisCommand extends BukkitCommand {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (!isNew && plugin.getConfig().getBoolean("SetWorldSpawn")) {
+            loc.getWorld().setSpawnLocation(loc);
+        }
     }
 
     protected void deleteSpawnLocation(boolean isNew) {

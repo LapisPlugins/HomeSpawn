@@ -60,6 +60,7 @@ public class HomeSpawnSetHome extends LapisCommand {
                 homeName = args[0];
             } else {
                 sendMessage(sender, "Error.NotPermitted");
+                return;
             }
         }
         if (player.hasHome(homeName)) {

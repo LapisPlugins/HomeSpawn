@@ -50,6 +50,10 @@ public class Home {
         this.loc = parseStringToLocation(loc);
     }
 
+    boolean isValid() {
+        return loc != null;
+    }
+
     public void rename(String newName) {
         HomeSpawnPlayer player = plugin.getPlayer(owner);
         player.deleteHome(this);
@@ -63,7 +67,7 @@ public class Home {
     }
 
     void cancelTeleport() {
-        if (teleportTask != null && !teleportTask.isCancelled()) {
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Home.Cancelled"));
             teleportTask.cancelTask();
             teleportTask = null;
@@ -71,7 +75,7 @@ public class Home {
     }
 
     void skipTeleportTimer() {
-        if (teleportTask != null && !teleportTask.isCancelled()) {
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleport(teleportTask.getPlayer());
         }
     }

@@ -16,6 +16,8 @@
 
 package net.lapismc.homespawn;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -28,24 +30,24 @@ import org.bukkit.permissions.PermissionDefault;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 public class HomeSpawnPermissions {
 
     private final HashMap<Permission, HashMap<Perm, Integer>> pluginPerms = new HashMap<>();
     private final HomeSpawn plugin;
-    private HashMap<UUID, Permission> playerPerms = new HashMap<>();
+    private final Cache<UUID, Permission> playerPerms = CacheBuilder.newBuilder()
+            .expireAfterWrite(30, TimeUnit.SECONDS).build();
 
     HomeSpawnPermissions(HomeSpawn p) {
         plugin = p;
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> playerPerms.clear(),
-                20 * 60 * 5, 20 * 60 * 5);
         loadPermissions();
     }
 
     public void loadPermissions() {
         pluginPerms.clear();
-        playerPerms.clear();
+        playerPerms.invalidateAll();
         ConfigurationSection permsSection = plugin.getConfig().getConfigurationSection("Permissions");
         Set<String> perms = permsSection.getKeys(false);
         for (String perm : perms) {
@@ -78,8 +80,8 @@ public class HomeSpawnPermissions {
 
     private Permission getPlayerPermission(UUID uuid) {
         Permission p = null;
-        if (playerPerms.get(uuid) != null) {
-            return playerPerms.get(uuid);
+        if (playerPerms.getIfPresent(uuid) != null) {
+            return playerPerms.getIfPresent(uuid);
         }
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
         if (op.isOnline()) {

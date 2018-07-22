@@ -40,7 +40,7 @@ public final class HomeSpawn extends JavaPlugin {
     public HomeSpawnPermissions HSPerms;
     public PrettyTime prettyTime;
     public LapisUpdater lapisUpdater;
-    private Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
+    private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
             .expireAfterAccess(1, TimeUnit.MINUTES).build();
 
     //TODO add help messages to messages.yml and commands
