@@ -16,6 +16,7 @@
 
 package net.lapismc.homespawn.util;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -23,10 +24,17 @@ public class TeleportTask {
 
     private BukkitTask task;
     private Player player;
+    private Location loc;
 
     public TeleportTask(BukkitTask task, Player player) {
         this.task = task;
         this.player = player;
+    }
+
+    public TeleportTask(BukkitTask task, Player player, Location loc) {
+        this.task = task;
+        this.player = player;
+        this.loc = loc;
     }
 
     public boolean isCancelled() {
@@ -39,5 +47,9 @@ public class TeleportTask {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Location getLocation() {
+        return loc;
     }
 }

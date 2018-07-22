@@ -50,7 +50,22 @@ Help:
    player: shows player stats\n"
   HomespawnPlayer: "\"/homespawn player [username] [home name]\"\n
    shows player stats if only a username is given, if given a valid home name you will be teleported\n"
-
+  Delhome: "\"/delhome [home]\"\n
+   Deletes your home\n"
+  Delspawn: "\"/delspawn [new]\"\n
+   Deletes spawn\n"
+  Home: "\"/home [home]\"\n
+   Teleport to your home\n"
+  Homelist: "\"/homelist\"\n
+   Displays a list or GUI of your homes"
+  Renamehome: "\"/renamehome [current name] [new name]\"\n
+   Renames a home"
+  Sethome: "\"/sethome [name]\"\n
+   Sets a home at your current location, can be used to move homes"
+  Setspawn: "\"/setspawn [new]\"\n
+   Sets spawn or new spawn at your current location"
+  Spawn: "\"/spawn\"/n
+   Teleport to spawn"
 
 Error:
   MustBePlayer: "&4You must be a player to do this!"

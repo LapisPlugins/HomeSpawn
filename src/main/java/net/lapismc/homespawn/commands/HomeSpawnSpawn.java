@@ -19,6 +19,7 @@ package net.lapismc.homespawn.commands;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.api.events.SpawnTeleportEvent;
+import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.LapisCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -39,6 +40,7 @@ public class HomeSpawnSpawn extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
+        HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
         if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.Spawn)) {
             sendMessage(sender, "Error.NotPermitted");
             return;
@@ -55,7 +57,6 @@ public class HomeSpawnSpawn extends LapisCommand {
             p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
-        p.teleport(spawn);
-        sendMessage(sender, "Spawn.Teleport");
+        player.teleportToSpawn(spawn);
     }
 }

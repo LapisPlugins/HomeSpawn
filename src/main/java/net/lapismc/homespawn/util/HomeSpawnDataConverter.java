@@ -31,7 +31,6 @@ import java.util.UUID;
 public class HomeSpawnDataConverter {
 
     //TODO remove after the next few updates
-    //TODO test this
 
     private HomeSpawn plugin;
 

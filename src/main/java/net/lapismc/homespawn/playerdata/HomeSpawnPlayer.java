@@ -22,10 +22,8 @@ import me.kangarko.ui.model.ItemCreator;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.EasyComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
+import net.lapismc.homespawn.util.TeleportTask;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,6 +39,7 @@ import java.util.*;
 public class HomeSpawnPlayer {
 
     private ArrayList<Home> homes = new ArrayList<>();
+    private TeleportTask teleportTask;
     private HomeSpawn plugin;
     private UUID uuid;
 
@@ -65,6 +64,9 @@ public class HomeSpawnPlayer {
     }
 
     public boolean isNotWaitingForTeleport() {
+        if (teleportTask != null && !teleportTask.isCancelled()) {
+            return true;
+        }
         for (Home home : homes) {
             if (home.isWaiting())
                 return false;
@@ -73,6 +75,10 @@ public class HomeSpawnPlayer {
     }
 
     public void cancelTeleport() {
+        if (teleportTask != null && !teleportTask.isCancelled()) {
+            teleportTask.cancelTask();
+            teleportTask = null;
+        }
         for (Home home : homes) {
             if (home.isWaiting())
                 home.cancelTeleport();
@@ -80,9 +86,36 @@ public class HomeSpawnPlayer {
     }
 
     public void skipTeleportTimer() {
+        if (teleportTask != null && !teleportTask.isCancelled()) {
+            teleportTask.getPlayer().teleport(teleportTask.getLocation());
+            teleportTask.cancelTask();
+            teleportTask = null;
+        }
         for (Home home : homes) {
             if (home.isWaiting())
                 home.skipTeleportTimer();
+        }
+    }
+
+    public void teleportToSpawn(Location spawn) {
+        if (teleportTask != null) {
+            teleportTask.cancelTask();
+            teleportTask = null;
+        }
+        Player p = Bukkit.getPlayer(uuid);
+        boolean delay = plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.TeleportDelay);
+        if (delay) {
+            Integer delayTime = plugin.HSPerms.getPermissionValue(p.getUniqueId(),
+                    HomeSpawnPermissions.Perm.TeleportDelay);
+            p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
+            teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
+                    () -> {
+                        p.teleport(spawn);
+                        p.sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
+                    }, delayTime * 20), p, spawn);
+        } else {
+            p.teleport(spawn);
+            p.sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
         }
     }
 
