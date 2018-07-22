@@ -132,3 +132,5 @@ ChangeLog:
       - "A backup would be recommended"
     3.0.1:
       - "Fixed player data directory not being generated"
+    3.0.2:
+      - "Fixed auto updater"
