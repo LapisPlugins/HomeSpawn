@@ -21,6 +21,7 @@ import org.bukkit.Bukkit;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.UUID;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
@@ -45,11 +46,10 @@ class HomeSpawnFileWatcher {
     }
 
     private void watcher() throws IOException, InterruptedException {
-        //TODO modify to allow detection of deleting/modifying player data
         WatchService watcher = FileSystems.getDefault().newWatchService();
         Path dir = Paths.get(plugin.getDataFolder().getAbsolutePath());
         dir.register(watcher, ENTRY_DELETE, ENTRY_MODIFY);
-        plugin.getLogger().info("LapisBans file watcher started!");
+        plugin.getLogger().info("HomeSpawn file watcher started!");
         WatchKey key = watcher.take();
         while (key != null) {
             for (WatchEvent<?> event : key.pollEvents()) {
@@ -72,16 +72,26 @@ class HomeSpawnFileWatcher {
                         }
                     }
                 } else if (kind == ENTRY_MODIFY) {
-                    if (f.getName().endsWith(".yml")) {
-                        checkConfig(f);
-                    }
+                    checkPlayerData(f);
+                    checkConfig(f);
                 }
             }
             key.reset();
-            Thread.sleep(100);
             key = watcher.take();
         }
-        plugin.getLogger().severe("LapisBans file watcher has stopped, please report any errors to dart2112 if this was not intended");
+        plugin.getLogger().severe("HomeSpawn file watcher has stopped, please report any errors to dart2112 if this was not intended");
+    }
+
+    private void checkPlayerData(File f) {
+        UUID uuid = null;
+        try {
+            uuid = UUID.fromString(f.getName().replace(".yml", ""));
+        } catch (IllegalArgumentException ignored) {
+        }
+        if (uuid != null && Bukkit.getOfflinePlayer(uuid).hasPlayedBefore()) {
+            plugin.getPlayer(uuid).reloadConfig();
+            plugin.getLogger().info("Changes made to " + Bukkit.getOfflinePlayer(uuid).getName() + "'s config have been loaded");
+        }
     }
 
     private void checkConfig(File f) {
@@ -95,6 +105,8 @@ class HomeSpawnFileWatcher {
             case "Messages":
                 plugin.HSConfig.reloadMessages(f);
                 plugin.getLogger().info("Changes made to LapisBans Messages.yml have been loaded");
+                break;
+            default:
                 break;
         }
     }

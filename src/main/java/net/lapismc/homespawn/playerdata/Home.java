@@ -64,14 +64,15 @@ public class Home {
 
     void cancelTeleport() {
         if (teleportTask != null && !teleportTask.isCancelled()) {
+            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Home.Cancelled"));
             teleportTask.cancelTask();
+            teleportTask = null;
         }
     }
 
     void skipTeleportTimer() {
         if (teleportTask != null && !teleportTask.isCancelled()) {
-
-            teleportTask.cancelTask();
+            teleport(teleportTask.getPlayer());
         }
     }
 
@@ -101,10 +102,15 @@ public class Home {
     }
 
     public void teleportPlayer(Player p) {
+        if (teleportTask != null) {
+            teleportTask.cancelTask();
+            teleportTask = null;
+        }
         boolean delay = plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.TeleportDelay);
         if (delay) {
             Integer delayTime = plugin.HSPerms.getPermissionValue(p.getUniqueId(),
                     HomeSpawnPermissions.Perm.TeleportDelay);
+            p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
             teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
                     () -> teleport(p), delayTime * 20), p);
         } else {
@@ -118,7 +124,7 @@ public class Home {
             teleportTask = null;
         }
         teleportNow(p);
-        p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Teleported"));
+        p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Teleport"));
     }
 
     private void teleportNow(Player p) {
@@ -146,7 +152,7 @@ public class Home {
     }
 
     private String parseLocationToString(Location loc) {
-        return loc.getWorld() + "," + loc.getX() + "," + loc.getY() + ","
+        return loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + ","
                 + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
     }
 

@@ -51,6 +51,7 @@ public class HomeSpawnPlayer {
     }
 
     private void loadHomes() {
+        homes.clear();
         YamlConfiguration yaml = getConfig();
         if (!yaml.contains("Homes")) {
             return;
@@ -61,6 +62,14 @@ public class HomeSpawnPlayer {
             String location = yaml.getString("Homes." + home);
             addHome(new Home(plugin, uuid, home, location));
         }
+    }
+
+    public boolean isNotWaitingForTeleport() {
+        for (Home home : homes) {
+            if (home.isWaiting())
+                return false;
+        }
+        return true;
     }
 
     public void cancelTeleport() {
@@ -110,11 +119,12 @@ public class HomeSpawnPlayer {
     }
 
     public void sendClickableHomesList(Player p) {
+        String command = p.getUniqueId().equals(uuid) ? "/home " : "/homespawn player " + Bukkit.getOfflinePlayer(uuid).getName();
         EasyComponent component = new EasyComponent("");
         for (Home home : homes) {
             component.append(" ");
             component.append(plugin.HSConfig.secondaryColor + home.getName())
-                    .onClickRunCmd("/home " + home.getName())
+                    .onClickRunCmd(command + home.getName())
                     .onHover(plugin.HSConfig.primaryColor + "Click to teleport");
             component.append(" ");
         }
@@ -149,7 +159,7 @@ public class HomeSpawnPlayer {
         info = info.replace("%TIME%", timeString);
         info = info.replace("%USED%", String.valueOf(homes.size()));
         info = info.replace("%TOTAL%",
-                (plugin.HSPerms.getPermissionValue(uuid, HomeSpawnPermissions.Perm.Homes) + 1) + "");
+                (plugin.HSPerms.getPermissionValue(uuid, HomeSpawnPermissions.Perm.Homes)) + "");
         return info;
     }
 
@@ -165,6 +175,10 @@ public class HomeSpawnPlayer {
             }
         }
         return YamlConfiguration.loadConfiguration(file);
+    }
+
+    public void reloadConfig() {
+        loadHomes();
     }
 
     public void saveConfig(YamlConfiguration yaml) {

@@ -47,24 +47,34 @@ public class HomeSpawnDataConverter {
         }
         for (File f : Objects.requireNonNull(playerDataFolder.listFiles())) {
             if (f.getName().endsWith(".yml")) {
-                YamlConfiguration yaml = YamlConfiguration.loadConfiguration(f);
-                if (!yaml.contains("Homes") || !yaml.contains("Homes.list")) {
-                    return;
-                }
-                yaml.set("Homes.list", null);
-                UUID uuid = UUID.fromString(f.getName().replace(".yml", ""));
-                ConfigurationSection permsSection = yaml.getConfigurationSection("Homes");
-                Set<String> homes = permsSection.getKeys(false);
-                for (String home : homes) {
-                    if (!home.equalsIgnoreCase("list")) {
-                        Location location = (Location) yaml.get("Homes." + home);
-                        yaml.set("Homes." + home, new Home(plugin, uuid, home, location).getLocationString());
+                if (f.getName().contains("Passwords")) {
+                    f.delete();
+                } else {
+                    YamlConfiguration yaml = YamlConfiguration.loadConfiguration(f);
+                    yaml.set("login", null);
+                    yaml.set("logout", null);
+                    yaml.set("UUID", null);
+                    yaml.set("UserName", null);
+                    if (yaml.contains("Homes") && yaml.contains("Homes.list")) {
+                        yaml.set("Homes.list", null);
+                        UUID uuid = UUID.fromString(f.getName().replace(".yml", ""));
+                        ConfigurationSection permsSection = yaml.getConfigurationSection("Homes");
+                        Set<String> homes = permsSection.getKeys(false);
+                        for (String home : homes) {
+                            if (!home.equalsIgnoreCase("list")) {
+                                try {
+                                    Location location = (Location) yaml.get("Homes." + home);
+                                    yaml.set("Homes." + home, new Home(plugin, uuid, home, location).getLocationString());
+                                } catch (ClassCastException ignored) {
+                                }
+                            }
+                        }
                     }
-                }
-                try {
-                    yaml.save(f);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        yaml.save(f);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

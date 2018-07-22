@@ -1,9 +1,13 @@
+# Don't change this value unless you want to reset the config
 ConfigVersion: 1
 
-PrimaryColor:
-SecondaryColor:
+PrimaryColor: &f
+SecondaryColor: &9
 
 Home:
+  Wait: "&pYou must wait &s%TIME%&p seconds before being teleported"
+  # Change the end of this message to suit your settings
+  Cancelled: "&pYour teleport has been cancelled, you must not move or partake in PvP!"
   Teleport: "&pWelcome home"
   Moved: "&pYour home has been moved"
   Renamed: "&pYour home has been renamed"
@@ -29,15 +33,24 @@ Update:
 # %USED% is the number of homes the player has used, %TOTAL% is the number of homes they are permitted
 # a clickable list of the players set homes is sent directly after this, hence the : at the end
 PlayerData: "&pPlayer data for &s%NAME%\n
- &pPlayers permission: &s%PERMISSION%\n
- &pPlayer has been &s%STATE%&p for &s%TIME%&p\n
- &pPlayer has &s%USED%&p of &s%TOTAL%&p homes in use:"
+&pPlayers permission: &s%PERMISSION%\n
+&pPlayer has been &s%STATE%&p since &s%TIME%&p\n
+&pPlayer has &s%USED%&p of &s%TOTAL%&p homes in use:"
 
 Reload: "&pAll configs and permissions have been reloaded!"
 
 Help:
   #This message is sent before all of the command help messages are sent if a user types /homespawn help
   Help: "The following is a list of commands and their uses:\n"
+  Homespawn: "\"/homespawn [help|reload|update|player]\" \n
+   No arguments: displays plugin info\n
+   help: displays command help\n
+   reload: reloads configuration and permissions\n
+   update: checks for and downloads an update if one is available\n
+   player: shows player stats\n"
+  HomespawnPlayer: "\"/homespawn player [username] [home name]\"\n
+   shows player stats if only a username is given, if given a valid home name you will be teleported\n"
+
 
 Error:
   MustBePlayer: "&4You must be a player to do this!"

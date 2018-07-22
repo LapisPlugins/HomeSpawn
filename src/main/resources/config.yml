@@ -1,4 +1,11 @@
+# Don't change this value unless you want to reset the config
 ConfigVersion: 1
+
+Update:
+  # Should updates be automatically downloaded and installed
+  Download: false
+  # Should console be notified if an update is available, this wont happen if download is true
+  NotifyConsole: true
 
 # If true an inventory based UI will display the players current homes and allow them to teleport
 # If false a list of home names will be shown that can be clicked to teleport
@@ -13,5 +20,56 @@ TeleportCancel:
   # Move means they move in the x y or z directions
   Move: 0
 
+# If you want to disable commands you can enter the command names here and they wont be used
+# e.g. home would disable the /home command
+DisabledCommands:
+  - "Command names here"
 
+# Permissions are handled below, there is no limit to how many permissions
+# you can have as long as they contain all of the settings
+# 0 = false, 1 = true, unless otherwise stated
+# (NOTE: in a permission name "," will be replaced with "." EG. homespawn,player = homespawn.player)
 Permissions:
+  homespawn,player:
+    # Who will have this by default? 0=no one 1=everyone 2=OPs
+    Default: 1
+    # Players will be given the permission with the highest value, if players have multiple permissions.
+    Priority: 1
+    # How many homes can they have set? 0=none, 1 = no custom names, 1+ is how many homes they can set
+    Homes: 1
+    # How many seconds must they wait before they are teleported? 0=instant
+    TeleportDelay: 10
+    # Can they teleport to spawn
+    Spawn: 1
+    # Can they set the spawn location
+    SetSpawn: 0
+    # Can they delete spawn
+    DeleteSpawn: 0
+    # Can they force the plugin to update it's self
+    CanUpdate: 0
+    # Can they reload the configurations and permissions
+    CanReload: 0
+    # Can they view player statistics and teleport to other players homes
+    CanViewPlayerStats: 0
+  homespawn,vip:
+    Default: 0
+    Priority: 2
+    Homes: 5
+    TeleportDelay: 5
+    Spawn: 1
+    SetSpawn: 0
+    DeleteSpawn: 0
+    CanUpdate: 0
+    CanReload: 0
+    CanViewPlayerStats: 0
+  homespawn,admin:
+    Default: 2
+    Priority: 3
+    Homes: 10
+    TeleportDelay: 0
+    Spawn: 1
+    SetSpawn: 1
+    DeleteSpawn: 1
+    CanUpdate: 1
+    CanReload: 1
+    CanViewPlayerStats: 1

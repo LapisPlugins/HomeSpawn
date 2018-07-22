@@ -40,7 +40,7 @@ public class HomeSpawn extends LapisCommand {
     protected void onCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
             displayPluginInfo(sender);
-        } else if (args.length == 1) {
+        } else {
             if (args[0].equalsIgnoreCase("update")) {
                 update(sender);
             } else if (args[0].equalsIgnoreCase("reload")) {
@@ -50,7 +50,7 @@ public class HomeSpawn extends LapisCommand {
             } else if (args[0].equalsIgnoreCase("player")) {
                 HSPlayer.onCommand(sender, args);
             } else {
-                sendMessage(sender, "Help.HomeSpawn");
+                sendMessage(sender, "Help.Homespawn");
             }
         }
     }
@@ -113,7 +113,7 @@ public class HomeSpawn extends LapisCommand {
                 }
             }
             if (args.length == 1 || args.length > 3) {
-                sendMessage(sender, "Help.HomeSpawnPlayer");
+                sendMessage(sender, "Help.HomespawnPlayer");
             } else if (args.length == 2) {
                 displayPlayerInformation(sender, args[1]);
             } else if (args.length == 3) {

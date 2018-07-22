@@ -18,17 +18,30 @@ package net.lapismc.homespawn;
 
 import net.lapismc.homespawn.commands.*;
 
+import java.util.List;
+
 class HomeSpawnCommands {
 
     HomeSpawnCommands(HomeSpawn plugin) {
-        new HomeSpawnDelHome(plugin);
-        new HomeSpawnDelSpawn(plugin);
-        new HomeSpawnHome(plugin);
-        new HomeSpawnHomeList(plugin);
-        new HomeSpawnRenameHome(plugin);
-        new HomeSpawnSetHome(plugin);
-        new HomeSpawnSetSpawn(plugin);
-        new HomeSpawnSpawn(plugin);
+        List<String> disabledCommands = plugin.getConfig().getStringList("DisabledCommands");
+        if (!disabledCommands.contains("homespawn"))
+            new net.lapismc.homespawn.commands.HomeSpawn(plugin);
+        if (!disabledCommands.contains("delhome"))
+            new HomeSpawnDelHome(plugin);
+        if (!disabledCommands.contains("delspawn"))
+            new HomeSpawnDelSpawn(plugin);
+        if (!disabledCommands.contains("home"))
+            new HomeSpawnHome(plugin);
+        if (!disabledCommands.contains("homelist"))
+            new HomeSpawnHomeList(plugin);
+        if (!disabledCommands.contains("renamehome"))
+            new HomeSpawnRenameHome(plugin);
+        if (!disabledCommands.contains("sethome"))
+            new HomeSpawnSetHome(plugin);
+        if (!disabledCommands.contains("setspawn"))
+            new HomeSpawnSetSpawn(plugin);
+        if (!disabledCommands.contains("spawn"))
+            new HomeSpawnSpawn(plugin);
     }
 
 }

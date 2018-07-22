@@ -32,6 +32,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.util.UUID;
@@ -66,6 +67,15 @@ public class HomeSpawnListeners implements Listener {
         player.saveConfig(yaml);
     }
 
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
+        YamlConfiguration yaml = player.getConfig();
+        yaml.set("Time", System.currentTimeMillis());
+        player.saveConfig(yaml);
+    }
+
     private void spawn(Player p) {
         File file = new File(plugin.getDataFolder() + File.separator + "spawn.yml");
         if (!file.exists()) {
@@ -95,10 +105,13 @@ public class HomeSpawnListeners implements Listener {
         } else if (plugin.getConfig().getInt("TeleportCancel.Move") == 0) {
             cancel = true;
         }
+        if (plugin.getPlayer(e.getPlayer().getUniqueId()).isNotWaitingForTeleport()) {
+            return;
+        }
         //check if the player has moved or just looked around
-        boolean x = e.getFrom().getX() == e.getTo().getX();
-        boolean y = e.getFrom().getY() == e.getTo().getY();
-        boolean z = e.getFrom().getZ() == e.getTo().getZ();
+        boolean x = e.getFrom().getBlockX() == e.getTo().getBlockX();
+        boolean y = e.getFrom().getBlockY() == e.getTo().getBlockY();
+        boolean z = e.getFrom().getBlockZ() == e.getTo().getBlockZ();
         boolean moved = !(x && y && z);
         if (moved) {
             if (cancel) {
@@ -123,6 +136,9 @@ public class HomeSpawnListeners implements Listener {
         } else if (plugin.getConfig().getInt("TeleportCancel.PvP") == 0) {
             cancel = true;
         }
+        if (plugin.getPlayer(p.getUniqueId()).isNotWaitingForTeleport()) {
+            return;
+        }
         //if the attacker isn't a player it might not be PvP
         if (!(e.getDamager() instanceof Player)) {
             // if its an arrow make sure a player shot it, if not we don't care
@@ -131,13 +147,14 @@ public class HomeSpawnListeners implements Listener {
                 if (!(arrow.getShooter() instanceof Player)) {
                     return;
                 }
-            }
-            //if its a wolf and it isn't tamed we don't care
-            if (e.getDamager() instanceof Wolf) {
+            } else if (e.getDamager() instanceof Wolf) {
+                //if its a wolf and it isn't tamed we don't care
                 Wolf wolf = (Wolf) e.getDamager();
                 if (!wolf.isTamed()) {
                     return;
                 }
+            } else {
+                return;
             }
         }
         //if we get to here its a player or a players wolf who has attacked a player and is probably PvP
@@ -162,6 +179,9 @@ public class HomeSpawnListeners implements Listener {
         } else if (plugin.getConfig().getInt("TeleportCancel.Attacked") == 0) {
             cancel = true;
         }
+        if (plugin.getPlayer(p.getUniqueId()).isNotWaitingForTeleport()) {
+            return;
+        }
         //if the attacker wasn't a mob we don't care
         if (!(e.getDamager() instanceof Monster)) {
             return;
@@ -169,6 +189,7 @@ public class HomeSpawnListeners implements Listener {
         if (cancel) {
             plugin.getPlayer(p.getUniqueId()).cancelTeleport();
         } else {
+            attackedPlayers.put(p.getUniqueId(), "Attacked");
             plugin.getPlayer(p.getUniqueId()).skipTeleportTimer();
         }
     }

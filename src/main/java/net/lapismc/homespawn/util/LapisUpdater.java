@@ -160,6 +160,6 @@ public class LapisUpdater {
             }
             return false;
         }
-        return oldVersion < newVersion;
+        return !oldVersion.equals(newVersion);
     }
 }

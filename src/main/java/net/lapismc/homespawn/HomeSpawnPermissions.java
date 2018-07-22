@@ -151,8 +151,7 @@ public class HomeSpawnPermissions {
     }
 
     public enum Perm {
-        //TODO add these to config
-        Default, Priority, CanUpdate, CanReload, CanViewPlayerStats, Homes, TeleportDelay, SetSpawn, Spawn, DeleteSpawn;
+        Default, Priority, Homes, TeleportDelay, Spawn, SetSpawn, DeleteSpawn, CanUpdate, CanReload, CanViewPlayerStats;
 
         @Override
         public String toString() {

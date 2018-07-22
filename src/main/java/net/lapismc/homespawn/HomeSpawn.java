@@ -16,6 +16,8 @@
 
 package net.lapismc.homespawn;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import net.lapismc.homespawn.api.HomeSpawnPlayerData;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.HomeSpawnDataConverter;
@@ -28,9 +30,9 @@ import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public final class HomeSpawn extends JavaPlugin {
 
@@ -38,13 +40,13 @@ public final class HomeSpawn extends JavaPlugin {
     public HomeSpawnPermissions HSPerms;
     public PrettyTime prettyTime;
     public LapisUpdater lapisUpdater;
-    private HashMap<UUID, HomeSpawnPlayer> players = new HashMap<>();
+    private Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
+            .expireAfterAccess(1, TimeUnit.MINUTES).build();
 
-    //TODO check API with extensions
+    //TODO add help messages to messages.yml and commands
 
     @Override
     public void onEnable() {
-        //checkUpdates();
         HSConfig = new HomeSpawnConfiguration(this);
         HSPerms = new HomeSpawnPermissions(this);
         prettyTime = new PrettyTime();
@@ -56,48 +58,41 @@ public final class HomeSpawn extends JavaPlugin {
         new HomeSpawnCommands(this);
         new HomeSpawnDataConverter(this);
         new HomeSpawnPlayerData().init(this);
-    }
-
-    @Override
-    public void onDisable() {
-
+        checkUpdates();
+        getLogger().info(getDescription().getName() + " v" + getDescription().getVersion() + " has been enabled");
     }
 
     private void checkUpdates() {
-        //TODO update these values when we make our new config
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
             lapisUpdater = new LapisUpdater(this);
             //check for an update
             if (lapisUpdater.checkUpdate()) {
                 //if there in an update but download is disabled and notification is enabled then notify in console
-                if (getConfig().getBoolean("UpdateNotification") && !getConfig()
-                        .getBoolean("DownloadUpdates")) {
-                    getLogger().info("An update for HomeSpawn is available and can be" +
-                            " downloaded and installed by running /homespawn update");
-                } else if (getConfig().getBoolean("DownloadUpdates")) {
+                if (getConfig().getBoolean("Update.NotifyConsole") && !getConfig().getBoolean("Update.Download")) {
+                    getLogger().info(HSConfig.getColoredMessage("Update.Available"));
+                } else if (getConfig().getBoolean("Update.Download")) {
                     //if downloading updates is enabled then download it and notify console
                     lapisUpdater.downloadUpdate();
-                    getLogger().info("Downloading Homespawn update, it will be installed " +
-                            "on next restart!");
+                    getLogger().info(HSConfig.getColoredMessage("Update.Downloading"));
                 }
             } else {
                 //if there is no update and notify is enabled then notify console that there was no update
                 if (getConfig().getBoolean("UpdateNotification")) {
-                    getLogger().info("No Update Available");
+                    getLogger().info(HSConfig.getColoredMessage("Update.NotAvailable"));
                 }
             }
         });
     }
 
     public HomeSpawnPlayer getPlayer(UUID uuid) {
-        if (!players.containsKey(uuid)) {
+        if (players.getIfPresent(uuid) == null) {
             players.put(uuid, new HomeSpawnPlayer(this, uuid));
         }
-        return players.get(uuid);
+        return players.getIfPresent(uuid);
     }
 
     public String parseLocationToString(Location loc) {
-        return loc.getWorld() + "," + loc.getX() + "," + loc.getY() + ","
+        return loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + ","
                 + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
     }
 
