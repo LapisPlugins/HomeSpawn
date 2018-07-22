@@ -130,3 +130,5 @@ ChangeLog:
       - "Complete rewrite"
       - "Configs will need to be redone from scratch and player data will automatically update"
       - "A backup would be recommended"
+    3.0.1:
+      - "Fixed player data directory not being generated"

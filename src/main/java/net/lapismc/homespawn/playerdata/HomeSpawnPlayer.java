@@ -208,6 +208,7 @@ public class HomeSpawnPlayer {
                 + "PlayerData" + File.separator + uuid.toString() + ".yml");
         if (!file.exists()) {
             try {
+                file.getParentFile().mkdir();
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
