@@ -30,7 +30,7 @@ import java.util.UUID;
 
 public class HomeSpawnDataConverter {
 
-    //TODO remove after the next few updates
+    //TODO move to only command after the next few updates
 
     private final HomeSpawn plugin;
 
@@ -40,6 +40,26 @@ public class HomeSpawnDataConverter {
     }
 
     private void runConverter() {
+        File spawnFile = new File(plugin.getDataFolder() + File.separator + "Spawn.yml");
+        if (spawnFile.exists()) {
+            YamlConfiguration spawn = YamlConfiguration.loadConfiguration(spawnFile);
+            if (spawn.contains("spawn")) {
+                Location l = (Location) spawn.get("spawn");
+                String loc = plugin.parseLocationToString(l);
+                spawn.set("spawn", loc);
+            }
+            if (spawn.contains("spawnnew")) {
+                Location l = (Location) spawn.get("spawnnew");
+                String loc = plugin.parseLocationToString(l);
+                spawn.set("spawnnew", loc);
+            }
+            try {
+                spawn.save(spawnFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            spawnFile.renameTo(new File(plugin.getDataFolder() + File.separator + "spawn.yml"));
+        }
         File playerDataFolder = new File(plugin.getDataFolder() + File.separator + "PlayerData");
         if (!playerDataFolder.exists() || !playerDataFolder.isDirectory()) {
             return;

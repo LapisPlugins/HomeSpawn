@@ -100,11 +100,11 @@ class HomeSpawnFileWatcher {
             case "config":
                 plugin.reloadConfig();
                 plugin.HSPerms.loadPermissions();
-                plugin.getLogger().info("Changes made to LapisBans config have been loaded");
+                plugin.getLogger().info("Changes made to HomeSpawn config have been loaded");
                 break;
             case "Messages":
                 plugin.HSConfig.reloadMessages(f);
-                plugin.getLogger().info("Changes made to LapisBans Messages.yml have been loaded");
+                plugin.getLogger().info("Changes made to HomeSpawn Messages.yml have been loaded");
                 break;
             default:
                 break;

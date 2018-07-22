@@ -126,3 +126,7 @@ ChangeLog:
       - "Fixed /sethome [name] not adding location data"
     2.3.5:
       - "Fixed /delhome not detecting new homes"
+    3.0.0:
+      - "Complete rewrite"
+      - "Configs will need to be redone from scratch and player data will automatically update"
+      - "A backup would be recommended"

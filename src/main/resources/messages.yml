@@ -1,8 +1,8 @@
 # Don't change this value unless you want to reset the config
 ConfigVersion: 1
 
-PrimaryColor: &f
-SecondaryColor: &9
+PrimaryColor: "&f"
+SecondaryColor: "&9"
 
 Home:
   Wait: "&pYou must wait &s%TIME%&p seconds before being teleported"
