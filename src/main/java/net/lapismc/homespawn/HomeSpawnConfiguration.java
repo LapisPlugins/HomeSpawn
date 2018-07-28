@@ -55,8 +55,8 @@ public class HomeSpawnConfiguration {
             }
         }
         messages = YamlConfiguration.loadConfiguration(messagesFile);
-        primaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("primaryColor", ChatColor.GOLD.toString()));
-        secondaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("secondaryColor", ChatColor.RED.toString()));
+        primaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("PrimaryColor", ChatColor.GOLD.toString()));
+        secondaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("SecondaryColor", ChatColor.RED.toString()));
     }
 
     public void reloadMessages(File f) {
@@ -64,8 +64,8 @@ public class HomeSpawnConfiguration {
             messagesFile = f;
         }
         messages = YamlConfiguration.loadConfiguration(messagesFile);
-        primaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("primaryColor", ChatColor.GOLD.toString()));
-        secondaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("secondaryColor", ChatColor.RED.toString()));
+        primaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("PrimaryColor", ChatColor.GOLD.toString()));
+        secondaryColor = ChatColor.translateAlternateColorCodes('&', messages.getString("SecondaryColor", ChatColor.RED.toString()));
     }
 
     public YamlConfiguration getMessages() {

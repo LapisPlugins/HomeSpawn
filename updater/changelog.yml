@@ -134,3 +134,5 @@ ChangeLog:
       - "Fixed player data directory not being generated"
     3.0.2:
       - "Fixed auto updater"
+    3.0.3:
+    - "Fixed primary and secondary colors"
