@@ -16,6 +16,8 @@
 
 package net.lapismc.homespawn.playerdata;
 
+import me.kangarko.compatbridge.model.CompDye;
+import me.kangarko.compatbridge.model.CompMaterial;
 import me.kangarko.ui.UIDesignerAPI;
 import me.kangarko.ui.menu.menues.MenuPagged;
 import me.kangarko.ui.model.ItemCreator;
@@ -23,7 +25,10 @@ import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -262,7 +267,7 @@ public class HomeSpawnPlayer {
 
         @Override
         protected ItemStack convertToItemStack(Home home) {
-            return ItemCreator.of(Material.WOOL).color(DyeColor.values()[(r.nextInt(DyeColor.values().length))])
+            return ItemCreator.of(CompMaterial.WHITE_WOOL).color(CompDye.values()[(r.nextInt(DyeColor.values().length))])
                     .name(plugin.HSConfig.primaryColor + home.getName()).build().make();
         }
 
