@@ -17,33 +17,17 @@
 package net.lapismc.homespawn.api.events;
 
 import net.lapismc.homespawn.playerdata.Home;
+import net.lapismc.lapiscore.LapisCoreCancellableEvent;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
 
-@SuppressWarnings({"unused", "WeakerAccess", "CanBeFinal"})
-public class HomeDeleteEvent extends Event implements Cancellable {
+public class HomeDeleteEvent extends LapisCoreCancellableEvent {
 
-    public static HandlerList handlers = new HandlerList();
     private final Home home;
     private final Player p;
-    private String reason;
-    private boolean cancelled;
 
     public HomeDeleteEvent(Player p, Home home) {
         this.home = home;
         this.p = p;
-        this.cancelled = false;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
     }
 
     public Home getHome() {
@@ -52,24 +36,6 @@ public class HomeDeleteEvent extends Event implements Cancellable {
 
     public Player getPlayer() {
         return p;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Deprecated
-    public void setCancelled(boolean cancel) {
-        cancelled = cancel;
-    }
-
-    public void setCancelled(boolean cancel, String reason) {
-        cancelled = cancel;
-        this.reason = reason;
     }
 
 }

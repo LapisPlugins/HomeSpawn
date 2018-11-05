@@ -16,73 +16,23 @@
 
 package net.lapismc.homespawn;
 
+import net.lapismc.lapiscore.LapisCoreFileWatcher;
 import org.bukkit.Bukkit;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.*;
 import java.util.UUID;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
-
-class HomeSpawnFileWatcher {
+class HomeSpawnFileWatcher extends LapisCoreFileWatcher {
 
     private final HomeSpawn plugin;
 
     HomeSpawnFileWatcher(HomeSpawn p) {
+        super(p);
         plugin = p;
-        start();
     }
 
-    private void start() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            try {
-                watcher();
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void watcher() throws IOException, InterruptedException {
-        WatchService watcher = FileSystems.getDefault().newWatchService();
-        Path dir = Paths.get(plugin.getDataFolder().getAbsolutePath());
-        dir.register(watcher, ENTRY_DELETE, ENTRY_MODIFY);
-        plugin.getLogger().info("HomeSpawn file watcher started!");
-        WatchKey key = watcher.take();
-        while (key != null) {
-            for (WatchEvent<?> event : key.pollEvents()) {
-                WatchEvent.Kind<?> kind = event.kind();
-                @SuppressWarnings("unchecked")
-                WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                Path fileName = ev.context();
-                File f = fileName.toFile();
-                if (kind == ENTRY_DELETE) {
-                    if (f.getName().endsWith(".yml")) {
-                        String name = f.getName().replace(".yml", "");
-                        switch (name) {
-                            case "config":
-                                plugin.saveDefaultConfig();
-                                plugin.reloadConfig();
-                                break;
-                            case "Messages":
-                                plugin.HSConfig.generateConfigs();
-                                break;
-                        }
-                    }
-                } else if (kind == ENTRY_MODIFY) {
-                    checkPlayerData(f);
-                    checkConfig(f);
-                }
-            }
-            key.reset();
-            key = watcher.take();
-        }
-        plugin.getLogger().severe("HomeSpawn file watcher has stopped, please report any errors to dart2112 if this was not intended");
-    }
-
-    private void checkPlayerData(File f) {
+    @Override
+    public void checkOtherFile(File f) {
         UUID uuid = null;
         try {
             uuid = UUID.fromString(f.getName().replace(".yml", ""));
@@ -91,23 +41,6 @@ class HomeSpawnFileWatcher {
         if (uuid != null && Bukkit.getOfflinePlayer(uuid).hasPlayedBefore()) {
             plugin.getPlayer(uuid).reloadConfig();
             plugin.getLogger().info("Changes made to " + Bukkit.getOfflinePlayer(uuid).getName() + "'s config have been loaded");
-        }
-    }
-
-    private void checkConfig(File f) {
-        String name = f.getName().replace(".yml", "");
-        switch (name) {
-            case "config":
-                plugin.reloadConfig();
-                plugin.HSPerms.loadPermissions();
-                plugin.getLogger().info("Changes made to HomeSpawn config have been loaded");
-                break;
-            case "Messages":
-                plugin.HSConfig.reloadMessages(f);
-                plugin.getLogger().info("Changes made to HomeSpawn Messages.yml have been loaded");
-                break;
-            default:
-                break;
         }
     }
 

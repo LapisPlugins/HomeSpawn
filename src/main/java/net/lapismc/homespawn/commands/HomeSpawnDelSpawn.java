@@ -17,14 +17,14 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnDelSpawn extends LapisCommand {
+public class HomeSpawnDelSpawn extends HomeSpawnCommand {
 
     public HomeSpawnDelSpawn(HomeSpawn plugin) {
         super(plugin, "delspawn", "Deletes a spawn point", new ArrayList<>());
@@ -33,7 +33,7 @@ public class HomeSpawnDelSpawn extends LapisCommand {
     @Override
     protected void onCommand(CommandSender sender, String[] args) {
         if (sender instanceof Player && isNotPermitted(((Player) sender).getUniqueId(),
-                HomeSpawnPermissions.Perm.DeleteSpawn)) {
+                Permission.DeleteSpawn)) {
             sendMessage(sender, "Error.NotPermitted");
             return;
         }

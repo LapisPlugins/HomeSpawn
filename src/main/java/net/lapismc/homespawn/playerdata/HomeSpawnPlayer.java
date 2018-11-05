@@ -22,7 +22,6 @@ import me.kangarko.ui.UIDesignerAPI;
 import me.kangarko.ui.menu.menues.MenuPagged;
 import me.kangarko.ui.model.ItemCreator;
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
 import org.bukkit.Bukkit;
@@ -84,7 +83,7 @@ public class HomeSpawnPlayer {
     public void cancelTeleport() {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.cancelTask();
-            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Home.Cancelled"));
+            teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Home.Cancelled"));
             teleportTask = null;
         }
         for (Home home : homes) {
@@ -96,7 +95,7 @@ public class HomeSpawnPlayer {
     public void skipTeleportTimer() {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.getPlayer().teleport(teleportTask.getLocation());
-            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
+            teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Spawn.Teleport"));
             teleportTask.cancelTask();
             teleportTask = null;
         }
@@ -112,19 +111,19 @@ public class HomeSpawnPlayer {
             teleportTask = null;
         }
         Player p = Bukkit.getPlayer(uuid);
-        boolean delay = plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.TeleportDelay);
+        boolean delay = plugin.perms.isPermitted(p.getUniqueId(), Permission.TeleportDelay.getPermission());
         if (delay) {
-            Integer delayTime = plugin.HSPerms.getPermissionValue(p.getUniqueId(),
-                    HomeSpawnPermissions.Perm.TeleportDelay);
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
+            Integer delayTime = plugin.perms.getPermissionValue(p.getUniqueId(),
+                    Permission.TeleportDelay.getPermission());
+            p.sendMessage(plugin.config.getMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
             teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
                     () -> {
                         p.teleport(spawn);
-                        p.sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
+                        p.sendMessage(plugin.config.getMessage("Spawn.Teleport"));
                     }, delayTime * 20), p, spawn);
         } else {
             p.teleport(spawn);
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Spawn.Teleport"));
+            p.sendMessage(plugin.config.getMessage("Spawn.Teleport"));
         }
     }
 
@@ -154,7 +153,7 @@ public class HomeSpawnPlayer {
         StringBuilder message = new StringBuilder();
         for (Home home : homes) {
             message.append(" ");
-            message.append(plugin.HSConfig.secondaryColor).append(home.getName());
+            message.append(plugin.secondaryColor).append(home.getName());
             message.append(" ");
         }
         sender.sendMessage(message.toString());
@@ -165,9 +164,9 @@ public class HomeSpawnPlayer {
         EasyComponent component = new EasyComponent("");
         for (Home home : homes) {
             component.append(" ");
-            component.append(plugin.HSConfig.secondaryColor + home.getName())
+            component.append(plugin.secondaryColor + home.getName())
                     .onClickRunCmd(command + home.getName())
-                    .onHover(plugin.HSConfig.primaryColor + "Click to teleport");
+                    .onHover(plugin.primaryColor + "Click to teleport");
             component.append(" ");
         }
         component.send(p);
@@ -193,18 +192,18 @@ public class HomeSpawnPlayer {
     }
 
     public String getPlayerInfo() {
-        String info = plugin.HSConfig.getColoredMessage("PlayerData");
+        String info = plugin.config.getMessage("PlayerData");
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
         Long time = getConfig().getLong("Time");
         String timeString = plugin.prettyTime.format(
                 reduceDurationList(plugin.prettyTime.calculatePreciseDuration(new Date(time))));
         info = info.replace("%NAME%", op.getName());
-        info = info.replace("%PERMISSION%", plugin.HSPerms.getPlayersPermission(uuid));
+        info = info.replace("%PERMISSION%", plugin.perms.getOfflinePlayerPermission(op).getName());
         info = info.replace("%STATE%", op.isOnline() ? "online" : "offline");
         info = info.replace("%TIME%", timeString);
         info = info.replace("%USED%", String.valueOf(homes.size()));
         info = info.replace("%TOTAL%",
-                (plugin.HSPerms.getPermissionValue(uuid, HomeSpawnPermissions.Perm.Homes)) + "");
+                (plugin.perms.getPermissionValue(uuid, Permission.Homes.getPermission())) + "");
         return info;
     }
 
@@ -268,7 +267,7 @@ public class HomeSpawnPlayer {
         @Override
         protected ItemStack convertToItemStack(Home home) {
             return ItemCreator.of(CompMaterial.WHITE_WOOL).color(CompDye.values()[(r.nextInt(DyeColor.values().length))])
-                    .name(plugin.HSConfig.primaryColor + home.getName()).build().make();
+                    .name(plugin.primaryColor + home.getName()).build().make();
         }
 
         @Override

@@ -17,35 +17,29 @@
 package net.lapismc.homespawn.util;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
-import org.bukkit.Bukkit;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.lapiscore.LapisCoreCommand;
 import org.bukkit.Location;
-import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public abstract class LapisCommand extends BukkitCommand {
+public abstract class HomeSpawnCommand extends LapisCoreCommand {
 
-    protected final HomeSpawn plugin;
+    protected HomeSpawn plugin;
 
-    protected LapisCommand(HomeSpawn plugin, String name, String desc, ArrayList<String> aliases) {
-        super(name);
+    protected HomeSpawnCommand(HomeSpawn plugin, String name, String desc, ArrayList<String> aliases) {
+        super(plugin, name, desc, aliases, true);
         this.plugin = plugin;
-        setDescription(desc);
-        setAliases(aliases);
-        registerCommand(name);
     }
 
     protected void sendMessage(CommandSender sender, String key) {
-        sender.sendMessage(plugin.HSConfig.getColoredMessage(key));
+        sender.sendMessage(plugin.config.getMessage(key));
     }
 
     protected boolean forcePlayer(CommandSender sender) {
@@ -56,8 +50,8 @@ public abstract class LapisCommand extends BukkitCommand {
         return false;
     }
 
-    protected boolean isNotPermitted(UUID uuid, HomeSpawnPermissions.Perm perm) {
-        return !plugin.HSPerms.isPermitted(uuid, perm);
+    protected boolean isNotPermitted(UUID uuid, Permission perm) {
+        return !plugin.perms.isPermitted(uuid, perm.getPermission());
     }
 
     protected Location getSpawnLocation(boolean isNew) {
@@ -120,24 +114,5 @@ public abstract class LapisCommand extends BukkitCommand {
     private Location parseStringToLocation(String s) {
         return plugin.parseStringToLocation(s);
     }
-
-    private void registerCommand(String name) {
-        try {
-            final Field serverCommandMap = Bukkit.getServer().getClass().getDeclaredField("commandMap");
-            serverCommandMap.setAccessible(true);
-            CommandMap commandMap = (CommandMap) serverCommandMap.get(Bukkit.getServer());
-            commandMap.register(name, this);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-        onCommand(sender, args);
-        return true;
-    }
-
-    protected abstract void onCommand(CommandSender sender, String[] args);
 
 }

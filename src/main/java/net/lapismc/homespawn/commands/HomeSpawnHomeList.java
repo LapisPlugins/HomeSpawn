@@ -18,14 +18,14 @@ package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HomeSpawnHomeList extends LapisCommand {
+public class HomeSpawnHomeList extends HomeSpawnCommand {
 
     public HomeSpawnHomeList(HomeSpawn plugin) {
         super(plugin, "homelist", "Shows the players current homes", new ArrayList<>(Arrays.asList("homeslist", "listhomes", "listhome")));

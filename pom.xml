@@ -56,11 +56,15 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.ocpsoft.prettytime</pattern>
-                                    <shadedPattern>net.lapismc.HomeSpawn.prettytime</shadedPattern>
+                                    <shadedPattern>net.lapismc.HomeSpawn.util.prettytime</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>me.kangarko.ui</pattern>
-                                    <shadedPattern>net.lapismc.HomeSpawn.ui</shadedPattern>
+                                    <shadedPattern>net.lapismc.HomeSpawn.util.ui</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.lapismc.lapiscore</pattern>
+                                    <shadedPattern>net.lapismc.HomeSpawn.util.core</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -99,6 +103,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>net.lapismc</groupId>
+            <artifactId>LapisCore</artifactId>
+            <version>LATEST</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>

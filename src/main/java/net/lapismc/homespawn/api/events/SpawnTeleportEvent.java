@@ -16,34 +16,18 @@
 
 package net.lapismc.homespawn.api.events;
 
+import net.lapismc.lapiscore.LapisCoreCancellableEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
 
-@SuppressWarnings("unused")
-public class SpawnTeleportEvent extends Event implements Cancellable {
+public class SpawnTeleportEvent extends LapisCoreCancellableEvent {
 
-    private static final HandlerList handlers = new HandlerList();
     private final Location location;
     private final Player p;
-    private String cancelReason;
-    private boolean cancelled;
 
     public SpawnTeleportEvent(Player p, Location l) {
         this.location = l;
         this.p = p;
-        this.cancelled = false;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
     }
 
     public Location getLocation() {
@@ -54,29 +38,4 @@ public class SpawnTeleportEvent extends Event implements Cancellable {
         return p;
     }
 
-    public String getReason() {
-        return cancelReason;
-    }
-
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Deprecated
-    public void setCancelled(boolean cancel) {
-        cancelled = cancel;
-    }
-
-    public void setCancelled(boolean cancel, String reason) {
-        cancelled = cancel;
-        cancelReason = reason;
-    }
-
-    public String getCancelReason() {
-        if (cancelled) {
-            return cancelReason;
-        } else {
-            return null;
-        }
-    }
 }

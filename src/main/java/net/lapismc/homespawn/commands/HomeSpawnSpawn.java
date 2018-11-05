@@ -17,10 +17,10 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.api.events.SpawnTeleportEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -28,7 +28,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnSpawn extends LapisCommand {
+public class HomeSpawnSpawn extends HomeSpawnCommand {
 
     public HomeSpawnSpawn(HomeSpawn plugin) {
         super(plugin, "spawn", "Teleport to the preset spawn location", new ArrayList<>());
@@ -41,7 +41,7 @@ public class HomeSpawnSpawn extends LapisCommand {
         }
         Player p = (Player) sender;
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
-        if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.Spawn)) {
+        if (isNotPermitted(p.getUniqueId(), Permission.Spawn)) {
             sendMessage(sender, "Error.NotPermitted");
             return;
         }
@@ -54,7 +54,7 @@ public class HomeSpawnSpawn extends LapisCommand {
         SpawnTeleportEvent event = new SpawnTeleportEvent(p, spawn);
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+            p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
         player.teleportToSpawn(spawn);

@@ -19,14 +19,14 @@ package net.lapismc.homespawn.commands;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeTeleportEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnHome extends LapisCommand {
+public class HomeSpawnHome extends HomeSpawnCommand {
 
     public HomeSpawnHome(HomeSpawn plugin) {
         super(plugin, "home", "Teleport to one of your homes", new ArrayList<>());
@@ -52,7 +52,7 @@ public class HomeSpawnHome extends LapisCommand {
         HomeTeleportEvent event = new HomeTeleportEvent(p, player.getHome(homeName));
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+            p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
         player.getHome(homeName).teleportPlayer(p);

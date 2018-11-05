@@ -17,7 +17,6 @@
 package net.lapismc.homespawn.playerdata;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.util.TeleportTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -68,7 +67,7 @@ public class Home {
 
     void cancelTeleport() {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
-            teleportTask.getPlayer().sendMessage(plugin.HSConfig.getColoredMessage("Home.Cancelled"));
+            teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Home.Cancelled"));
             teleportTask.cancelTask();
             teleportTask = null;
         }
@@ -110,11 +109,11 @@ public class Home {
             teleportTask.cancelTask();
             teleportTask = null;
         }
-        boolean delay = plugin.HSPerms.isPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.TeleportDelay);
+        boolean delay = plugin.perms.isPermitted(p.getUniqueId(), Permission.TeleportDelay.getPermission());
         if (delay) {
-            Integer delayTime = plugin.HSPerms.getPermissionValue(p.getUniqueId(),
-                    HomeSpawnPermissions.Perm.TeleportDelay);
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
+            Integer delayTime = plugin.perms.getPermissionValue(p.getUniqueId(),
+                    Permission.TeleportDelay.getPermission());
+            p.sendMessage(plugin.config.getMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
             teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
                     () -> teleport(p), delayTime * 20), p);
         } else {
@@ -128,7 +127,7 @@ public class Home {
             teleportTask = null;
         }
         teleportNow(p);
-        p.sendMessage(plugin.HSConfig.getColoredMessage("Home.Teleport"));
+        p.sendMessage(plugin.config.getMessage("Home.Teleport"));
     }
 
     private void teleportNow(Player p) {
@@ -166,22 +165,22 @@ public class Home {
         String worldName = args[0];
         if (Bukkit.getServer().getWorld(worldName) == null) {
             plugin.getPlayer(owner).deleteHome(this);
-            plugin.getLogger().warning(plugin.HSConfig.getColoredMessage("Error.WorldDoesNotExist")
+            plugin.getLogger().warning(plugin.config.getMessage("Error.WorldDoesNotExist")
                     .replace("%WORLD%", worldName));
             return null;
         }
         World world = plugin.getServer().getWorld(worldName);
         try {
-            Double x = Double.valueOf(args[1]);
-            Double y = Double.valueOf(args[2]);
-            Double z = Double.valueOf(args[3]);
-            Float pitch = Float.valueOf(args[4]);
-            Float yaw = Float.valueOf(args[5]);
+            double x = Double.parseDouble(args[1]);
+            double y = Double.parseDouble(args[2]);
+            double z = Double.parseDouble(args[3]);
+            float pitch = Float.parseFloat(args[4]);
+            float yaw = Float.parseFloat(args[5]);
             loc = new Location(world, x, y, z, yaw, pitch);
         } catch (NumberFormatException e) {
             e.printStackTrace();
             plugin.getPlayer(owner).deleteHome(this);
-            plugin.getLogger().warning(plugin.HSConfig.getColoredMessage("Error.NumberFormatError"));
+            plugin.getLogger().warning(plugin.config.getMessage("Error.NumberFormatError"));
             return null;
         }
         return loc;

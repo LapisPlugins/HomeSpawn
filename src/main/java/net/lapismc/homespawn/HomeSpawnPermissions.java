@@ -16,149 +16,46 @@
 
 package net.lapismc.homespawn;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.lapiscore.LapisCorePermissions;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
+public class HomeSpawnPermissions extends LapisCorePermissions {
 
+    private HomeSpawn plugin;
 
-public class HomeSpawnPermissions {
-
-    private final HashMap<Permission, HashMap<Perm, Integer>> pluginPerms = new HashMap<>();
-    private final HomeSpawn plugin;
-    private final Cache<UUID, Permission> playerPerms = CacheBuilder.newBuilder()
-            .expireAfterWrite(30, TimeUnit.SECONDS).build();
-
-    HomeSpawnPermissions(HomeSpawn p) {
-        plugin = p;
+    HomeSpawnPermissions(HomeSpawn core) {
+        super(core);
+        this.plugin = core;
+        registerPermissions();
         loadPermissions();
     }
 
-    public void loadPermissions() {
-        pluginPerms.clear();
-        playerPerms.invalidateAll();
-        ConfigurationSection permsSection = plugin.getConfig().getConfigurationSection("Permissions");
-        Set<String> perms = permsSection.getKeys(false);
-        for (String perm : perms) {
-            HashMap<Perm, Integer> permMap = new HashMap<>();
-            String permName = perm.replace(",", ".");
-            for (Perm permission : Perm.values()) {
-                int i = plugin.getConfig().getInt("Permissions." + perm + "." + permission.name());
-                permMap.put(permission, i);
-            }
-            PermissionDefault permissionDefault;
-            switch (permMap.get(Perm.Default)) {
-                case 1:
-                    permissionDefault = PermissionDefault.TRUE;
-                    break;
-                case 2:
-                    permissionDefault = PermissionDefault.OP;
-                    break;
-                case 0:
-                default:
-                    permissionDefault = PermissionDefault.FALSE;
-                    break;
-            }
-            Permission permission = new Permission(permName, permissionDefault);
-            if (Bukkit.getPluginManager().getPermission(permName) == null) {
-                Bukkit.getPluginManager().addPermission(permission);
-            }
-            pluginPerms.put(permission, permMap);
+    private void registerPermissions() {
+        for (Permission permission : Permission.values()) {
+            registerPermissions(permission.getPermission());
         }
     }
 
-    private Permission getPlayerPermission(UUID uuid) {
-        Permission p = null;
-        if (playerPerms.getIfPresent(uuid) != null) {
-            return playerPerms.getIfPresent(uuid);
-        }
-        OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
-        if (op.isOnline()) {
-            Player player = op.getPlayer();
-            Integer priority = -1;
-            for (Permission perm : pluginPerms.keySet()) {
-                if (player.hasPermission(perm) &&
-                        (pluginPerms.get(perm).get(Perm.Priority) > priority)) {
-                    p = perm;
-                    priority = pluginPerms.get(perm).get(Perm.Priority);
-                }
-            }
-            if (p == null) {
-                return null;
-            } else {
-                playerPerms.put(uuid, p);
-                HomeSpawnPlayer homeSpawnPlayer = plugin.getPlayer(uuid);
-                YamlConfiguration yaml = homeSpawnPlayer.getConfig();
-                yaml.set("Permission", p.getName());
-                homeSpawnPlayer.saveConfig(yaml);
-            }
-            return p;
-        } else if (op.hasPlayedBefore()) {
-            HomeSpawnPlayer homeSpawnPlayer = plugin.getPlayer(uuid);
-            YamlConfiguration yaml = homeSpawnPlayer.getConfig();
-            String permission = yaml.getString("Permission");
-            if (permission == null) {
-                return null;
-            } else {
-                p = Bukkit.getPluginManager().getPermission(permission);
-                playerPerms.put(uuid, p);
-                return p;
-            }
+    @Override
+    public org.bukkit.permissions.Permission getOfflinePlayerPermission(OfflinePlayer op) {
+        HomeSpawnPlayer player = plugin.getPlayer(op.getUniqueId());
+        YamlConfiguration yaml = player.getConfig();
+        if (yaml.contains("Permission") && !yaml.getString("Permission").equals("")) {
+            return Bukkit.getPluginManager().getPermission(yaml.getString("Permission"));
         }
         return null;
     }
 
-    public String getPlayersPermission(UUID uuid) {
-        Permission p = getPlayerPermission(uuid);
-        if (p == null) {
-            return plugin.HSConfig.getColoredMessage("Error.PermissionNotFound");
-        } else {
-            return p.getName();
-        }
-    }
-
-    public Boolean isPermitted(UUID uuid, Perm perm) {
-        HashMap<Perm, Integer> permMap;
-        Permission p = getPlayerPermission(uuid);
-        if (!pluginPerms.containsKey(p) || pluginPerms.get(p) == null) {
-            loadPermissions();
-            permMap = pluginPerms.get(p);
-        } else {
-            permMap = pluginPerms.get(p);
-        }
-        return permMap != null && permMap.get(perm) != null && permMap.get(perm) >= 1;
-    }
-
-    public Integer getPermissionValue(UUID uuid, Perm perm) {
-        HashMap<Perm, Integer> permMap;
-        Permission p = getPlayerPermission(uuid);
-        if (!pluginPerms.containsKey(p) || pluginPerms.get(p) == null) {
-            loadPermissions();
-            permMap = pluginPerms.get(p);
-        } else {
-            permMap = pluginPerms.get(p);
-        }
-        return permMap.get(perm);
-    }
-
-    public enum Perm {
-        Default, Priority, Homes, TeleportDelay, Spawn, SetSpawn, DeleteSpawn, CanUpdate, CanReload, CanViewPlayerStats;
-
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
+    @Override
+    protected void savePlayersPermission(OfflinePlayer op, org.bukkit.permissions.Permission perm) {
+        HomeSpawnPlayer player = plugin.getPlayer(op.getUniqueId());
+        YamlConfiguration yaml = player.getConfig();
+        yaml.set("Permission", perm);
+        player.saveConfig(yaml);
     }
 
 }

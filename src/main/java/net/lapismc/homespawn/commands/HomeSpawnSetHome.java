@@ -17,19 +17,19 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.api.events.HomeMoveEvent;
 import net.lapismc.homespawn.api.events.HomeSetEvent;
 import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnSetHome extends LapisCommand {
+public class HomeSpawnSetHome extends HomeSpawnCommand {
 
     public HomeSpawnSetHome(HomeSpawn plugin) {
         super(plugin, "sethome", "Sets a home at your current location", new ArrayList<>());
@@ -41,18 +41,18 @@ public class HomeSpawnSetHome extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
-        if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.Homes)) {
+        if (isNotPermitted(p.getUniqueId(), Permission.Homes)) {
             sendMessage(sender, "Error.NotPermitted");
         }
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
         String homeName = "Home";
         //if the player is setting a custom home, check that they can and then set the name
         if (args.length == 1) {
-            if (plugin.HSPerms.getPermissionValue(p.getUniqueId(), HomeSpawnPermissions.Perm.Homes) > 1) {
+            if (plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission()) > 1) {
                 //check that the player doesn't have to many custom homes to set another
                 //also check if they are moving a preexisting home as they can do that even if they are at the limit
-                if (player.getHomes().size() >= plugin.HSPerms.getPermissionValue(p.getUniqueId(),
-                        HomeSpawnPermissions.Perm.Homes) && !player.hasHome(args[0])) {
+                if (player.getHomes().size() >= plugin.perms.getPermissionValue(p.getUniqueId(),
+                        Permission.Homes.getPermission()) && !player.hasHome(args[0])) {
                     sendMessage(sender, "Home.LimitReached");
                     return;
                 }
@@ -70,7 +70,7 @@ public class HomeSpawnSetHome extends LapisCommand {
             HomeMoveEvent event = new HomeMoveEvent(p, home.getName(), home.getLocation(), p.getLocation());
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled()) {
-                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+                p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
                 return;
             }
             home.setLoc(p.getLocation());
@@ -82,7 +82,7 @@ public class HomeSpawnSetHome extends LapisCommand {
             HomeSetEvent event = new HomeSetEvent(p, home);
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled()) {
-                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+                p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
                 return;
             }
             home.setLoc(p.getLocation());

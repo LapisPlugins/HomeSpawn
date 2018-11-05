@@ -63,7 +63,6 @@ class HomeSpawnListeners implements Listener {
             spawn(p);
         }
         yaml.set("Time", System.currentTimeMillis());
-        yaml.set("Permission", plugin.HSPerms.getPlayersPermission(p.getUniqueId()));
         player.saveConfig(yaml);
     }
 

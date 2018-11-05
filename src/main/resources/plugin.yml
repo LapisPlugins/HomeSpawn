@@ -4,4 +4,5 @@ loadbefore: [Essentials]
 version: ${project.version}
 softdepend: [Multiverse-Core]
 main: net.lapismc.homespawn.HomeSpawn
+api-version: 1.13
 description: The Basic Home And Spawn Plugin

@@ -17,14 +17,14 @@
 package net.lapismc.homespawn.commands;
 
 import net.lapismc.homespawn.HomeSpawn;
-import net.lapismc.homespawn.HomeSpawnPermissions;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnSetSpawn extends LapisCommand {
+public class HomeSpawnSetSpawn extends HomeSpawnCommand {
 
     public HomeSpawnSetSpawn(HomeSpawn plugin) {
         super(plugin, "setspawn", "Set the location for /spawn", new ArrayList<>());
@@ -36,7 +36,7 @@ public class HomeSpawnSetSpawn extends LapisCommand {
             return;
         }
         Player p = (Player) sender;
-        if (isNotPermitted(p.getUniqueId(), HomeSpawnPermissions.Perm.SetSpawn)) {
+        if (isNotPermitted(p.getUniqueId(), Permission.SetSpawn)) {
             sendMessage(sender, "Error.NotPermitted");
             return;
         }

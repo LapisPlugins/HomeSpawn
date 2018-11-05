@@ -20,14 +20,14 @@ import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeRenameEvent;
 import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnRenameHome extends LapisCommand {
+public class HomeSpawnRenameHome extends HomeSpawnCommand {
 
     public HomeSpawnRenameHome(HomeSpawn plugin) {
         super(plugin, "renamehome", "Rename a home", new ArrayList<>());
@@ -52,7 +52,7 @@ public class HomeSpawnRenameHome extends LapisCommand {
             HomeRenameEvent event = new HomeRenameEvent(p, oldName, newName);
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled()) {
-                p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+                p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
                 return;
             }
             home.rename(newName);

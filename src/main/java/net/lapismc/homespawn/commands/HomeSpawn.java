@@ -16,9 +16,9 @@
 
 package net.lapismc.homespawn.commands;
 
-import net.lapismc.homespawn.HomeSpawnPermissions;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.playerdata.Permission;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -27,7 +27,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawn extends LapisCommand {
+public class HomeSpawn extends HomeSpawnCommand {
 
     private final HomeSpawnPlayerCommand HSPlayer;
 
@@ -57,7 +57,7 @@ public class HomeSpawn extends LapisCommand {
 
     private void update(CommandSender sender) {
         if (sender instanceof Player) {
-            if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanUpdate)) {
+            if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanUpdate)) {
                 sendMessage(sender, "Error.NotPermitted");
             }
         }
@@ -71,20 +71,20 @@ public class HomeSpawn extends LapisCommand {
 
     private void reload(CommandSender sender) {
         if (sender instanceof Player) {
-            if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanReload)) {
+            if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanReload)) {
                 sendMessage(sender, "Error.NotPermitted");
             }
         }
         plugin.getLogger().info("Reloading...");
-        plugin.HSConfig.reloadMessages(null);
+        plugin.config.reloadMessages(null);
         plugin.reloadConfig();
-        plugin.HSPerms.loadPermissions();
+        plugin.perms.loadPermissions();
         sendMessage(sender, "Reload");
     }
 
     private void displayHelp(CommandSender sender) {
-        YamlConfiguration messages = plugin.HSConfig.getMessages();
-        sender.sendMessage(plugin.HSConfig.getColoredMessage("Help.Help"));
+        YamlConfiguration messages = plugin.config.getMessages();
+        sender.sendMessage(plugin.config.getMessage("Help.Help"));
         for (String key : messages.getConfigurationSection("Help").getKeys(false)) {
             if (!key.equalsIgnoreCase("help")) {
                 sendMessage(sender, "Help." + key);
@@ -93,8 +93,8 @@ public class HomeSpawn extends LapisCommand {
     }
 
     private void displayPluginInfo(CommandSender sender) {
-        String primary = plugin.HSConfig.primaryColor;
-        String secondary = plugin.HSConfig.secondaryColor;
+        String primary = plugin.primaryColor;
+        String secondary = plugin.secondaryColor;
         String bars = secondary + "-------------";
         sender.sendMessage(bars + primary + "  HomeSpawn  " + bars);
         sender.sendMessage(primary + "Version: " + secondary + plugin.getDescription().getVersion());
@@ -108,7 +108,7 @@ public class HomeSpawn extends LapisCommand {
 
         private void onCommand(CommandSender sender, String[] args) {
             if (sender instanceof Player) {
-                if (isNotPermitted(((Player) sender).getUniqueId(), HomeSpawnPermissions.Perm.CanViewPlayerStats)) {
+                if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanViewPlayerStats)) {
                     sendMessage(sender, "Error.NotPermitted");
                 }
             }

@@ -19,14 +19,14 @@ package net.lapismc.homespawn.commands;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeDeleteEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
-import net.lapismc.homespawn.util.LapisCommand;
+import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class HomeSpawnDelHome extends LapisCommand {
+public class HomeSpawnDelHome extends HomeSpawnCommand {
 
     public HomeSpawnDelHome(HomeSpawn plugin) {
         super(plugin, "delhome", "Delete a home", new ArrayList<>());
@@ -52,7 +52,7 @@ public class HomeSpawnDelHome extends LapisCommand {
         HomeDeleteEvent event = new HomeDeleteEvent(p, player.getHome(homeName));
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
-            p.sendMessage(plugin.HSConfig.getColoredMessage("Error.ActionCancelled") + event.getReason());
+            p.sendMessage(plugin.config.getMessage("Error.ActionCancelled") + event.getReason());
             return;
         }
         //delete the home

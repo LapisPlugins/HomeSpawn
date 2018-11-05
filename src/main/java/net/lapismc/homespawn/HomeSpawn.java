@@ -21,11 +21,12 @@ import com.google.common.cache.CacheBuilder;
 import net.lapismc.homespawn.api.HomeSpawnPlayerData;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.HomeSpawnDataConverter;
-import net.lapismc.homespawn.util.LapisUpdater;
+import net.lapismc.lapiscore.LapisCoreConfiguration;
+import net.lapismc.lapiscore.LapisCorePlugin;
+import net.lapismc.lapiscore.LapisUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
@@ -34,11 +35,10 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public final class HomeSpawn extends JavaPlugin {
+public final class HomeSpawn extends LapisCorePlugin {
 
-    public HomeSpawnConfiguration HSConfig;
-    public HomeSpawnPermissions HSPerms;
     public PrettyTime prettyTime;
+    public HomeSpawnPermissions perms;
     public LapisUpdater lapisUpdater;
     private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
             .expireAfterAccess(1, TimeUnit.MINUTES).build();
@@ -47,8 +47,9 @@ public final class HomeSpawn extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        HSConfig = new HomeSpawnConfiguration(this);
-        HSPerms = new HomeSpawnPermissions(this);
+        registerConfiguration(new LapisCoreConfiguration(this, 1, 1));
+        this.perms = new HomeSpawnPermissions(this);
+        registerPermissions(this.perms);
         prettyTime = new PrettyTime();
         prettyTime.setLocale(Locale.ENGLISH);
         prettyTime.removeUnit(JustNow.class);
@@ -64,21 +65,21 @@ public final class HomeSpawn extends JavaPlugin {
 
     private void checkUpdates() {
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
-            lapisUpdater = new LapisUpdater(this);
+            lapisUpdater = new LapisUpdater(this, "HomeSpawn", "LapisPlugins", "HomeSpawn", "master");
             //check for an update
             if (lapisUpdater.checkUpdate()) {
                 //if there in an update but download is disabled and notification is enabled then notify in console
                 if (getConfig().getBoolean("Update.NotifyConsole") && !getConfig().getBoolean("Update.Download")) {
-                    getLogger().info(HSConfig.getColoredMessage("Update.Available"));
+                    getLogger().info(config.getMessage("Update.Available"));
                 } else if (getConfig().getBoolean("Update.Download")) {
                     //if downloading updates is enabled then download it and notify console
                     lapisUpdater.downloadUpdate();
-                    getLogger().info(HSConfig.getColoredMessage("Update.Downloading"));
+                    getLogger().info(config.getMessage("Update.Downloading"));
                 }
             } else {
                 //if there is no update and notify is enabled then notify console that there was no update
                 if (getConfig().getBoolean("UpdateNotification")) {
-                    getLogger().info(HSConfig.getColoredMessage("Update.NotAvailable"));
+                    getLogger().info(config.getMessage("Update.NotAvailable"));
                 }
             }
         });
@@ -108,11 +109,11 @@ public final class HomeSpawn extends JavaPlugin {
         }
         World world = getServer().getWorld(worldName);
         try {
-            Float pitch = Float.valueOf(args[4]);
-            Float yaw = Float.valueOf(args[5]);
-            Double x = Double.valueOf(args[1]);
-            Double y = Double.valueOf(args[2]);
-            Double z = Double.valueOf(args[3]);
+            float pitch = Float.parseFloat(args[4]);
+            float yaw = Float.parseFloat(args[5]);
+            double x = Double.parseDouble(args[1]);
+            double y = Double.parseDouble(args[2]);
+            double z = Double.parseDouble(args[3]);
             loc = new Location(world, x, y, z, yaw, pitch);
         } catch (NumberFormatException e) {
             e.printStackTrace();
