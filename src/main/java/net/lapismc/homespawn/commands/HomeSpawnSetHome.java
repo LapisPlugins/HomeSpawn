@@ -47,7 +47,7 @@ public class HomeSpawnSetHome extends HomeSpawnCommand {
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
         String homeName = "Home";
         //if the player is setting a custom home, check that they can and then set the name
-        if (args.length == 1) {
+        if (args.length >= 1) {
             if (plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission()) > 1) {
                 //check that the player doesn't have to many custom homes to set another
                 //also check if they are moving a preexisting home as they can do that even if they are at the limit

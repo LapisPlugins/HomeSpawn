@@ -41,7 +41,7 @@ public class HomeSpawnSetSpawn extends HomeSpawnCommand {
             return;
         }
         //check if the command has an argument of new
-        setSpawnLocation(p.getLocation(), args.length == 1 && args[0].equalsIgnoreCase("new"));
+        setSpawnLocation(p.getLocation(), args.length >= 1 && args[0].equalsIgnoreCase("new"));
         sendMessage(sender, "Spawn.Created");
     }
 }

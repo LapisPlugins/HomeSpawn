@@ -58,7 +58,7 @@ Help:
    Teleport to your home\n"
   Homelist: "\"/homelist\"\n
    Displays a list or GUI of your homes"
-  Renamehome: "\"/renamehome [current name] [new name]\"\n
+  RenameHome: "\"/renamehome [current name] [new name]\"\n
    Renames a home"
   Sethome: "\"/sethome [name]\"\n
    Sets a home at your current location, can be used to move homes"

@@ -37,13 +37,11 @@ import java.util.concurrent.TimeUnit;
 
 public final class HomeSpawn extends LapisCorePlugin {
 
+    private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
+            .expireAfterAccess(1, TimeUnit.MINUTES).build();
     public PrettyTime prettyTime;
     public HomeSpawnPermissions perms;
     public LapisUpdater lapisUpdater;
-    private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
-            .expireAfterAccess(1, TimeUnit.MINUTES).build();
-
-    //TODO add help messages to messages.yml and commands
 
     @Override
     public void onEnable() {

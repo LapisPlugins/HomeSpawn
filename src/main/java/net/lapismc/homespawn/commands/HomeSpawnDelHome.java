@@ -40,7 +40,7 @@ public class HomeSpawnDelHome extends HomeSpawnCommand {
         Player p = (Player) sender;
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
         String homeName = "Home";
-        if (args.length == 1) {
+        if (args.length >= 1) {
             homeName = args[0];
         }
         //check that the home exists

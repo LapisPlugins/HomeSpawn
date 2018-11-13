@@ -57,6 +57,8 @@ public class HomeSpawnRenameHome extends HomeSpawnCommand {
             }
             home.rename(newName);
             sendMessage(sender, "Home.Renamed");
+        } else {
+            sendMessage(sender, "Help.RenameHome");
         }
     }
 }
