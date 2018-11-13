@@ -138,3 +138,7 @@ ChangeLog:
   - "Fixed primary and secondary colors"
   3.0.4:
   - "Updated to 1.13"
+  3.0.5:
+  - "Updated to LapisCore 1.1.2"
+  - "Updating to LapisCore allows quicker bug fixes and easier work on the code"
+  - "Underlined clickable links to make them more obvious"

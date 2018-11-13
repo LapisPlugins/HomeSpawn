@@ -24,10 +24,7 @@ import me.kangarko.ui.model.ItemCreator;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
-import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -164,7 +161,7 @@ public class HomeSpawnPlayer {
         EasyComponent component = new EasyComponent("");
         for (Home home : homes) {
             component.append(" ");
-            component.append(plugin.secondaryColor + home.getName())
+            component.append(plugin.secondaryColor + ChatColor.UNDERLINE + home.getName() + ChatColor.RESET)
                     .onClickRunCmd(command + home.getName())
                     .onHover(plugin.primaryColor + "Click to teleport");
             component.append(" ");

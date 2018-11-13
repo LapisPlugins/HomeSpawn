@@ -54,7 +54,7 @@ public class HomeSpawnPermissions extends LapisCorePermissions {
     protected void savePlayersPermission(OfflinePlayer op, org.bukkit.permissions.Permission perm) {
         HomeSpawnPlayer player = plugin.getPlayer(op.getUniqueId());
         YamlConfiguration yaml = player.getConfig();
-        yaml.set("Permission", perm);
+        yaml.set("Permission", perm.getName());
         player.saveConfig(yaml);
     }
 

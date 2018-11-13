@@ -17,6 +17,8 @@
 package net.lapismc.homespawn.api;
 
 import net.lapismc.homespawn.HomeSpawn;
+import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.UUID;
@@ -33,6 +35,10 @@ public class HomeSpawnPlayerData {
 
     public void init(HomeSpawn p) {
         plugin = p;
+    }
+
+    public HomeSpawnPlayer getPlayer(OfflinePlayer op) {
+        return plugin.getPlayer(op.getUniqueId());
     }
 
     /**
