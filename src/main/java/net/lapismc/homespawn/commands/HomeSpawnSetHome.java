@@ -49,19 +49,19 @@ public class HomeSpawnSetHome extends HomeSpawnCommand {
         //if the player is setting a custom home, check that they can and then set the name
         if (args.length >= 1) {
             if (plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission()) > 1) {
-                //check that the player doesn't have to many custom homes to set another
-                //also check if they are moving a preexisting home as they can do that even if they are at the limit
-                if (player.getHomes().size() >= plugin.perms.getPermissionValue(p.getUniqueId(),
-                        Permission.Homes.getPermission()) && !player.hasHome(args[0])) {
-                    sendMessage(sender, "Home.LimitReached");
-                    return;
-                }
                 //set the home name to the custom name provided
                 homeName = args[0];
             } else {
                 sendMessage(sender, "Error.NotPermitted");
                 return;
             }
+        }
+        //check that the player doesn't have to many custom homes to set another
+        //also check if they are moving a preexisting home as they can do that even if they are at the limit
+        if (player.getHomes().size() >= plugin.perms.getPermissionValue(p.getUniqueId(),
+                Permission.Homes.getPermission()) && !player.hasHome(homeName)) {
+            sendMessage(sender, "Home.LimitReached");
+            return;
         }
         if (player.hasHome(homeName)) {
             //if we are just moving a preexisting home then this is significantly better
