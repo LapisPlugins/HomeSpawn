@@ -59,6 +59,7 @@ public class HomeSpawn extends HomeSpawnCommand {
         if (sender instanceof Player) {
             if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanUpdate)) {
                 sendMessage(sender, "Error.NotPermitted");
+                return;
             }
         }
         if (plugin.lapisUpdater.checkUpdate()) {
@@ -73,6 +74,7 @@ public class HomeSpawn extends HomeSpawnCommand {
         if (sender instanceof Player) {
             if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanReload)) {
                 sendMessage(sender, "Error.NotPermitted");
+                return;
             }
         }
         plugin.getLogger().info("Reloading...");
