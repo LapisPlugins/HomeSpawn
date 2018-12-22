@@ -20,8 +20,9 @@ import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.playerdata.Permission;
 import net.lapismc.lapiscore.LapisCorePermissions;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.util.UUID;
 
 public class HomeSpawnPermissions extends LapisCorePermissions {
 
@@ -41,8 +42,8 @@ public class HomeSpawnPermissions extends LapisCorePermissions {
     }
 
     @Override
-    public org.bukkit.permissions.Permission getOfflinePlayerPermission(OfflinePlayer op) {
-        HomeSpawnPlayer player = plugin.getPlayer(op.getUniqueId());
+    public org.bukkit.permissions.Permission getOfflinePlayerPermission(UUID uuid) {
+        HomeSpawnPlayer player = plugin.getPlayer(uuid);
         YamlConfiguration yaml = player.getConfig();
         if (yaml.contains("Permission") && !yaml.getString("Permission").equals("")) {
             return Bukkit.getPluginManager().getPermission(yaml.getString("Permission"));
@@ -51,8 +52,8 @@ public class HomeSpawnPermissions extends LapisCorePermissions {
     }
 
     @Override
-    protected void savePlayersPermission(OfflinePlayer op, org.bukkit.permissions.Permission perm) {
-        HomeSpawnPlayer player = plugin.getPlayer(op.getUniqueId());
+    protected void savePlayersPermission(UUID uuid, org.bukkit.permissions.Permission perm) {
+        HomeSpawnPlayer player = plugin.getPlayer(uuid);
         YamlConfiguration yaml = player.getConfig();
         yaml.set("Permission", perm.getName());
         player.saveConfig(yaml);

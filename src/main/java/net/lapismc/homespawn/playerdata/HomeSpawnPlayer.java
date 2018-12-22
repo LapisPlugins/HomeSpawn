@@ -195,7 +195,8 @@ public class HomeSpawnPlayer {
         String timeString = plugin.prettyTime.format(
                 reduceDurationList(plugin.prettyTime.calculatePreciseDuration(new Date(time))));
         info = info.replace("%NAME%", op.getName());
-        info = info.replace("%PERMISSION%", plugin.perms.getOfflinePlayerPermission(op).getName());
+        org.bukkit.permissions.Permission assignedPermission = plugin.perms.getAssignedPermission(op.getUniqueId());
+        info = info.replace("%PERMISSION%", assignedPermission == null ? "Unknown" : assignedPermission.getName());
         info = info.replace("%STATE%", op.isOnline() ? "online" : "offline");
         info = info.replace("%TIME%", timeString);
         info = info.replace("%USED%", String.valueOf(homes.size()));

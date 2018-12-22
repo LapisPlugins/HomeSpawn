@@ -146,3 +146,6 @@ ChangeLog:
     - "Added config option to disable file watcher"
     - "Added config option to force players to respawn at spawn"
     - "Fixed a permissions work around with renaming homes, players that can only set one home can no longer rename homes"
+  3.0.7:
+    - "Update to LapisCore 1.2.0"
+    - "Permissions are completely rewritten, this should reduce errors"
