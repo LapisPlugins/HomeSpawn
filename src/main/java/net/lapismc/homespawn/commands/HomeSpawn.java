@@ -110,6 +110,7 @@ public class HomeSpawn extends HomeSpawnCommand {
             if (sender instanceof Player) {
                 if (isNotPermitted(((Player) sender).getUniqueId(), Permission.CanViewPlayerStats)) {
                     sendMessage(sender, "Error.NotPermitted");
+                    return;
                 }
             }
             if (args.length == 1 || args.length > 3) {

@@ -149,3 +149,5 @@ ChangeLog:
   3.0.7:
     - "Update to LapisCore 1.2.0"
     - "Permissions are completely rewritten, this should reduce errors"
+  3.0.8:
+    - "Fixed permission check on player stats command"
