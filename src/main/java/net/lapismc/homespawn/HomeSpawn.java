@@ -27,10 +27,13 @@ import net.lapismc.lapiscore.LapisUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -42,23 +45,32 @@ public final class HomeSpawn extends LapisCorePlugin {
     public PrettyTime prettyTime;
     public HomeSpawnPermissions perms;
     public LapisUpdater lapisUpdater;
+    private HomeSpawnFileWatcher fileWatcher;
 
     @Override
     public void onEnable() {
-        registerConfiguration(new LapisCoreConfiguration(this, 1, 1));
+        registerConfiguration(new LapisCoreConfiguration(this, 2, 1));
         this.perms = new HomeSpawnPermissions(this);
         registerPermissions(this.perms);
         prettyTime = new PrettyTime();
         prettyTime.setLocale(Locale.ENGLISH);
         prettyTime.removeUnit(JustNow.class);
         prettyTime.removeUnit(Millisecond.class);
-        new HomeSpawnFileWatcher(this);
+        if (getConfig().getBoolean("FileWatcher"))
+            fileWatcher = new HomeSpawnFileWatcher(this);
         new HomeSpawnListeners(this);
         new HomeSpawnCommands(this);
         new HomeSpawnDataConverter(this);
         new HomeSpawnPlayerData().init(this);
         checkUpdates();
         getLogger().info(getDescription().getName() + " v" + getDescription().getVersion() + " has been enabled");
+    }
+
+    @Override
+    public void onDisable() {
+        if (fileWatcher != null)
+            fileWatcher.stop();
+        getLogger().info(getDescription().getName() + " has been disabled");
     }
 
     private void checkUpdates() {
@@ -90,13 +102,27 @@ public final class HomeSpawn extends LapisCorePlugin {
         return players.getIfPresent(uuid);
     }
 
+    public Location getSpawn(boolean isNew) {
+        File file = new File(getDataFolder() + File.separator + "spawn.yml");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        YamlConfiguration spawn = YamlConfiguration.loadConfiguration(file);
+        String locationString = spawn.getString(isNew ? "SpawnNew" : "Spawn", "");
+        return parseStringToLocation(locationString);
+    }
+
     public String parseLocationToString(Location loc) {
         return loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + ","
                 + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
     }
 
     public Location parseStringToLocation(String s) {
-        if (s == null) {
+        if (s == null || s.equals("")) {
             return null;
         }
         Location loc;

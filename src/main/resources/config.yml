@@ -1,5 +1,5 @@
 # Don't change this value unless you want to reset the config
-ConfigVersion: 1
+ConfigVersion: 2
 
 Update:
   # Should updates be automatically downloaded and installed
@@ -7,8 +7,13 @@ Update:
   # Should console be notified if an update is available, this wont happen if download is true
   NotifyConsole: true
 
+# Should the file watcher be enabled, if true config files will be reloaded when edited
+FileWatcher: true
+
 # If true the /setspawn command will also set the world spawn, meaning you will respawn there
 SetWorldSpawn: false
+# Should the player be respawned at spawn, use this in place of SetWorldSpawn if you dont want spawn chunks at the HomeSpawn spawn
+RespawnAtSpawn: false
 
 # If true an inventory based UI will display the players current homes and allow them to teleport
 # If false a list of home names will be shown that can be clicked to teleport

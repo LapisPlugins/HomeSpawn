@@ -33,6 +33,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.io.File;
 import java.util.UUID;
@@ -49,7 +50,7 @@ class HomeSpawnListeners implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    /**
+    /*
      * Deal with new players and checking data from reoccurring players
      */
 
@@ -89,7 +90,22 @@ class HomeSpawnListeners implements Listener {
         }
     }
 
-    /**
+    /*
+     * Deal with player respawns
+     */
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerRespawn(PlayerRespawnEvent e) {
+        //if respawning at spawn is enabled
+        if (plugin.getConfig().getBoolean("RespawnAtSpawn")) {
+            //get spawn and set it as the respawn location if it is set
+            Location spawn = plugin.getSpawn(false);
+            if (spawn != null)
+                e.setRespawnLocation(spawn);
+        }
+    }
+
+    /*
      * Deal with teleport cancellations
      */
 

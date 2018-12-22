@@ -20,6 +20,7 @@ import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeRenameEvent;
 import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import net.lapismc.homespawn.playerdata.Permission;
 import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,10 @@ public class HomeSpawnRenameHome extends HomeSpawnCommand {
         }
         Player p = (Player) sender;
         HomeSpawnPlayer player = plugin.getPlayer(p.getUniqueId());
+        if (plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission()) <= 1) {
+            sendMessage(sender, "Error.NotPermitted");
+            return;
+        }
         if (args.length == 2) {
             String oldName = args[0];
             String newName = args[1];

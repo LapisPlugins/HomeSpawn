@@ -55,17 +55,7 @@ public abstract class HomeSpawnCommand extends LapisCoreCommand {
     }
 
     protected Location getSpawnLocation(boolean isNew) {
-        File file = new File(plugin.getDataFolder() + File.separator + "spawn.yml");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        YamlConfiguration spawn = YamlConfiguration.loadConfiguration(file);
-        String locationString = spawn.getString(isNew ? "SpawnNew" : "Spawn");
-        return parseStringToLocation(locationString);
+        return plugin.getSpawn(isNew);
     }
 
     protected void setSpawnLocation(Location loc, boolean isNew) {
