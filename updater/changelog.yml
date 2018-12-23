@@ -155,3 +155,5 @@ Stable 2.1.7:
 3.1.0:
   - "Added home lockout if the limit is exceeded"
   - "This means players cant go home if they have more homes then they are allowed"
+3.1.1:
+  - "Fixed config version for messages.yml"

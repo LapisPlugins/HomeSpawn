@@ -49,7 +49,7 @@ public final class HomeSpawn extends LapisCorePlugin {
 
     @Override
     public void onEnable() {
-        registerConfiguration(new LapisCoreConfiguration(this, 2, 1));
+        registerConfiguration(new LapisCoreConfiguration(this, 2, 2));
         this.perms = new HomeSpawnPermissions(this);
         registerPermissions(this.perms);
         prettyTime = new PrettyTime();
