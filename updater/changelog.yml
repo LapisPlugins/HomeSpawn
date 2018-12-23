@@ -153,3 +153,6 @@ ChangeLog:
     - "Fixed permission check on player stats command"
   3.0.9:
     - "Fixed the homes limit check to ensure players cannot have more homes than permitted"
+  3.1.0:
+    - "Added home lockout if the limit is exceeded"
+    - "This means players cant go home if they have more homes then they are allowed"

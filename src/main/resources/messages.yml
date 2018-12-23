@@ -1,5 +1,5 @@
 # Don't change this value unless you want to reset the config
-ConfigVersion: 1
+ConfigVersion: 2
 
 PrimaryColor: "&f"
 SecondaryColor: "&9"
@@ -12,7 +12,8 @@ Home:
   Moved: "&pYour home has been moved"
   Renamed: "&pYour home has been renamed"
   Created: "&pHome has been created"
-  LimitReached: "&sYou have reached you limit for custom homes, please use /delhome to remove some"
+  LimitReached: "&sYou have reached you limit for homes, please use /delhome to remove some"
+  LimitExceeded: "&SYou have more homes then you are allowed, you must delete some before you can use them. Use /delhome [name] to remove them"
   Deleted: "&pYour home was deleted"
   NoHomes: "&pYou have no homes set"
 

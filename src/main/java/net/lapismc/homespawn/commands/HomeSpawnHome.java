@@ -19,6 +19,7 @@ package net.lapismc.homespawn.commands;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeTeleportEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
+import net.lapismc.homespawn.playerdata.Permission;
 import net.lapismc.homespawn.util.HomeSpawnCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -42,6 +43,11 @@ public class HomeSpawnHome extends HomeSpawnCommand {
         String homeName = "Home";
         if (args.length >= 1) {
             homeName = args[0];
+        }
+        //check if the player has more homes then allowed and lock them out if they have exceeded the limit
+        if (player.getHomes().size() > plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission())) {
+            sendMessage(sender, "Home.LimitExceeded");
+            return;
         }
         //check if home exists
         if (!player.hasHome(homeName)) {
