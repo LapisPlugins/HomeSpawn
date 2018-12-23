@@ -151,3 +151,5 @@ ChangeLog:
     - "Permissions are completely rewritten, this should reduce errors"
   3.0.8:
     - "Fixed permission check on player stats command"
+  3.0.9:
+    - "Fixed the homes limit check to ensure players cannot have more homes than permitted"
