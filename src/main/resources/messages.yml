@@ -58,15 +58,15 @@ Help:
   Home: "\"/home [home]\"\n
    Teleport to your home\n"
   Homelist: "\"/homelist\"\n
-   Displays a list or GUI of your homes"
+   Displays a list or GUI of your homes\n"
   RenameHome: "\"/renamehome [current name] [new name]\"\n
-   Renames a home"
+   Renames a home\n"
   Sethome: "\"/sethome [name]\"\n
-   Sets a home at your current location, can be used to move homes"
+   Sets a home at your current location, can be used to move homes\n"
   Setspawn: "\"/setspawn [new]\"\n
-   Sets spawn or new spawn at your current location"
+   Sets spawn or new spawn at your current location\n"
   Spawn: "\"/spawn\"/n
-   Teleport to spawn"
+   Teleport to spawn\n"
 
 Error:
   MustBePlayer: "&4You must be a player to do this!"

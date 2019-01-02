@@ -157,3 +157,6 @@ Stable 2.1.7:
   - "This means players cant go home if they have more homes then they are allowed"
 3.1.1:
   - "Fixed config version for messages.yml"
+3.1.2:
+  - "Updated to LapisCore 1.3.1"
+  - "This fixes some problems with permissions"

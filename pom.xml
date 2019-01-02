@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2018 Benjamin Martin
+  ~ Copyright 2019 Benjamin Martin
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.1</version>
+    <version>3.1.2</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -71,6 +71,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -87,10 +100,22 @@
         </resources>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-lapisplugins-LapisPlugins</id>
+            <name>lapisplugins-LapisPlugins</name>
+            <url>https://api.bintray.com/maven/lapisplugins/LapisPlugins/${project.name}/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>LapisMC</id>
+            <url>https://dl.bintray.com/lapisplugins/LapisPlugins/</url>
         </repository>
         <repository>
             <id>jitpack.io</id>

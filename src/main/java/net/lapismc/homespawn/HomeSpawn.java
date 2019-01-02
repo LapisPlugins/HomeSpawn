@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2019 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ import net.lapismc.homespawn.util.HomeSpawnDataConverter;
 import net.lapismc.lapiscore.LapisCoreConfiguration;
 import net.lapismc.lapiscore.LapisCorePlugin;
 import net.lapismc.lapiscore.LapisUpdater;
+import net.lapismc.lapiscore.LocationUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
@@ -117,32 +117,10 @@ public final class HomeSpawn extends LapisCorePlugin {
     }
 
     public String parseLocationToString(Location loc) {
-        return loc.getWorld().getName() + "," + loc.getX() + "," + loc.getY() + ","
-                + loc.getZ() + "," + loc.getPitch() + "," + loc.getYaw();
+        return new LocationUtils().parseLocationToString(loc);
     }
 
     public Location parseStringToLocation(String s) {
-        if (s == null || s.equals("")) {
-            return null;
-        }
-        Location loc;
-        String[] args = s.split(",");
-        String worldName = args[0];
-        if (Bukkit.getServer().getWorld(worldName) == null) {
-            return null;
-        }
-        World world = getServer().getWorld(worldName);
-        try {
-            float pitch = Float.parseFloat(args[4]);
-            float yaw = Float.parseFloat(args[5]);
-            double x = Double.parseDouble(args[1]);
-            double y = Double.parseDouble(args[2]);
-            double z = Double.parseDouble(args[3]);
-            loc = new Location(world, x, y, z, yaw, pitch);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return loc;
+        return new LocationUtils().parseStringToLocation(s);
     }
 }
