@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.2</version>
+    <version>3.1.3</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -53,6 +53,11 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.mineacademy:Remain</exclude>
+                                </excludes>
+                            </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.ocpsoft.prettytime</pattern>
@@ -131,25 +136,25 @@
         <dependency>
             <groupId>net.lapismc</groupId>
             <artifactId>LapisCore</artifactId>
-            <version>LATEST</version>
+            <version>1.7.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
-            <version>LATEST</version>
+            <version>4.0.2.Final</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.kangarko</groupId>
-            <artifactId>UIDesigner</artifactId>
-            <version>1.1.6</version>
+            <groupId>org.mineacademy</groupId>
+            <artifactId>Designer</artifactId>
+            <version>3.1.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.14.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2019 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,6 @@
 
 package net.lapismc.homespawn.playerdata;
 
-import me.kangarko.compatbridge.model.CompDye;
-import me.kangarko.compatbridge.model.CompMaterial;
-import me.kangarko.ui.UIDesignerAPI;
-import me.kangarko.ui.menu.menues.MenuPagged;
-import me.kangarko.ui.model.ItemCreator;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
@@ -31,6 +26,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.mineacademy.designer.Designer;
+import org.mineacademy.designer.menu.impl.MenuPagged;
+import org.mineacademy.designer.model.ItemCreator;
+import org.mineacademy.remain.model.CompDye;
+import org.mineacademy.remain.model.CompMaterial;
 import org.ocpsoft.prettytime.Duration;
 
 import java.io.File;
@@ -108,6 +108,9 @@ public class HomeSpawnPlayer {
             teleportTask = null;
         }
         Player p = Bukkit.getPlayer(uuid);
+        if (p == null) {
+            return;
+        }
         boolean delay = plugin.perms.isPermitted(p.getUniqueId(), Permission.TeleportDelay.getPermission());
         if (delay) {
             Integer delayTime = plugin.perms.getPermissionValue(p.getUniqueId(),
@@ -170,7 +173,7 @@ public class HomeSpawnPlayer {
     }
 
     public void showHomesGUI(Player p) {
-        UIDesignerAPI.setPlugin(plugin);
+        Designer.setPlugin(plugin);
         new HomeListGUI().displayTo(p);
     }
 
@@ -191,7 +194,7 @@ public class HomeSpawnPlayer {
     public String getPlayerInfo() {
         String info = plugin.config.getMessage("PlayerData");
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
-        Long time = getConfig().getLong("Time");
+        long time = getConfig().getLong("Time");
         String timeString = plugin.prettyTime.format(
                 reduceDurationList(plugin.prettyTime.calculatePreciseDuration(new Date(time))));
         info = info.replace("%NAME%", op.getName());
@@ -254,12 +257,12 @@ public class HomeSpawnPlayer {
 
         HomeListGUI() {
             super(9 * 2, null, homes);
-            setTitle(getMenuTitle());
+            setTitle(getTitlePrefix());
         }
 
         @Override
-        protected String getMenuTitle() {
-            return op == null ? "Player" : op.getName() + "'s homes";
+        protected String getTitlePrefix() {
+            return op.getName() + "'s homes";
         }
 
         @Override
@@ -269,7 +272,7 @@ public class HomeSpawnPlayer {
         }
 
         @Override
-        protected void onMenuClickPaged(Player player, Home home, ClickType clickType) {
+        protected void onPageClick(Player player, Home home, ClickType clickType) {
             if (clickType.isLeftClick() || clickType.isRightClick()) {
                 player.closeInventory();
                 home.teleportPlayer(player);
