@@ -252,8 +252,8 @@ public class HomeSpawnPlayer {
 
     private class HomeListGUI extends MenuPagged<Home> {
 
-        final Random r = new Random(System.currentTimeMillis());
-        final OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
+        Random r = new Random(System.currentTimeMillis());
+        OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         HomeListGUI() {
             super(9 * 2, null, homes);
@@ -262,6 +262,9 @@ public class HomeSpawnPlayer {
 
         @Override
         protected String getTitlePrefix() {
+            if (op.getName() == null) {
+                return "Homes";
+            }
             return op.getName() + "'s homes";
         }
 
