@@ -262,7 +262,7 @@ public class HomeSpawnPlayer {
 
         @Override
         protected String getTitlePrefix() {
-            if (op.getName() == null) {
+            if (op == null) {
                 return "Homes";
             }
             return op.getName() + "'s homes";
