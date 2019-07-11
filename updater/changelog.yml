@@ -163,3 +163,5 @@ Stable 2.1.7:
 3.1.3:
   - "Updated to LapisCore 1.7.2"
   - "Updated to Spigot 1.14.2"
+3.1.4:
+  - "Fixed Null Pointer Exception in the homes list GUI"
