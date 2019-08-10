@@ -47,7 +47,7 @@ public class HomeSpawnPlayer {
     public HomeSpawnPlayer(HomeSpawn plugin, UUID uuid) {
         this.plugin = plugin;
         this.uuid = uuid;
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::loadHomes);
+        loadHomes();
     }
 
     private void loadHomes() {
@@ -63,6 +63,12 @@ public class HomeSpawnPlayer {
             Home home = new Home(plugin, uuid, homeString, location);
             if (home.isValid())
                 addHome(home);
+        }
+    }
+
+    private void loadHomesIfEmpty() {
+        if (homes.isEmpty()) {
+            loadHomes();
         }
     }
 
@@ -128,6 +134,7 @@ public class HomeSpawnPlayer {
     }
 
     public boolean hasHome(String name) {
+        loadHomesIfEmpty();
         for (Home home : homes) {
             if (home.getName().equalsIgnoreCase(name)) {
                 return true;
@@ -137,6 +144,7 @@ public class HomeSpawnPlayer {
     }
 
     public Home getHome(String name) {
+        loadHomesIfEmpty();
         for (Home home : homes) {
             if (home.getName().equalsIgnoreCase(name)) {
                 return home;
@@ -150,6 +158,7 @@ public class HomeSpawnPlayer {
     }
 
     public void sendHomesList(CommandSender sender) {
+        loadHomesIfEmpty();
         StringBuilder message = new StringBuilder();
         for (Home home : homes) {
             message.append(" ");
@@ -160,6 +169,7 @@ public class HomeSpawnPlayer {
     }
 
     public void sendClickableHomesList(Player p) {
+        loadHomesIfEmpty();
         String command = p.getUniqueId().equals(uuid) ? "/home " : "/homespawn player " + Bukkit.getOfflinePlayer(uuid).getName();
         EasyComponent component = new EasyComponent("");
         for (Home home : homes) {
@@ -173,6 +183,7 @@ public class HomeSpawnPlayer {
     }
 
     public void showHomesGUI(Player p) {
+        loadHomesIfEmpty();
         Designer.setPlugin(plugin);
         new HomeListGUI().displayTo(p);
     }
@@ -192,6 +203,7 @@ public class HomeSpawnPlayer {
     }
 
     public String getPlayerInfo() {
+        loadHomesIfEmpty();
         String info = plugin.config.getMessage("PlayerData");
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
         long time = getConfig().getLong("Time");

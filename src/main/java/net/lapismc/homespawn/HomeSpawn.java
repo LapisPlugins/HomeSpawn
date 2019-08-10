@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 public final class HomeSpawn extends LapisCorePlugin {
 
     private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
-            .expireAfterAccess(1, TimeUnit.MINUTES).build();
+            .expireAfterAccess(1, TimeUnit.HOURS).build();
     public PrettyTime prettyTime;
     public HomeSpawnPermissions perms;
     public LapisUpdater lapisUpdater;
