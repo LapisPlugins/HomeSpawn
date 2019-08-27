@@ -165,3 +165,5 @@ Stable 2.1.7:
   - "Updated to Spigot 1.14.2"
 3.1.4:
   - "Fixed Null Pointer Exception in the homes list GUI"
+3.1.5:
+  - "Fixed needing to run commands twice"
