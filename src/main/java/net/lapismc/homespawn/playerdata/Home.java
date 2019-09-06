@@ -164,9 +164,13 @@ public class Home {
         String[] args = s.split(",");
         String worldName = args[0];
         if (Bukkit.getServer().getWorld(worldName) == null) {
-            plugin.getPlayer(owner).deleteHome(this);
-            plugin.getLogger().warning(plugin.config.getMessage("Error.WorldDoesNotExist")
-                    .replace("%WORLD%", worldName));
+            //This has been delayed by one tick since this code is called when the player
+            //is being initialized which can lead to an infinite loop
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                plugin.getPlayer(owner).deleteHome(this);
+                plugin.getLogger().warning(plugin.config.getMessage("Error.WorldDoesNotExist")
+                        .replace("%WORLD%", worldName));
+            });
             return null;
         }
         World world = plugin.getServer().getWorld(worldName);
