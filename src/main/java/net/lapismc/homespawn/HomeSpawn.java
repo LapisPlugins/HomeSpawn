@@ -25,6 +25,7 @@ import net.lapismc.lapiscore.LapisCoreConfiguration;
 import net.lapismc.lapiscore.LapisCorePlugin;
 import net.lapismc.lapiscore.utils.LapisUpdater;
 import net.lapismc.lapiscore.utils.LocationUtils;
+import net.lapismc.lapisui.LapisUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -58,6 +59,7 @@ public final class HomeSpawn extends LapisCorePlugin {
         prettyTime.removeUnit(Millisecond.class);
         if (getConfig().getBoolean("FileWatcher"))
             fileWatcher = new HomeSpawnFileWatcher(this);
+        new LapisUI().registerPlugin(this);
         new HomeSpawnListeners(this);
         new HomeSpawnCommands(this);
         new HomeSpawnDataConverter(this);

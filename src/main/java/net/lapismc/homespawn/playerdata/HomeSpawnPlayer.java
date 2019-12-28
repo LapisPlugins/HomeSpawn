@@ -19,18 +19,15 @@ package net.lapismc.homespawn.playerdata;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
+import net.lapismc.lapiscore.utils.CompatibleMaterial;
+import net.lapismc.lapiscore.utils.LapisItemBuilder;
+import net.lapismc.lapisui.menu.SinglePage;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
-import org.mineacademy.designer.Designer;
-import org.mineacademy.designer.menu.impl.MenuPagged;
-import org.mineacademy.designer.model.ItemCreator;
-import org.mineacademy.remain.model.CompDye;
-import org.mineacademy.remain.model.CompMaterial;
 import org.ocpsoft.prettytime.Duration;
 
 import java.io.File;
@@ -184,8 +181,7 @@ public class HomeSpawnPlayer {
 
     public void showHomesGUI(Player p) {
         loadHomesIfEmpty();
-        Designer.setPlugin(plugin);
-        new HomeListGUI().displayTo(p);
+        new HomeListGUI().showTo(p);
     }
 
     public void deleteHome(Home home) {
@@ -262,17 +258,16 @@ public class HomeSpawnPlayer {
         return durationList;
     }
 
-    private class HomeListGUI extends MenuPagged<Home> {
+    private class HomeListGUI extends SinglePage<Home> {
 
         Random r = new Random(System.currentTimeMillis());
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         HomeListGUI() {
-            super(9 * 2, null, homes);
+            super(homes);
             setTitle(getTitlePrefix());
         }
 
-        @Override
         protected String getTitlePrefix() {
             if (op == null) {
                 return "Your Homes";
@@ -281,29 +276,17 @@ public class HomeSpawnPlayer {
         }
 
         @Override
-        protected ItemStack convertToItemStack(Home home) {
-            return ItemCreator.of(CompMaterial.WHITE_WOOL).color(CompDye.values()[(r.nextInt(DyeColor.values().length))])
-                    .name(plugin.primaryColor + home.getName()).build().make();
+        protected ItemStack toItemStack(Home home) {
+            return new LapisItemBuilder(CompatibleMaterial.WHITE_WOOL.parseMaterial())
+                    .woolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
+                    .setName(plugin.primaryColor + home.getName())
+                    .build();
         }
 
         @Override
-        protected void onPageClick(Player player, Home home, ClickType clickType) {
-            if (clickType.isLeftClick() || clickType.isRightClick()) {
-                player.closeInventory();
-                home.teleportPlayer(player);
-            }
-        }
-
-        @Override
-        protected boolean updateButtonOnClick() {
-            return false;
-        }
-
-        @Override
-        protected String[] getInfo() {
-            return new String[]{
-                    "This is a list of your current homes", "", "Click to teleport!"
-            };
+        protected void onItemClick(Player player, Home home) {
+            player.closeInventory();
+            home.teleportPlayer(player);
         }
     }
 }
