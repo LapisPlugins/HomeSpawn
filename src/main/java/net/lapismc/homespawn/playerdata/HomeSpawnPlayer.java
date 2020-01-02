@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
 import net.lapismc.lapiscore.utils.CompatibleMaterial;
 import net.lapismc.lapiscore.utils.LapisItemBuilder;
-import net.lapismc.lapisui.menu.SinglePage;
+import net.lapismc.lapisui.menu.MultiPage;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -258,13 +258,13 @@ public class HomeSpawnPlayer {
         return durationList;
     }
 
-    private class HomeListGUI extends SinglePage<Home> {
+    private class HomeListGUI extends MultiPage<Home> {
 
         Random r = new Random(System.currentTimeMillis());
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         HomeListGUI() {
-            super(homes);
+            super(homes, 3);
             setTitle(getTitlePrefix());
         }
 
@@ -278,7 +278,7 @@ public class HomeSpawnPlayer {
         @Override
         protected ItemStack toItemStack(Home home) {
             return new LapisItemBuilder(CompatibleMaterial.WHITE_WOOL.parseMaterial())
-                    .woolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
+                    .setWoolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
                     .setName(plugin.primaryColor + home.getName())
                     .build();
         }
