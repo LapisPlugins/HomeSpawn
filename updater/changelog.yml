@@ -167,3 +167,8 @@ Stable 2.1.7:
   - "Fixed Null Pointer Exception in the homes list GUI"
 3.1.5:
   - "Fixed needing to run commands twice"
+3.1.6:
+  - "Updated to LapisUI for homeslist UI"
+  - "Fixed home teleport bug in /homespawn player"
+  - "Update to spigot 1.15.1"
+  - "Fixed an endless loop with world detection"
