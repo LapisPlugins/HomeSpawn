@@ -172,7 +172,7 @@ public class HomeSpawnPlayer {
         for (Home home : homes) {
             component.append(" ");
             component.append(plugin.secondaryColor + ChatColor.UNDERLINE + home.getName() + ChatColor.RESET)
-                    .onClickRunCmd(command + home.getName())
+                    .onClickRunCmd(command + " " + home.getName())
                     .onHover(plugin.primaryColor + "Click to teleport");
             component.append(" ");
         }
