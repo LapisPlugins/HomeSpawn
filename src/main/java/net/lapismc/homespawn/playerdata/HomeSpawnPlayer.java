@@ -279,7 +279,7 @@ public class HomeSpawnPlayer {
         protected ItemStack toItemStack(Home home) {
             return new LapisItemBuilder(CompatibleMaterial.WHITE_WOOL.parseMaterial())
                     .setWoolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
-                    .setName(plugin.primaryColor + home.getName())
+                    .setName(plugin.primaryColor + home.getName()).setLore("Click to teleport")
                     .build();
         }
 
