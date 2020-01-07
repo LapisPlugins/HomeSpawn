@@ -172,3 +172,5 @@ Stable 2.1.7:
   - "Fixed home teleport bug in /homespawn player"
   - "Update to spigot 1.15.1"
   - "Fixed an endless loop with world detection"
+3.1.7:
+  - "Fixed messages.yml reloading"

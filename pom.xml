@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.6</version>
+    <version>3.1.7</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -116,7 +116,7 @@
         <dependency>
             <groupId>net.lapismc</groupId>
             <artifactId>LapisCore</artifactId>
-            <version>1.7.3</version>
+            <version>1.7.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

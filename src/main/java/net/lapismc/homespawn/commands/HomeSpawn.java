@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class HomeSpawn extends HomeSpawnCommand {
@@ -79,7 +78,7 @@ public class HomeSpawn extends HomeSpawnCommand {
             }
         }
         plugin.getLogger().info("Reloading...");
-        plugin.config.reloadMessages(new File(plugin.getDataFolder() + File.separator + "messages.yml"));
+        plugin.config.reloadMessages();
         plugin.reloadConfig();
         plugin.perms.loadPermissions();
         sendMessage(sender, "Reload");
