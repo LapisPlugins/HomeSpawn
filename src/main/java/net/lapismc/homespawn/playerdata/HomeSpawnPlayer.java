@@ -19,7 +19,7 @@ package net.lapismc.homespawn.playerdata;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
-import net.lapismc.lapiscore.utils.CompatibleMaterial;
+import net.lapismc.lapiscore.compatibility.XMaterial;
 import net.lapismc.lapiscore.utils.LapisItemBuilder;
 import net.lapismc.lapisui.menu.MultiPage;
 import org.bukkit.*;
@@ -277,7 +277,7 @@ public class HomeSpawnPlayer {
 
         @Override
         protected ItemStack toItemStack(Home home) {
-            return new LapisItemBuilder(CompatibleMaterial.WHITE_WOOL.parseMaterial())
+            return new LapisItemBuilder(XMaterial.WHITE_WOOL.parseMaterial())
                     .setWoolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
                     .setName(plugin.primaryColor + home.getName()).setLore("Click to teleport")
                     .build();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,9 @@ import java.util.ArrayList;
 
 public class HomeSpawnDelHome extends HomeSpawnCommand {
 
-    public HomeSpawnDelHome(HomeSpawn plugin) {
+    public HomeSpawnDelHome(HomeSpawn plugin, HomesTabCompleter tabCompleter) {
         super(plugin, "delhome", "Delete a home", new ArrayList<>());
+        registerTabCompleter(tabCompleter);
     }
 
     @Override

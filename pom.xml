@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.7</version>
+    <version>3.1.8</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -30,7 +30,7 @@
 
     <build>
         <finalName>${project.name}</finalName>
-        <defaultGoal>clean package</defaultGoal>
+        <defaultGoal>clean install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -116,7 +116,7 @@
         <dependency>
             <groupId>net.lapismc</groupId>
             <artifactId>LapisCore</artifactId>
-            <version>1.7.4</version>
+            <version>1.7.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

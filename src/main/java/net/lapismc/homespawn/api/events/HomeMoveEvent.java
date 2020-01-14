@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package net.lapismc.homespawn.api.events;
 
-import net.lapismc.lapiscore.LapisCoreCancellableEvent;
+import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

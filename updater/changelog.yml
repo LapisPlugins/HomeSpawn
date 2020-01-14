@@ -174,3 +174,6 @@ Stable 2.1.7:
   - "Fixed an endless loop with world detection"
 3.1.7:
   - "Fixed messages.yml reloading"
+3.1.8:
+  - "Updated LapisCore"
+  - "Added tab completer for /home /delhome and /renamehome"

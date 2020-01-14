@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,9 @@ import java.util.ArrayList;
 
 public class HomeSpawnHome extends HomeSpawnCommand {
 
-    public HomeSpawnHome(HomeSpawn plugin) {
+    public HomeSpawnHome(HomeSpawn plugin, HomesTabCompleter tabCompleter) {
         super(plugin, "home", "Teleport to one of your homes", new ArrayList<>());
+        registerTabCompleter(tabCompleter);
     }
 
     @Override
