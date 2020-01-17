@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Copy to server" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="79e49ccf-4737-4eda-839a-e963307345e3" name="Default" comment="Update 3.1.8&#10;Updated to LapisCore 1.7.5&#10;Added tab completion for /home, /delhome and /renamehome" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>load</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PREVIEW_PUSH_ON_COMMIT_AND_PUSH" value="false" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1MifBwSqh1vPGKbURvHZTXquLdP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545563378845" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/updater/HomeSpawn" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\benja\IdeaProjects\HomeSpawn" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/updater/HomeSpawn" />
+      <recent name="C:\Users\benja\IdeaProjects\HomeSpawn\updater\HomeSpawn" />
+      <recent name="C:\Users\benja\IdeaProjects\HomeSpawn\src\main\java\net\lapismc\homespawn" />
+      <recent name="C:\Users\benja\IdeaProjects\HomeSpawn" />
+      <recent name="C:\Users\benja\IdeaProjects\HomeSpawn\.idea" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="bui" />
+      <command value="HomeSpawn build" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.HomeSpawn build">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Spigot Test Server" type="JarApplication" singleton="true">
+      <option name="JAR_PATH" value="$USER_HOME$/Documents/Spigot/SpigotBuilder.jar" />
+      <option name="PROGRAM_PARAMETERS" value="1.15.1 false" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documents/Spigot/" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="clean package" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Copy to server" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="HomeSpawn build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JAR Application.Spigot Test Server" />
+      <item itemvalue="Maven.HomeSpawn build" />
+    </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="79e49ccf-4737-4eda-839a-e963307345e3" name="Default" comment="" />
+      <created>1532091494289</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1532091494289</updated>
+      <workItem from="1532091505299" duration="1702000" />
+      <workItem from="1532097563990" duration="6438000" />
+      <workItem from="1532104132145" duration="519000" />
+      <workItem from="1532166350480" duration="5723000" />
+      <workItem from="1532177716043" duration="9091000" />
+      <workItem from="1532228012106" duration="16176000" />
+      <workItem from="1532259353222" duration="915000" />
+      <workItem from="1532260606150" duration="289000" />
+      <workItem from="1532757895325" duration="1193000" />
+      <workItem from="1534400165114" duration="1760000" />
+      <workItem from="1534682546299" duration="285000" />
+      <workItem from="1534840751634" duration="647000" />
+      <workItem from="1534893609342" duration="364000" />
+      <workItem from="1535291684872" duration="626000" />
+      <workItem from="1541393139065" duration="2504000" />
+      <workItem from="1541846394702" duration="54000" />
+      <workItem from="1541849113203" duration="440000" />
+      <workItem from="1542088856924" duration="646000" />
+      <workItem from="1542095731550" duration="3408000" />
+      <workItem from="1542459045477" duration="554000" />
+      <workItem from="1542851582941" duration="180000" />
+      <workItem from="1543232760051" duration="436000" />
+      <workItem from="1543233329480" duration="223000" />
+      <workItem from="1545441609086" duration="1460000" />
+      <workItem from="1545477440901" duration="623000" />
+      <workItem from="1545480062590" duration="251000" />
+      <workItem from="1545480589341" duration="545000" />
+      <workItem from="1545481672534" duration="725000" />
+      <workItem from="1545485143629" duration="196000" />
+      <workItem from="1545485645261" duration="264000" />
+      <workItem from="1545485948884" duration="217000" />
+      <workItem from="1545487606541" duration="967000" />
+      <workItem from="1545534194922" duration="383000" />
+      <workItem from="1545535230400" duration="961000" />
+      <workItem from="1545563301431" duration="171000" />
+      <workItem from="1545564463938" duration="562000" />
+      <workItem from="1545566577814" duration="194000" />
+      <workItem from="1545566791579" duration="879000" />
+      <workItem from="1545573294660" duration="812000" />
+      <workItem from="1545629628616" duration="1242000" />
+      <workItem from="1545631015166" duration="63000" />
+      <workItem from="1546397563577" duration="423000" />
+      <workItem from="1547440846535" duration="60000" />
+      <workItem from="1550453413732" duration="88000" />
+      <workItem from="1550453613259" duration="1470000" />
+      <workItem from="1553235081658" duration="1742000" />
+      <workItem from="1560672229286" duration="1674000" />
+      <workItem from="1560674897314" duration="1321000" />
+      <workItem from="1560678365873" duration="294000" />
+      <workItem from="1561013887652" duration="243000" />
+      <workItem from="1562676492794" duration="532000" />
+      <workItem from="1562755662663" duration="1081000" />
+      <workItem from="1562823204658" duration="153000" />
+      <workItem from="1562823650551" duration="205000" />
+      <workItem from="1562831846635" duration="88000" />
+      <workItem from="1562840743943" duration="508000" />
+      <workItem from="1562849077215" duration="11000" />
+      <workItem from="1562853470699" duration="171000" />
+      <workItem from="1565429590985" duration="2511000" />
+      <workItem from="1566804621546" duration="1324000" />
+      <workItem from="1566878913973" duration="216000" />
+      <workItem from="1567487753685" duration="425000" />
+      <workItem from="1567824032764" duration="276000" />
+      <workItem from="1568435231650" duration="277000" />
+      <workItem from="1572158194248" duration="49000" />
+      <workItem from="1572774458888" duration="37000" />
+      <workItem from="1575352581615" duration="117000" />
+      <workItem from="1577417719229" duration="1459000" />
+      <workItem from="1577521431386" duration="1397000" />
+      <workItem from="1577522838651" duration="62000" />
+      <workItem from="1577522947199" duration="5299000" />
+      <workItem from="1577537050813" duration="47000" />
+      <workItem from="1577538910141" duration="380000" />
+      <workItem from="1578000722801" duration="3185000" />
+      <workItem from="1578024469668" duration="1074000" />
+      <workItem from="1578044186554" duration="434000" />
+      <workItem from="1578258663959" duration="74000" />
+      <workItem from="1578370060503" duration="3097000" />
+      <workItem from="1578914243230" duration="146000" />
+      <workItem from="1578977818216" duration="2742000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added .gitignore">
+      <created>1532091982207</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1532091982207</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Started work">
+      <created>1532093204028</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532093204028</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added updater so we don't break the auto updater">
+      <created>1532097654402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1532097654402</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added but not tested core home functionality">
+      <created>1532104639438</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1532104639438</updated>
+    </task>
+    <task id="LOCAL-00005" summary="5 new commands and a ton of work all over">
+      <created>1532172070341</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532172070341</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Ready to start testing">
+      <created>1532186162937</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1532186162937</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixed an API class for compatibility with my own addons">
+      <created>1532186874557</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1532186874557</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Started testing and fixing">
+      <created>1532235192668</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1532235192668</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added command help messages">
+      <created>1532237416062</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1532237416062</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Ready to release">
+      <created>1532247067436</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1532247067436</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update 3.0.0">
+      <created>1532250105314</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1532250105314</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update 3.0.1&#10;Fixed player data dir not being made">
+      <created>1532260181517</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1532260181517</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update 3.0.2&#10;Fixed auto updater">
+      <created>1532260845564</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1532260845564</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Update 3.0.3&#10;Fixed primary and secondary colors">
+      <created>1532759096668</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1532759096668</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Update 3.0.4&#10;Updated for 1.13">
+      <created>1534401890222</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1534401890222</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Implemented LapisCore&#10;Yet to be tested&#10;Use at own risk">
+      <created>1541395682545</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1541395682545</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Ready to be tested for update">
+      <created>1542089427910</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1542089427910</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Update 3.0.5&#10;Check change log for more details">
+      <created>1542099131986</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1542099131986</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update 3.0.6&#10;Added config option to disable file watcher&#10;Added config option to force players to respawn at spawn&#10;Fixed a permissions work around with renaming homes, players that can only set one home can no longer rename homes">
+      <created>1545443027796</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1545443027796</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update 3.0.7&#10;Updated LapisCore to 1.2.0&#10;This should fix all permission related errors as the permissions code has been rewritten">
+      <created>1545482242393</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1545482242393</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update 3.0.8&#10;Quick bug fix of permission check on player stats command">
+      <created>1545485860269</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1545485860269</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Permissions hotfix">
+      <created>1545486011170</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1545486011171</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fix to home limit checking">
+      <created>1545488520173</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1545488520173</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update 3.0.9&#10;Fix to home limit checking">
+      <created>1545534432609</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1545534432610</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Update 3.1.0&#10;Added home lockout when exceeding home limits">
+      <created>1545535726210</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1545535726210</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fixed changelog for LapisCore compliance">
+      <created>1545536059143</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1545536059143</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update 3.1.1&#10;Fixed Changelog&#10;Fixed Messages.yml regeneration">
+      <created>1545563414278</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1545563414278</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update 3.1.2&#10;Updated to LapisCore 1.3.1&#10;This fixes some permission errors">
+      <created>1546397919943</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1546397919943</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Update 3.1.3&#10;Updated to LapisCore 1.7.2&#10;Updated to Spigot 1.14.2">
+      <created>1560675947591</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1560675947591</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Updater update">
+      <created>1560676117280</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1560676117280</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Hopefully fixed null pointer in GUI&#10;Issue #4">
+      <created>1562676980349</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1562676980349</updated>
+    </task>
+    <task id="LOCAL-00032" summary="One last attempt at fixing null pointer in GUI title&#10;Issue #4">
+      <created>1562755976529</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1562755976529</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Update 3.1.4&#10;Fixed Null Pointer Exception in homeslist GUI">
+      <created>1562840967858</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1562840967858</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Attempt to fix errors when commands are first run">
+      <created>1565431873254</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1565431873254</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Update 3.1.5&#10;Fixed having to run commands twice">
+      <created>1566879078818</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1566879078818</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Update to LapisUI&#10;Currently only using a single page&#10;Removed Designer and Remain">
+      <created>1577528610815</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1577528610815</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Update to LapisUI 1.0.0&#10;Changed to MultiPage UI">
+      <created>1578004330436</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1578004330436</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Fix for issue #5">
+      <created>1578024833891</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1578024833891</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Update 3.1.6&#10;See changelog for details">
+      <created>1578025259332</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1578025259332</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added lore to UI items">
+      <created>1578044590517</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1578044590518</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Update 3.1.7&#10;Updated to LapisCore 1.7.4&#10;This fixes the messages.yml reloading issue">
+      <created>1578373054054</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1578373054054</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Update 3.1.8&#10;Updated to LapisCore 1.7.5&#10;Added tab completion for /home, /delhome and /renamehome">
+      <created>1578980805304</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1578980805304</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Update 3.0.5&#10;Check change log for more details" />
+    <MESSAGE value="Update 3.0.6&#10;Added config option to disable file watcher&#10;Added config option to force players to respawn at spawn&#10;Fixed a permissions work around with renaming homes, players that can only set one home can no longer rename homes" />
+    <MESSAGE value="Update 3.0.7&#10;Updated LapisCore to 1.2.0&#10;This should fix all permission related errors as the permissions code has been rewritten" />
+    <MESSAGE value="Update 3.0.8&#10;Quick bug fix of permission check on player stats command" />
+    <MESSAGE value="Permissions hotfix" />
+    <MESSAGE value="Fix to home limit checking" />
+    <MESSAGE value="Update 3.0.9&#10;Fix to home limit checking" />
+    <MESSAGE value="Update 3.1.0&#10;Added home lockout when exceeding home limits" />
+    <MESSAGE value="Fixed changelog for LapisCore compliance" />
+    <MESSAGE value="Update 3.1.1&#10;Fixed Changelog&#10;Fixed Messages.yml regeneration" />
+    <MESSAGE value="Update 3.1.2&#10;Updated to LapisCore 1.3.1&#10;This fixes some permission errors" />
+    <MESSAGE value="Update 3.1.3&#10;Updated to LapisCore 1.7.2&#10;Updated to Spigot 1.14.2" />
+    <MESSAGE value="Updater update" />
+    <MESSAGE value="Hopefully fixed null pointer in GUI&#10;Issue #4" />
+    <MESSAGE value="One last attempt at fixing null pointer in GUI title&#10;Issue #4" />
+    <MESSAGE value="Update 3.1.4&#10;Fixed Null Pointer Exception in homeslist GUI" />
+    <MESSAGE value="Attempt to fix errors when commands are first run" />
+    <MESSAGE value="Update 3.1.5&#10;Fixed having to run commands twice" />
+    <MESSAGE value="Update to LapisUI&#10;Currently only using a single page&#10;Removed Designer and Remain" />
+    <MESSAGE value="Update to LapisUI 1.0.0&#10;Changed to MultiPage UI" />
+    <MESSAGE value="Fix for issue #5" />
+    <MESSAGE value="Update 3.1.6&#10;See changelog for details" />
+    <MESSAGE value="Added lore to UI items" />
+    <MESSAGE value="Update 3.1.7&#10;Updated to LapisCore 1.7.4&#10;This fixes the messages.yml reloading issue" />
+    <MESSAGE value="Update 3.1.8&#10;Updated to LapisCore 1.7.5&#10;Added tab completion for /home, /delhome and /renamehome" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 3.1.8&#10;Updated to LapisCore 1.7.5&#10;Added tab completion for /home, /delhome and /renamehome" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="284" y="168" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578980726948">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="284" y="168" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980726948" />
+    <state x="2204" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578371680242" />
+    <state x="418" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state x="768" y="236" width="374" height="570" key="#com.intellij.ide.util.MemberChooser" timestamp="1578978252550">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="768" y="236" width="374" height="570" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578978252550" />
+    <state x="554" y="70" width="993" height="800" key="CommitChangelistDialog2" timestamp="1578980804919">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="554" y="70" width="993" height="800" key="CommitChangelistDialog2/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980804919" />
+    <state x="2759" y="72" width="708" height="822" key="CommitChangelistDialog2/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578373053843" />
+    <state x="422" y="45" key="CommitChangelistDialog2/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state x="2718" y="120" width="424" height="479" key="FileChooserDialogImpl" timestamp="1578025541903">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2718" y="120" width="424" height="479" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578025541903" />
+    <state x="743" y="198" key="FileChooserDialogImpl/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state width="1878" height="274" key="GridCell.Tab.0.bottom" timestamp="1578980876660">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1878" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980876660" />
+    <state width="1878" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578914389041" />
+    <state width="1878" height="285" key="GridCell.Tab.0.bottom/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state width="1878" height="274" key="GridCell.Tab.0.center" timestamp="1578980876660">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1878" height="274" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980876660" />
+    <state width="1878" height="274" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578914389041" />
+    <state width="1878" height="285" key="GridCell.Tab.0.center/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state width="1878" height="274" key="GridCell.Tab.0.left" timestamp="1578980876660">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1878" height="274" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980876660" />
+    <state width="1878" height="274" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578914389040" />
+    <state width="1878" height="285" key="GridCell.Tab.0.left/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state width="1878" height="274" key="GridCell.Tab.0.right" timestamp="1578980876660">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1878" height="274" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1578980876660" />
+    <state width="1878" height="274" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578914389041" />
+    <state width="1878" height="285" key="GridCell.Tab.0.right/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state x="2214" y="140" width="1024" height="840" key="SettingsEditor" timestamp="1578371701343">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2214" y="140" width="1024" height="840" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578371701343" />
+    <state x="440" y="170" key="SettingsEditor/1920.1080/1920.1080" timestamp="1575352655407" />
+    <state x="662" y="319" key="git4idea.merge.GitPullDialog" timestamp="1575352655407" />
+    <state x="662" y="319" key="git4idea.merge.GitPullDialog/1920.1080/1920.1080" timestamp="1575352655407" />
+  </component>
+  <component name="mavenExecuteGoalHistory">
+    <option value="$PROJECT_DIR$" />
+    <option value="deploy" />
+    <option value="install" />
+  </component>
+</project>

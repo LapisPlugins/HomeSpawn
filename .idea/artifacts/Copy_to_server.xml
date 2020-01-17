@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="Copy to server">
+    <output-path>$USER_HOME$/Documents/Spigot/plugins/</output-path>
+    <root id="root">
+      <element id="file-copy" path="$PROJECT_DIR$/target/HomeSpawn.jar" />
+    </root>
+  </artifact>
+</component>
