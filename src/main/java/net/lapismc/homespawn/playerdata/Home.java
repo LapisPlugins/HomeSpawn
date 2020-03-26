@@ -69,7 +69,6 @@ public class Home {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Home.Cancelled"));
             teleportTask.cancelTask();
-            teleportTask = null;
         }
     }
 
@@ -107,7 +106,6 @@ public class Home {
     public void teleportPlayer(Player p) {
         if (teleportTask != null) {
             teleportTask.cancelTask();
-            teleportTask = null;
         }
         boolean delay = plugin.perms.isPermitted(p.getUniqueId(), Permission.TeleportDelay.getPermission());
         if (delay) {
@@ -118,7 +116,6 @@ public class Home {
                     () -> {
                         teleport(p);
                         teleportTask.cancelTask();
-                        teleportTask = null;
                     }, delayTime * 20), p);
         } else {
             this.teleport(p);
@@ -128,7 +125,6 @@ public class Home {
     private void teleport(Player p) {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.cancelTask();
-            teleportTask = null;
         }
         teleportNow(p);
         p.sendMessage(plugin.config.getMessage("Home.Teleport"));

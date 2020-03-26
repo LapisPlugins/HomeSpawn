@@ -84,7 +84,6 @@ public class HomeSpawnPlayer {
         if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.cancelTask();
             teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Home.Cancelled"));
-            teleportTask = null;
         }
         for (Home home : homes) {
             if (home.isWaiting())
@@ -97,7 +96,6 @@ public class HomeSpawnPlayer {
             teleportTask.getPlayer().teleport(teleportTask.getLocation());
             teleportTask.getPlayer().sendMessage(plugin.config.getMessage("Spawn.Teleport"));
             teleportTask.cancelTask();
-            teleportTask = null;
         }
         for (Home home : homes) {
             if (home.isWaiting())
@@ -108,7 +106,6 @@ public class HomeSpawnPlayer {
     public void teleportToSpawn(Location spawn) {
         if (teleportTask != null) {
             teleportTask.cancelTask();
-            teleportTask = null;
         }
         Player p = Bukkit.getPlayer(uuid);
         if (p == null) {
@@ -123,6 +120,7 @@ public class HomeSpawnPlayer {
                     () -> {
                         p.teleport(spawn);
                         p.sendMessage(plugin.config.getMessage("Spawn.Teleport"));
+                        teleportTask.cancelTask();
                     }, delayTime * 20), p, spawn);
         } else {
             p.teleport(spawn);
