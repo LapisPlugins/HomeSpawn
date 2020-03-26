@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,7 +115,11 @@ public class Home {
                     Permission.TeleportDelay.getPermission());
             p.sendMessage(plugin.config.getMessage("Home.Wait").replace("%TIME%", delayTime.toString()));
             teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
-                    () -> teleport(p), delayTime * 20), p);
+                    () -> {
+                        teleport(p);
+                        teleportTask.cancelTask();
+                        teleportTask = null;
+                    }, delayTime * 20), p);
         } else {
             this.teleport(p);
         }
