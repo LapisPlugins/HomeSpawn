@@ -126,7 +126,7 @@ public class Home {
     }
 
     private void teleport(Player p) {
-        if (teleportTask != null) {
+        if (teleportTask != null && teleportTask.isNotCancelled()) {
             teleportTask.cancelTask();
             teleportTask = null;
         }

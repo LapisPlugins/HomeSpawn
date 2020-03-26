@@ -177,3 +177,5 @@ Stable 2.1.7:
 3.1.8:
   - "Updated LapisCore"
   - "Added tab completer for /home /delhome and /renamehome"
+3.1.9:
+  - "Fixed teleport timer not canceling after teleport"
