@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,10 +36,6 @@ public abstract class HomeSpawnCommand extends LapisCoreCommand {
     protected HomeSpawnCommand(HomeSpawn plugin, String name, String desc, ArrayList<String> aliases) {
         super(plugin, name, desc, aliases, true);
         this.plugin = plugin;
-    }
-
-    protected void sendMessage(CommandSender sender, String key) {
-        sender.sendMessage(plugin.config.getMessage(key));
     }
 
     protected boolean forcePlayer(CommandSender sender) {

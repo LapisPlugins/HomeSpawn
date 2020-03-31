@@ -1,6 +1,5 @@
 name: HomeSpawn
 authors: [Dart2112]
-loadbefore: [Essentials]
 version: ${project.version}
 softdepend: [Multiverse-Core]
 main: net.lapismc.homespawn.HomeSpawn

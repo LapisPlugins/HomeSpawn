@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,15 +44,13 @@ public final class HomeSpawn extends LapisCorePlugin {
     private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
             .expireAfterAccess(1, TimeUnit.HOURS).build();
     public PrettyTime prettyTime;
-    public HomeSpawnPermissions perms;
     public LapisUpdater lapisUpdater;
     private HomeSpawnFileWatcher fileWatcher;
 
     @Override
     public void onEnable() {
         registerConfiguration(new LapisCoreConfiguration(this, 2, 2));
-        this.perms = new HomeSpawnPermissions(this);
-        registerPermissions(this.perms);
+        registerPermissions(new HomeSpawnPermissions(this));
         prettyTime = new PrettyTime();
         prettyTime.setLocale(Locale.ENGLISH);
         prettyTime.removeUnit(JustNow.class);
