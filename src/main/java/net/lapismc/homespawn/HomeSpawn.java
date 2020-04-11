@@ -25,6 +25,7 @@ import net.lapismc.lapiscore.LapisCoreConfiguration;
 import net.lapismc.lapiscore.LapisCorePlugin;
 import net.lapismc.lapiscore.utils.LapisUpdater;
 import net.lapismc.lapiscore.utils.LocationUtils;
+import net.lapismc.lapiscore.utils.Metrics;
 import net.lapismc.lapisui.LapisUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -63,6 +64,7 @@ public final class HomeSpawn extends LapisCorePlugin {
         new HomeSpawnDataConverter(this);
         new HomeSpawnPlayerData().init(this);
         checkUpdates();
+        new Metrics(this);
         getLogger().info(getDescription().getName() + " v" + getDescription().getVersion() + " has been enabled");
     }
 
