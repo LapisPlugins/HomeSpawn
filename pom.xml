@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.9</version>
+    <version>3.1.10</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -116,13 +116,13 @@
         <dependency>
             <groupId>net.lapismc</groupId>
             <artifactId>LapisCore</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
             <artifactId>prettytime</artifactId>
-            <version>4.0.2.Final</version>
+            <version>4.0.4.Final</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.15.1-R0.1-SNAPSHOT</version>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -18,7 +18,7 @@ package net.lapismc.homespawn.util;
 
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.playerdata.Permission;
-import net.lapismc.lapiscore.LapisCoreCommand;
+import net.lapismc.lapiscore.commands.LapisCoreCommand;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
