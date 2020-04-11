@@ -120,7 +120,9 @@ public class HomeSpawnPlayer {
                     () -> {
                         p.teleport(spawn);
                         p.sendMessage(plugin.config.getMessage("Spawn.Teleport"));
-                        teleportTask.cancelTask();
+                        if (teleportTask != null) {
+                            teleportTask.cancelTask();
+                        }
                     }, delayTime * 20), p, spawn);
         } else {
             p.teleport(spawn);

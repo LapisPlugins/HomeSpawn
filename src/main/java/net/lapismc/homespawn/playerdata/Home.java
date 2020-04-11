@@ -115,7 +115,9 @@ public class Home {
             teleportTask = new TeleportTask(Bukkit.getScheduler().runTaskLater(plugin,
                     () -> {
                         teleport(p);
-                        teleportTask.cancelTask();
+                        if (teleportTask != null) {
+                            teleportTask.cancelTask();
+                        }
                     }, delayTime * 20), p);
         } else {
             this.teleport(p);
