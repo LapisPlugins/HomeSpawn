@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.12</version>
+    <version>3.1.13</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
