@@ -70,8 +70,14 @@ public final class HomeSpawn extends LapisCorePlugin {
 
     @Override
     public void onDisable() {
-        if (fileWatcher != null)
+        //Stop the file watcher task for reloads
+        if (fileWatcher != null) {
             fileWatcher.stop();
+        }
+        //Attempt to stop all teleport tasks so that there are no tasks waiting on reload
+        for (HomeSpawnPlayer player : players.asMap().values()) {
+            player.cancelTeleport();
+        }
         getLogger().info(getDescription().getName() + " has been disabled");
     }
 

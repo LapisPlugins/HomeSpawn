@@ -184,3 +184,6 @@ Stable 2.1.7:
   - "Thanks to rvause for reporting the error on GitHub"
 3.1.11:
   - "Re-enabled metrics, not sure how long this hasn't been running"
+3.1.12:
+  - "Updated to LapisCore 1.7.7"
+  - "This fixes issues with tasks not being cleaned up"

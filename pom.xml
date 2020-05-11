@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.11</version>
+    <version>3.1.12</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -53,18 +53,13 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>org.mineacademy:Remain</exclude>
-                                </excludes>
-                            </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.ocpsoft.prettytime</pattern>
                                     <shadedPattern>net.lapismc.HomeSpawn.util.prettytime</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>me.kangarko.ui</pattern>
+                                    <pattern>net.lapismc.lapisui</pattern>
                                     <shadedPattern>net.lapismc.HomeSpawn.util.ui</shadedPattern>
                                 </relocation>
                                 <relocation>
