@@ -187,3 +187,6 @@ Stable 2.1.7:
 3.1.13:
   - "Updated to LapisCore 1.7.7"
   - "This fixes issues with tasks not being cleaned up"
+3.1.14:
+  - "Updated to Spigot 1.16.2"
+  - "Updated to LapisCore 1.7.8"

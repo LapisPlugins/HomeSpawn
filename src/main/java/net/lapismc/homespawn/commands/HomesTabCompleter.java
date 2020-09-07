@@ -29,7 +29,7 @@ import java.util.List;
 
 public class HomesTabCompleter implements TabCompleter {
 
-    private net.lapismc.homespawn.HomeSpawn plugin;
+    private final net.lapismc.homespawn.HomeSpawn plugin;
 
     public HomesTabCompleter(HomeSpawn plugin) {
         this.plugin = plugin;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2020 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class HomeSpawnPermissions extends LapisCorePermissions {
 
-    private HomeSpawn plugin;
+    private final HomeSpawn plugin;
 
     HomeSpawnPermissions(HomeSpawn core) {
         super(core);
