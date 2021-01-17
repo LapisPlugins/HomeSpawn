@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2020 Benjamin Martin
+  ~ Copyright 2021 Benjamin Martin
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
     <groupId>net.lapismc</groupId>
     <artifactId>HomeSpawn</artifactId>
-    <version>3.1.14</version>
+    <version>3.1.15</version>
     <packaging>jar</packaging>
 
     <name>HomeSpawn</name>
@@ -123,12 +123,12 @@
         <dependency>
             <groupId>net.lapismc</groupId>
             <artifactId>LapisUI</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.2-R0.1-SNAPSHOT</version>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

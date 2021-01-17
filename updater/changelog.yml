@@ -190,3 +190,7 @@ Stable 2.1.7:
 3.1.14:
   - "Updated to Spigot 1.16.2"
   - "Updated to LapisCore 1.7.8"
+3.1.15:
+  - "Updated to LapisUI 1.0.2"
+  - "Made homes GUI async to avoid lag on the main thread"
+  - "Added a message to the chat for players waiting for the GUI to open the first time"
