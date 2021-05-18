@@ -56,15 +56,15 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.ocpsoft.prettytime</pattern>
-                                    <shadedPattern>net.lapismc.HomeSpawn.util.prettytime</shadedPattern>
+                                    <shadedPattern>net.lapismc.homespawn.util.prettytime</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>net.lapismc.lapisui</pattern>
-                                    <shadedPattern>net.lapismc.HomeSpawn.util.ui</shadedPattern>
+                                    <shadedPattern>net.lapismc.homespawn.util.ui</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>net.lapismc.lapiscore</pattern>
-                                    <shadedPattern>net.lapismc.HomeSpawn.util.core</shadedPattern>
+                                    <shadedPattern>net.lapismc.homespawn.util.core</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
