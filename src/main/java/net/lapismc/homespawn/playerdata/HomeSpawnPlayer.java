@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Benjamin Martin
+ * Copyright 2022 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package net.lapismc.homespawn.playerdata;
 import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.util.EasyComponent;
 import net.lapismc.homespawn.util.TeleportTask;
-import net.lapismc.lapiscore.compatibility.XMaterial;
 import net.lapismc.lapiscore.utils.LapisItemBuilder;
 import net.lapismc.lapisui.menu.MultiPage;
 import org.bukkit.*;
@@ -280,7 +279,7 @@ public class HomeSpawnPlayer {
 
         @Override
         protected ItemStack toItemStack(Home home) {
-            return new LapisItemBuilder(XMaterial.WHITE_WOOL.parseMaterial())
+            return new LapisItemBuilder(Material.WHITE_WOOL)
                     .setWoolColor(LapisItemBuilder.WoolColor.values()[r.nextInt(DyeColor.values().length)])
                     .setName(plugin.primaryColor + home.getName()).setLore("Click to teleport")
                     .build();

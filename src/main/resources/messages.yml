@@ -1,5 +1,5 @@
 # Don't change this value unless you want to reset the config
-ConfigVersion: 3
+ConfigVersion: 4
 
 PrimaryColor: "&f"
 SecondaryColor: "&9"
@@ -12,11 +12,12 @@ Home:
   Moved: "&pYour home has been moved"
   Renamed: "&pYour home has been renamed"
   Created: "&pHome has been created"
+  InvalidName: "&sHome names cannot contain the \"&p.&s\" character, please try again with a valid home name"
   LimitReached: "&sYou have reached you limit for homes, please use /delhome to remove some"
   LimitExceeded: "&SYou have more homes then you are allowed, you must delete some before you can use them. Use /delhome [name] to remove them"
   Deleted: "&pYour home was deleted"
   NoHomes: "&pYou have no homes set"
-  GUILoading: "&pLoading your homes, this may take a few seconds..."
+  GUILoading: "&pLoading your homes"
 
 Spawn:
   Teleport: "&pTeleported to spawn"

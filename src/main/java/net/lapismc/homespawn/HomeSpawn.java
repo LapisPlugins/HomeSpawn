@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Benjamin Martin
+ * Copyright 2022 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public final class HomeSpawn extends LapisCorePlugin {
 
     @Override
     public void onEnable() {
-        registerConfiguration(new LapisCoreConfiguration(this, 2, 2));
+        registerConfiguration(new LapisCoreConfiguration(this, 2, 4));
         registerPermissions(new HomeSpawnPermissions(this));
         prettyTime = new PrettyTime();
         prettyTime.setLocale(Locale.ENGLISH);

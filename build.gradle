@@ -1,0 +1,140 @@
+/*
+ * Copyright 2021 Benjamin Martin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'java'
+    id 'maven'
+    id 'signing'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id 'io.codearte.nexus-staging' version '0.30.0'
+}
+
+group = 'net.lapismc'
+archivesBaseName = "HomeSpawn"
+version = '3.1.16'
+description = 'AFK for professional servers'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+defaultTasks 'clean', 'build', 'shadowJar', 'install'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    //Spigot Repo
+    maven {
+        url = uri('https://hub.spigotmc.org/nexus/content/groups/public/')
+    }
+}
+
+dependencies {
+    compile 'net.lapismc:LapisCore:1.12.0'
+    compile 'net.lapismc:LapisUI:1.1.1'
+    compile 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
+    compileOnly 'org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT'
+}
+
+processResources {
+    filter {
+        it.replace('${project.version}', project.getVersion())
+    }
+}
+
+shadowJar {
+    archiveFileName.set(archivesBaseName + "-" + project.getVersion() + ".jar")
+    exclude 'javax/**'
+    relocate("org.ocpsoft.prettytime", "net.lapismc.homespawn.util.prettytime")
+    relocate("net.lapismc.lapisui", "net.lapismc.homespawn.util.ui")
+    relocate("net.lapismc.lapiscore", "net.lapismc.homespawn.util.core")
+}
+
+javadoc {
+    exclude 'net/lapismc/homespawn/commands'
+    exclude 'net/lapismc/homespawn/playerdata'
+    exclude 'net/lapismc/homespawn/util'
+    exclude 'net/lapismc/homespawn/*.java'
+}
+
+task javadocJar(type: Jar) {
+    archiveClassifier.set('javadoc')
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar, shadowJar
+}
+
+signing {
+    useGpgCmd()
+    sign configurations.archives
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+nexusStaging {
+    packageGroup = "net.lapismc" //optional if packageGroup == project.getGroup()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name = project.archivesBaseName
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description = project.description
+                url 'https://github.com/LapisPlugins/HomeSpawn'
+
+                scm {
+                    connection 'git@github.com:LapisPlugins/HomeSpawn.git'
+                    developerConnection 'git@github.com:LapisPlugins/HomeSpawn.git'
+                    url 'https://github.com/LapisPlugins/HomeSpawn'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'Dart2112'
+                        name 'Benjamin Martin'
+                        email 'dart2112@lapismc.net'
+                    }
+                }
+            }
+        }
+    }
+}

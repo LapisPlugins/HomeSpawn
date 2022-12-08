@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2022 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,12 @@ public class HomeSpawnSetHome extends HomeSpawnCommand {
             if (plugin.perms.getPermissionValue(p.getUniqueId(), Permission.Homes.getPermission()) > 1) {
                 //set the home name to the custom name provided
                 homeName = args[0];
+                //Validate the home name
+                if (homeName.contains(".")) {
+                    //Invalid name
+                    sendMessage(sender, "Home.InvalidName");
+                    return;
+                }
             } else {
                 sendMessage(sender, "Error.NotPermitted");
                 return;

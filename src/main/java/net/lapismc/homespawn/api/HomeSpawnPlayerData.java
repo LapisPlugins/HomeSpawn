@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2022 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,9 @@ public class HomeSpawnPlayerData {
 
     /**
      * Returns the currently loaded Player Data file will the given Player name
+     *
+     * @param uuid The UUID of the player you wish to fetch the data file for
+     * @return The Yaml config currently associated with the given UUID
      */
     public YamlConfiguration getHomeConfig(UUID uuid) {
         return plugin.getPlayer(uuid).getConfig();
@@ -50,6 +53,9 @@ public class HomeSpawnPlayerData {
 
     /**
      * Saves the given YamlConfiguration as the UUID in its file name
+     *
+     * @param uuid       The UUID of the player you wish to save the config too
+     * @param HomeConfig The Yaml data to save to disk
      */
     public void saveHomesConfig(UUID uuid, YamlConfiguration HomeConfig) {
         plugin.getPlayer(uuid).saveConfig(HomeConfig);

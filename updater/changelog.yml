@@ -194,3 +194,7 @@ Stable 2.1.7:
   - "Updated to LapisUI 1.0.2"
   - "Made homes GUI async to avoid lag on the main thread"
   - "Added a message to the chat for players waiting for the GUI to open the first time"
+3.1.16:
+  - "Updated to LapisCore 1.12.0 (Removed XMaterial for better load times and fixing lag on first GUI load)"
+  - "Validate home names, fixes Issue #10"
+  - "Finally moved from Maven to Gradle for building the plugin (this should have no noticeable effect for end users)"
