@@ -40,10 +40,10 @@ repositories {
 }
 
 dependencies {
-    compile 'net.lapismc:LapisCore:1.12.0'
-    compile 'net.lapismc:LapisUI:1.1.1'
-    compile 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
-    compileOnly 'org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT'
+    implementation 'net.lapismc:LapisCore:1.12.0'
+    implementation 'net.lapismc:LapisUI:1.2.1'
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
+    compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
 }
 
 processResources {
