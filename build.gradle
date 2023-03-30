@@ -25,7 +25,7 @@ plugins {
 group = 'net.lapismc'
 archivesBaseName = "HomeSpawn"
 version = '3.1.16'
-description = 'AFK for professional servers'
+description = 'The only way to home and spawn'
 sourceCompatibility = '11'
 targetCompatibility = '11'
 defaultTasks 'clean', 'build', 'shadowJar', 'install'
