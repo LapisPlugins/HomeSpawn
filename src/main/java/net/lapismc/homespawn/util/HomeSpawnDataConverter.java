@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Benjamin Martin
+ * Copyright 2023 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,22 @@ public class HomeSpawnDataConverter {
         if (spawnFile.exists()) {
             YamlConfiguration spawn = YamlConfiguration.loadConfiguration(spawnFile);
             if (spawn.contains("spawn")) {
-                Location l = (Location) spawn.get("spawn");
-                String loc = plugin.parseLocationToString(l);
-                spawn.set("spawn", loc);
+                try {
+                    Location l = (Location) spawn.get("spawn");
+                    String loc = plugin.parseLocationToString(l);
+                    spawn.set("spawn", loc);
+                } catch (ClassCastException e) {
+                    //already converted
+                }
             }
             if (spawn.contains("spawnnew")) {
-                Location l = (Location) spawn.get("spawnnew");
-                String loc = plugin.parseLocationToString(l);
-                spawn.set("spawnnew", loc);
+                try {
+                    Location l = (Location) spawn.get("spawnnew");
+                    String loc = plugin.parseLocationToString(l);
+                    spawn.set("spawnnew", loc);
+                } catch (ClassCastException e) {
+                    //already converted
+                }
             }
             try {
                 spawn.save(spawnFile);
