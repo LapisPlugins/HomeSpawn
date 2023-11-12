@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/HomeSpawn.main.iml" filepath="$PROJECT_DIR$/.idea/modules/HomeSpawn.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.lapismc.HomeSpawn.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.lapismc.HomeSpawn.main.iml" />
     </modules>
   </component>
 </project>
