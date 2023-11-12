@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Benjamin Martin
+ * Copyright 2023 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public final class HomeSpawn extends LapisCorePlugin {
         new HomeSpawnDataConverter(this);
         new HomeSpawnPlayerData().init(this);
         checkUpdates();
-        new Metrics(this);
+        new Metrics(this, 421);
         new LapisUI().registerPlugin(this);
         getLogger().info(getDescription().getName() + " v" + getDescription().getVersion() + " has been enabled");
     }
