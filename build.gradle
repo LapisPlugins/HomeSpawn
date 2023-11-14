@@ -16,18 +16,17 @@
 
 plugins {
     id 'java'
-    id 'maven'
     id 'maven-publish'
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 group = 'net.lapismc'
 archivesBaseName = "HomeSpawn"
 version = '3.1.16'
 description = 'The only way to home and spawn'
-sourceCompatibility = '11'
-targetCompatibility = '11'
-defaultTasks 'clean', 'build', 'shadowJar', 'install'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+defaultTasks 'clean', 'build', 'shadowJar'
 
 repositories {
     mavenCentral()
@@ -44,10 +43,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.lapismc:LapisCore:1.12.6'
+    implementation 'net.lapismc:LapisCore:1.12.7'
     implementation 'net.lapismc:LapisUI:1.2.1'
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
-    compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.20.2-R0.1-SNAPSHOT'
 }
 
 processResources {
