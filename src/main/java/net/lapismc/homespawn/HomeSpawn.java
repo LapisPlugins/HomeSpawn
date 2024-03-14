@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,17 +26,14 @@ import net.lapismc.lapiscore.LapisCorePlugin;
 import net.lapismc.lapiscore.utils.LapisUpdater;
 import net.lapismc.lapiscore.utils.LocationUtils;
 import net.lapismc.lapiscore.utils.Metrics;
+import net.lapismc.lapiscore.utils.PrettyTimeUtil;
 import net.lapismc.lapisui.LapisUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.ocpsoft.prettytime.PrettyTime;
-import org.ocpsoft.prettytime.units.JustNow;
-import org.ocpsoft.prettytime.units.Millisecond;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +41,7 @@ public final class HomeSpawn extends LapisCorePlugin {
 
     private final Cache<UUID, HomeSpawnPlayer> players = CacheBuilder.newBuilder()
             .expireAfterAccess(1, TimeUnit.HOURS).build();
-    public PrettyTime prettyTime;
+    public PrettyTimeUtil prettyTime;
     public LapisUpdater lapisUpdater;
     private HomeSpawnFileWatcher fileWatcher;
 
@@ -52,10 +49,7 @@ public final class HomeSpawn extends LapisCorePlugin {
     public void onEnable() {
         registerConfiguration(new LapisCoreConfiguration(this, 2, 4));
         registerPermissions(new HomeSpawnPermissions(this));
-        prettyTime = new PrettyTime();
-        prettyTime.setLocale(Locale.ENGLISH);
-        prettyTime.removeUnit(JustNow.class);
-        prettyTime.removeUnit(Millisecond.class);
+        prettyTime = new PrettyTimeUtil();
         if (getConfig().getBoolean("FileWatcher"))
             fileWatcher = new HomeSpawnFileWatcher(this);
         new LapisUI().registerPlugin(this);

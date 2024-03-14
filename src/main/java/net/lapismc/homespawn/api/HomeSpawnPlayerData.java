@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,15 +28,25 @@ import java.util.UUID;
  *
  * @author Dart2112
  */
-@SuppressWarnings("unused")
 public class HomeSpawnPlayerData {
 
     private static HomeSpawn plugin;
 
+    /**
+     * DO NOT USE, this is an internal use method to store the main class within this class!
+     *
+     * @param p the HomeSpawn main class to be stored in this API
+     */
     public void init(HomeSpawn p) {
         plugin = p;
     }
 
+    /**
+     * Get a HomeSpawnPlayer object
+     *
+     * @param op The player you wish to retrieve
+     * @return a {@link HomeSpawnPlayer} object representing the player you provided
+     */
     public HomeSpawnPlayer getPlayer(OfflinePlayer op) {
         return plugin.getPlayer(op.getUniqueId());
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +19,45 @@ package net.lapismc.homespawn.api.events;
 import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.entity.Player;
 
-@SuppressWarnings("unused")
+/**
+ * A cancelable event triggered when a player attempts to rename a home
+ */
 public class HomeRenameEvent extends LapisCoreCancellableEvent {
 
     private final String oldHome;
     private final String newHome;
     private final Player p;
 
+    /**
+     * Set up a HomeRenameEvent
+     *
+     * @param p       The player renaming a home
+     * @param oldHome The old home name
+     * @param newHome The new home name
+     */
     public HomeRenameEvent(Player p, String oldHome, String newHome) {
         this.oldHome = oldHome;
         this.newHome = newHome;
         this.p = p;
     }
 
+    /**
+     * @return the old home name
+     */
     public String getOldHome() {
         return oldHome;
     }
 
+    /**
+     * @return the new home name
+     */
     public String getNewHome() {
         return newHome;
     }
 
+    /**
+     * @return the player attempting to rename a home
+     */
     public Player getPlayer() {
         return p;
     }

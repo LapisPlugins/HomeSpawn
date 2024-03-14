@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,35 @@ import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.entity.Player;
 
+/**
+ * A cancellable event triggered when a player attempts to teleport to one of their homes
+ */
 public class HomeTeleportEvent extends LapisCoreCancellableEvent {
 
     private final Home home;
     private final Player p;
 
+    /**
+     * Set up a HomeTeleportEvent
+     *
+     * @param p    the player attempting to teleport to one of their homes
+     * @param home the home that the player will teleport to
+     */
     public HomeTeleportEvent(Player p, Home home) {
         this.home = home;
         this.p = p;
     }
 
+    /**
+     * @return the home that the player is trying to teleport to
+     */
     public Home getHome() {
         return home;
     }
 
+    /**
+     * @return the player attempting to teleport to one of their homes
+     */
     public Player getPlayer() {
         return p;
     }

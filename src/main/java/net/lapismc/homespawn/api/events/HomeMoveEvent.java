@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,9 @@ import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-@SuppressWarnings("unused")
+/**
+ * A cancelable event triggered when a player attempts to move a home location
+ */
 public class HomeMoveEvent extends LapisCoreCancellableEvent {
 
     private final String name;
@@ -28,6 +30,14 @@ public class HomeMoveEvent extends LapisCoreCancellableEvent {
     private final Location newHome;
     private final Player p;
 
+    /**
+     * Set up a HomeMoveEvent
+     *
+     * @param p       The player who is trying to move their home
+     * @param name    The name of the home they are trying to move
+     * @param oldHome The old home location
+     * @param newHome The new home location
+     */
     public HomeMoveEvent(Player p, String name, Location oldHome, Location newHome) {
         this.name = name;
         this.oldHome = oldHome;
@@ -35,18 +45,30 @@ public class HomeMoveEvent extends LapisCoreCancellableEvent {
         this.p = p;
     }
 
+    /**
+     * @return name of the home involved in the event
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the location of the old home
+     */
     public Location getOldHome() {
         return oldHome;
     }
 
+    /**
+     * @return the location of the new home
+     */
     public Location getNewHome() {
         return newHome;
     }
 
+    /**
+     * @return the player attempting to move their home
+     */
     public Player getPlayer() {
         return p;
     }

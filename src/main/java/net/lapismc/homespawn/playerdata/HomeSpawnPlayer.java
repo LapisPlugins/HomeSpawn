@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
-import org.ocpsoft.prettytime.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -205,8 +205,7 @@ public class HomeSpawnPlayer {
         String info = plugin.config.getMessage("PlayerData");
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
         long time = getConfig().getLong("Time");
-        String timeString = plugin.prettyTime.format(
-                reduceDurationList(plugin.prettyTime.calculatePreciseDuration(new Date(time))));
+        String timeString = plugin.prettyTime.getRelativeTimeDifference(time, 2);
         info = info.replace("%NAME%", op.getName());
         org.bukkit.permissions.Permission assignedPermission = plugin.perms.getAssignedPermission(op.getUniqueId());
         info = info.replace("%PERMISSION%", assignedPermission == null ? "Unknown" : assignedPermission.getName());
@@ -247,19 +246,6 @@ public class HomeSpawnPlayer {
         }
     }
 
-    private List<Duration> reduceDurationList(List<Duration> durationList) {
-        while (durationList.size() > 2) {
-            Duration smallest = null;
-            for (Duration current : durationList) {
-                if (smallest == null || smallest.getUnit().getMillisPerUnit() > current.getUnit().getMillisPerUnit()) {
-                    smallest = current;
-                }
-            }
-            durationList.remove(smallest);
-        }
-        return durationList;
-    }
-
     private class HomeListGUI extends MultiPage<Home> {
 
         Random r = new Random(System.currentTimeMillis());
@@ -286,7 +272,7 @@ public class HomeSpawnPlayer {
         }
 
         @Override
-        protected void onItemClick(Player player, Home home) {
+        protected void onItemClick(Player player, Home home, ClickType type) {
             player.closeInventory();
             home.teleportPlayer(player);
         }

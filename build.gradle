@@ -22,7 +22,7 @@ plugins {
 
 group = 'net.lapismc'
 archivesBaseName = "HomeSpawn"
-version = '3.1.16'
+version = '3.1.17'
 description = 'The only way to home and spawn'
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -43,10 +43,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.lapismc:LapisCore:1.12.7'
-    implementation 'net.lapismc:LapisUI:1.2.1'
-    implementation 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
-    compileOnly 'org.spigotmc:spigot-api:1.20.2-R0.1-SNAPSHOT'
+    implementation 'net.lapismc:LapisCore:1.12.13'
+    implementation 'net.lapismc:LapisUI:1.4.2'
+    compileOnly 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
 }
 
 processResources {
@@ -56,9 +55,8 @@ processResources {
 }
 
 shadowJar {
-    archiveFileName.set(archivesBaseName + "-" + project.getVersion() + ".jar")
+    archiveFileName.set(archivesBaseName + ".jar")
     exclude 'javax/**'
-    relocate("org.ocpsoft.prettytime", "net.lapismc.homespawn.util.prettytime")
     relocate("net.lapismc.lapisui", "net.lapismc.homespawn.util.ui")
     relocate("net.lapismc.lapiscore", "net.lapismc.homespawn.util.core")
 }

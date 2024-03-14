@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,35 @@ import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * A cancelable event triggered when a player attempts to teleport to spawn
+ */
 public class SpawnTeleportEvent extends LapisCoreCancellableEvent {
 
     private final Location location;
     private final Player p;
 
+    /**
+     * Setup a SpawnTeleport event
+     *
+     * @param p The player teleporting to spawn
+     * @param l The location they are attempting to teleport too
+     */
     public SpawnTeleportEvent(Player p, Location l) {
         this.location = l;
         this.p = p;
     }
 
+    /**
+     * @return the spawn location that the player is attempting to teleport to
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * @return get the player who is attempting to teleport to spawn
+     */
     public Player getPlayer() {
         return p;
     }

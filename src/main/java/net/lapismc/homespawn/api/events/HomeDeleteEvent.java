@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,35 @@ import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.lapiscore.events.LapisCoreCancellableEvent;
 import org.bukkit.entity.Player;
 
+/**
+ * A cancelable event triggered when a player deletes one of their homes
+ */
 public class HomeDeleteEvent extends LapisCoreCancellableEvent {
 
     private final Home home;
     private final Player p;
 
+    /**
+     * Setup a HomeDeleteEvent
+     *
+     * @param p    The player who is deleting a home
+     * @param home The home they are trying to delete
+     */
     public HomeDeleteEvent(Player p, Home home) {
         this.home = home;
         this.p = p;
     }
 
+    /**
+     * @return the home that the player is trying to delete
+     */
     public Home getHome() {
         return home;
     }
 
+    /**
+     * @return the player who is trying to delete a home
+     */
     public Player getPlayer() {
         return p;
     }

@@ -3,5 +3,5 @@ authors: [Dart2112]
 version: ${project.version}
 softdepend: [Multiverse-Core]
 main: net.lapismc.homespawn.HomeSpawn
-api-version: 1.13
+api-version: 1.20
 description: The Basic Home And Spawn Plugin
