@@ -202,3 +202,5 @@ Stable 2.1.7:
   - "Update LapisCore and LapisUI"
   - "Move to PrettyTimeUtil"
   - "Completed proper JavaDocs"
+3.1.18:
+  - "Fixed tab completions when essentials is installed"

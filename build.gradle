@@ -22,7 +22,7 @@ plugins {
 
 group = 'net.lapismc'
 archivesBaseName = "HomeSpawn"
-version = '3.1.17'
+version = '3.1.18'
 description = 'The only way to home and spawn'
 sourceCompatibility = '17'
 targetCompatibility = '17'
