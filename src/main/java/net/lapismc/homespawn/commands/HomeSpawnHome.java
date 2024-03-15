@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,20 @@ import net.lapismc.homespawn.api.events.HomeTeleportEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.playerdata.Permission;
 import net.lapismc.homespawn.util.HomeSpawnCommand;
+import net.lapismc.lapiscore.commands.tabcomplete.LapisCoreTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeSpawnHome extends HomeSpawnCommand {
 
-    public HomeSpawnHome(HomeSpawn plugin, HomesTabCompleter tabCompleter) {
+    public HomeSpawnHome(HomeSpawn plugin) {
         super(plugin, "home", "Teleport to one of your homes", new ArrayList<>());
+        LapisCoreTabCompleter tabCompleter = new LapisCoreTabCompleter();
+        tabCompleter.registerTopLevelOptions(this, Collections.singletonList(new HomeTabOption(plugin)));
         registerTabCompleter(tabCompleter);
     }
 

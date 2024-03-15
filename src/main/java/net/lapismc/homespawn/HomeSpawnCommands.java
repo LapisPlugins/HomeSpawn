@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,19 +24,18 @@ class HomeSpawnCommands {
 
     HomeSpawnCommands(HomeSpawn plugin) {
         List<String> disabledCommands = plugin.getConfig().getStringList("DisabledCommands");
-        HomesTabCompleter tabCompleter = new HomesTabCompleter(plugin);
         if (!disabledCommands.contains("homespawn"))
             new net.lapismc.homespawn.commands.HomeSpawn(plugin);
         if (!disabledCommands.contains("delhome"))
-            new HomeSpawnDelHome(plugin, tabCompleter);
+            new HomeSpawnDelHome(plugin);
         if (!disabledCommands.contains("delspawn"))
             new HomeSpawnDelSpawn(plugin);
         if (!disabledCommands.contains("home"))
-            new HomeSpawnHome(plugin, tabCompleter);
+            new HomeSpawnHome(plugin);
         if (!disabledCommands.contains("homelist"))
             new HomeSpawnHomeList(plugin);
         if (!disabledCommands.contains("renamehome"))
-            new HomeSpawnRenameHome(plugin, tabCompleter);
+            new HomeSpawnRenameHome(plugin);
         if (!disabledCommands.contains("sethome"))
             new HomeSpawnSetHome(plugin);
         if (!disabledCommands.contains("setspawn"))

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,20 @@ import net.lapismc.homespawn.playerdata.Home;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.playerdata.Permission;
 import net.lapismc.homespawn.util.HomeSpawnCommand;
+import net.lapismc.lapiscore.commands.tabcomplete.LapisCoreTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeSpawnRenameHome extends HomeSpawnCommand {
 
-    public HomeSpawnRenameHome(HomeSpawn plugin, HomesTabCompleter tabCompleter) {
+    public HomeSpawnRenameHome(HomeSpawn plugin) {
         super(plugin, "renamehome", "Rename a home", new ArrayList<>());
+        LapisCoreTabCompleter tabCompleter = new LapisCoreTabCompleter();
+        tabCompleter.registerTopLevelOptions(this, Collections.singletonList(new HomeTabOption(plugin)));
         registerTabCompleter(tabCompleter);
     }
 

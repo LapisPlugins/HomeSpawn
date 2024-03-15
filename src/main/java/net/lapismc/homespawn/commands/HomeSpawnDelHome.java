@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Benjamin Martin
+ * Copyright 2024 Benjamin Martin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,20 @@ import net.lapismc.homespawn.HomeSpawn;
 import net.lapismc.homespawn.api.events.HomeDeleteEvent;
 import net.lapismc.homespawn.playerdata.HomeSpawnPlayer;
 import net.lapismc.homespawn.util.HomeSpawnCommand;
+import net.lapismc.lapiscore.commands.tabcomplete.LapisCoreTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeSpawnDelHome extends HomeSpawnCommand {
 
-    public HomeSpawnDelHome(HomeSpawn plugin, HomesTabCompleter tabCompleter) {
+    public HomeSpawnDelHome(HomeSpawn plugin) {
         super(plugin, "delhome", "Delete a home", new ArrayList<>());
+        LapisCoreTabCompleter tabCompleter = new LapisCoreTabCompleter();
+        tabCompleter.registerTopLevelOptions(this, Collections.singletonList(new HomeTabOption(plugin)));
         registerTabCompleter(tabCompleter);
     }
 

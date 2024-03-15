@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.lapismc:LapisCore:1.12.13'
+    implementation 'net.lapismc:LapisCore:1.12.15'
     implementation 'net.lapismc:LapisUI:1.4.2'
     compileOnly 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
 }
